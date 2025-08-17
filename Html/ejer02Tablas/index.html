@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2 - Tablas</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        .estilada th {
+            background-color: lightblue;
+        }
+        .sin-color th {
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Tabla representando la matriz completa</h2>
+    <table class="sin-color">
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr><th></th><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><th></th><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><th></th><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><th></th><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><th></th><td></td><td></td><td></td><td></td><td></td></tr>
+    </table>
+
+    <h2>Tabla agrupando celdas y agregando estilo</h2>
+    <table class="estilada">
+        <tr>
+            <th>Hora</th>
+            <th>Lunes</th>
+            <th>Martes</th>
+            <th>Miércoles</th>
+            <th>Jueves</th>
+            <th>Viernes</th>
+        </tr>
+        <tr>
+            <th>08:00 - 09:00</th>
+            <td rowspan="2">Matemática</td>
+            <td>Historia</td>
+            <td rowspan="2">Física</td>
+            <td>Biología</td>
+            <td rowspan="4">Inglés</td>
+        </tr>
+        <tr>
+            <th>09:00 - 10:00</th>
+            <td rowspan="2">Geografía</td>
+            <td rowspan="2">Química</td>
+        </tr>
+        <tr>
+            <th>10:00 - 11:00</th>
+            <td>Educación Física</td>
+            <td>Lengua</td>
+        </tr>
+        <tr>
+            <th>11:00 - 12:00</th>
+            <td>Arte</td>
+            <td>Historia</td>
+            <td>Matemática</td>
+            <td>Arte</td>
+        </tr>
+        <tr>
+            <th>12:00 - 13:00</th>
+            <td>Lengua</td>
+            <td>Física</td>
+            <td colspan="3">Educación Física</td>
+        </tr>
+    </table>
+
+    <nav>
+        <ul>
+            <li><a href="../">Volver al índice de HTML</a></li>
+            <li><a href="../../">Volver al índice principal</a></li>
+        </ul>
+    </nav>
+
+</body>
+</html>

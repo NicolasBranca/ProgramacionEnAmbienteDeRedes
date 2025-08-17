@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario HTML</title>
+</head>
+<body>
+    <form action="respuestaFormulario.html" method="get">
+
+        <b>Entradas simples</b><br>
+        Nombre: <input type="text" name="nombre"><br>
+        Contraseña: <input type="password" name="clave"><br>
+        Campo oculto: <input type="hidden" name="oculto" value="dato_oculto"><br>
+        Campo deshabilitado: <input type="text" name="deshabilitado" disabled><br>
+        Campo de solo lectura: <input type="text" name="soloLectura" value="Solo lectura" readonly><br><br>
+
+        <b>Entradas de selección</b><br>
+        <input type="checkbox" name="opcion1"> Intolerante a la lactosa<br>
+        <input type="checkbox" name="opcion2"> Intolerante al gluten<br>
+        <input type="checkbox" name="opcion3"> Vegetariano<br>
+        Sexo: 
+        <input type="radio" name="sexo" value="M"> M
+        <input type="radio" name="sexo" value="F"> F<br>
+        Mes de nacimiento: 
+        <select name="lista">
+            <option value="1">ENERO</option>
+            <option value="2">FEBRERO</option>
+            <option value="3">MARZO</option>
+            <option value="4">ABRIL</option>
+            <option value="5">MAYO</option>
+            <option value="6">JUNIO</option>
+            <option value="7">JULIO</option>
+            <option value="8">AGOSTO</option>
+            <option value="9">SEPTIEMBRE</option>
+            <option value="10">OCTUBRE</option>
+            <option value="11">NOVIEMBRE</option>
+            <option value="12">DICIEMBRE</option>
+        </select><br>
+        Selector: <input type="file" name="archivo"><br>
+        Color: <input type="color" name="color"><br><br>
+
+        <b>Entradas con validación</b><br>
+        Campo requerido: 
+        <input type="text" name="requerido" required title="Este campo es obligatorio"><br>
+        Email: 
+        <input type="email" name="email" required title="Introduce un correo válido"><br>
+        Número (1 a 100): 
+        <input type="number" name="numero" min="1" max="100" required title="Introduce un número entre 1 y 100"><br>
+        URL: 
+        <input type="url" name="url" required title="Debe comenzar con http:// o https://"><br>
+        Solo letras y números: 
+        <input type="text" name="alfaNumerico" pattern="[A-Za-z0-9]+" required title="Solo se permiten letras y números"><br>
+        Teléfono (Capital Federal, formato 011-XXXX-XXXX): 
+        <input type="tel" name="telefono" pattern="011-[0-9]{4}-[0-9]{4}" required title="Formato: 011-XXXX-XXXX"><br><br>
+
+
+        <input type="submit" value="Enviar">
+        <input type="reset" value="Restablecer">
+    </form>
+
+  <nav>
+    <ul>
+      <li><a href="../">Volver al índice de HTML</a></li>
+      <li><a href="../../">Volver al índice principal</a></li>
+    </ul>
+  </nav>
+</body>
+</html>
