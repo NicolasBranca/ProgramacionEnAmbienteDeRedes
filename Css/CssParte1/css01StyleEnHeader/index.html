@@ -22,26 +22,18 @@
       border-width: thin;
       border-color: blue;
     }
-
-    pre {
-      background-color: #f4f4f4;
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin: 10px 0;
-      font-family: monospace;
-    }
   </style>
 </head>
 <body>
   <h1>Declaraciones en bloque definidas entre etiquetas style</h1>
-  <pre>
-  h1 {
-    font-size: 2em;
-    color: darkblue; 
-    background-color: aquamarine;
-    text-align: center;
-  }
-  </pre>
+  <div>
+    h1 {<br>
+      font-size: 2em;<br>
+      color: darkblue;<br>
+      background-color: aquamarine;<br>
+      text-align: center;<br>
+    }
+  </div>
 
   <h1>Todos los textos con etiqueta h1 tienen este estilo.</h1>
   <h1>La etiqueta h1 ocupa el ancho del contenedor (por defecto lleva display de bloque).</h1>
@@ -49,18 +41,18 @@
   <h1>El background de un h1 lleva color aquamarine.</h1>
   <h1>El estilo definido para la etiqueta h1 indica que el texto irá centrado.</h1>
 
-  <pre>
-  p {
-    color: blue;
-    font-style: italic;
-    text-align: left;
-    font-size: 1em;
-    border-top-style: solid;
-    border-bottom-style: solid;
-    border-width: thin;
-    border-color: blue;
-  }
-  </pre>
+  <div>
+    p {<br>
+      color: blue;<br>
+      font-style: italic;<br>
+      text-align: left;<br>
+      font-size: 1em;<br>
+      border-top-style: solid;<br>
+      border-bottom-style: solid;<br>
+      border-width: thin;<br>
+      border-color: blue;<br>
+    }
+  </div>
 
   <p>Todos los textos con etiquetas p tienen este estilo definido dentro de la etiqueta style.</p>
   <p>Para los párrafos se define un estilo con estas características: alineación a la izquierda</p>
@@ -68,5 +60,6 @@
   <p>Color de letra azul</p>
   <p>Fuente de la fuente itálico</p>
   <p>Bordes superior e inferior sólidos, finos y de color azul</p>
+
 </body>
 </html>
