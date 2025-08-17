@@ -1,17 +1,17 @@
 h1 {
-  font-size: 2em;
-  color: darkblue; 
-  background-color: aquamarine;
-  text-align: center;
+    font-size: 2em;
+    color: red; 
+    background-color: green;
+    text-align: center;
 }
 
 p {
-  color: blue;
-  font-style: italic;
-  text-align: left;
-  font-size: 1em;
-  border-top-style: solid;
-  border-bottom-style: solid;
-  border-width: thin;
-  border-color: blue;
+    color: fuchsia;
+    font-style: italic;
+    text-align: left;
+    font-size: 1em;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-width: thin;
+    border-color: orange;
 }
