@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>css02SelectoresDeClase</title>
+  <style>
+    p {
+      font-size: 1em;
+      margin-bottom: 60px;
+    }
+
+    .claseAcotacion {
+      font-style: italic;
+      color: blue;
+      border: 1px solid blue;
+      padding: 5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: inline-block;
+      max-width: 100%;
+      font-size: clamp(0.5em, 2vw, 1em);
+    }
+
+    .claseResaltado {
+      font-weight: bold;
+      color: darkred;
+      background-color: #ffe6e6;
+      padding: 5px;
+    }
+
+    .claseAyuda {
+      font-style: italic;
+      color: yellow;
+      border: 1px solid yellow;
+      width: 50%;
+      margin-left: 0;
+      text-align: center;
+      padding: 5px;
+    }
+
+    .claseContenidoComun {
+      color: black;
+    }
+
+    #idUnico {
+      color: red;
+      border: 1px solid red;
+      width: 25%;
+      margin-left: 0;
+      text-align: center;
+      padding: 5px;
+    }
+
+    .imagenA50 {
+      width: 50%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Selectores de clase</h1>
+  <h1>A partir de esta página no usaremos más el atributo style en ninguna etiqueta</h1>
+  <h1>Todo el estilo aplicado en el documento será definido dentro de una etiqueta style como "clase", anidada a la etiqueta head del documento.</h1>
+
+  <div>
+    <p>
+      p { <br>
+      &nbsp;&nbsp;font-size: 1em;<br>
+      &nbsp;&nbsp;margin-bottom: 60px;<br>
+      }<br>
+    </p>
+  </div>
+
+  <h1>Todos los párrafos tienen un default como estilo que incluyen un margin-bottom para separarlos entre ellos</h1>
+
+  <p class="claseAcotacion">Este párrafo toma el estilo definido en la etiqueta style en el header del documento como class="claseAcotacion" qweqweqweqweqweqweqweqweqweqweqweqweqweqweqweqweqweqweqweqweqweqwe</p>
+
+  <p class="claseResaltado">Este párrafo toma el estilo definido en la etiqueta style en el header del documento como class="claseResaltado"</p>
+
+  <p class="claseAyuda">Este párrafo toma el estilo definido en la etiqueta style en el header del documento como class="claseAyuda"</p>
+
+  <p class="claseContenidoComun">Este párrafo toma el estilo definido en la etiqueta style en el header del documento como class="claseContenidoComun"</p>
+
+  <p id="idUnico">Párrafo formateado por un estilo particular definido en el style del documento para un párrafo específico id="idUnico". No se trata de un selector de clase sino de un selector de elementos "#"</p>
+
+  <p>Todas las imágenes con class="imagenA50" en esta página se encuentran limitadas al 50% del ancho del contenedor más allá de su tamaño real en píxeles:</p>
+
+  <img src="imagen.jpg" alt="Imagen de ejemplo" class="imagenA50">
+</body>
+</html>
