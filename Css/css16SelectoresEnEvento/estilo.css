@@ -35,7 +35,7 @@
 
 .formulario {
   margin-bottom: 40px;
-  max-width: 300px; 
+  max-width: 300px;
 }
 
 .formulario label {
@@ -46,7 +46,7 @@
 
 .formulario input {
   display: block;
-  width: 100%; 
+  width: 100%;
   padding: 8px;
   margin-bottom: 15px;
   border: 1px solid black;
@@ -64,12 +64,12 @@ h2 {
 .imagenes {
   display: flex;
   gap: 10px;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
 }
 
 .img-box {
   flex: 1;
-  max-width: 150px; 
+  max-width: 120px; 
   border: 2px solid black;
   overflow: hidden;
   transition: all 0.3s ease-in-out;
@@ -85,6 +85,7 @@ h2 {
 
 .img-box img:active {
   width: 30%; 
+  max-width: 30vw; 
   height: auto;
   object-fit: contain;
 }
