@@ -1,10 +1,3 @@
-body {
-  font-family: Arial, sans-serif;
-  line-height: 1.5;
-  background-color: #f7f7f7;
-  padding: 20px;
-}
-
 .contenedor {
   width: 90%; 
   margin: 0 auto;
@@ -60,7 +53,7 @@ body {
 
 .caja4 {
   background: linear-gradient(to right, lightcoral, darkred);
-  background-image: linear-gradient(135deg, lightcoral 50%, darkred 50%);
+  background-image: conic-gradient(135deg, lightcoral 50%, darkred 50%);
   color: white;
 }
 
