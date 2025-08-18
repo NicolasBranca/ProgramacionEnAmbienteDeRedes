@@ -4,9 +4,10 @@
   background-color: lightblue;
   text-align: center;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column; 
   gap: 10px; 
+  min-height: 100vh;      
+  overflow-y: auto;       
 }
 
 .contenedor h1 {
@@ -16,7 +17,7 @@
 }
 
 .caja {
-  width: 33.33%;
+  width: 33.3%;      
   height: 20vh;
   display: flex;
   justify-content: flex-start; 
@@ -27,14 +28,14 @@
 .caja1 {
   background-color: lightgreen;
   text-align: center;  
-  justify-content: center;
+  justify-content: flex-start; 
   align-items: center;
 }
 @media (max-width: 1080px) and (min-width: 600px) {
   .caja1 {
     background-color: pink;
     text-align: center;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
   }
 }
@@ -42,7 +43,7 @@
   .caja1 {
     background-color: burlywood;
     text-align: center;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
   }
 }
@@ -64,7 +65,7 @@
 }
 
 .caja4 {
-  background-image: conic-gradient(135deg, lightcoral 50%, darkred 50%);
+  background: conic-gradient(from 135deg, lightcoral 0% 50%, darkred 50% 100%);
   color: white;
 }
 
