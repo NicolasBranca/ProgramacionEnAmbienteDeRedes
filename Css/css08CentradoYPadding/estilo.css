@@ -1,0 +1,34 @@
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+  background-color: #f7f7f7;
+  padding: 20px;
+}
+
+h1 {
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+.elemento {
+  width: 50%;
+  margin: 20px auto;
+  border-radius: 8px;
+}
+
+
+.sin-padding {
+  background-color: #d8b9ff;
+}
+
+
+.con-padding {
+  background-color: #87ceeb;
+  padding: 20px;
+}
+
+.con-padding-borderbox {
+  background-color: #f08080; 
+  padding: 20px;
+  box-sizing: border-box; /
+}

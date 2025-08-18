@@ -8,27 +8,27 @@ body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
   background-color: #f0f0f0;
-  padding: 20px; 
+  padding: 20px;
 }
 
 .contenedor {
   max-width: 800px;
   margin: 0 auto;
-  padding: 40px; 
-  color: white;
+  background-color: lightblue;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.bloque-imagen {
+  height: 50vh;
   background-image: url("imagen.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  padding: 20px;
   border-radius: 12px;
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-  background-color: rgba(0,0,0,0.5);
-  padding: 10px;
-  border-radius: 8px;
+  overflow-y: auto;
+  color: white;
 }
 
 p {
