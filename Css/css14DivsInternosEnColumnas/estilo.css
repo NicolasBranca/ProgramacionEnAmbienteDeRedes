@@ -1,0 +1,50 @@
+.contenedor {
+  width: 90%;
+  margin: 0 auto;
+  background-color: lightblue;
+  padding: 20px;
+}
+
+.contenedor h1 {
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.columna {
+  float: left;
+  width: 15%;
+  padding: 10px;
+  color: black;
+  box-sizing: border-box;
+  background-color: lightgreen;
+  margin-bottom: 10px;
+}
+
+.columna img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 10px 0;
+}
+
+@media (max-width: 1080px) and (min-width: 800px) {
+  .columna {
+    width: 33.33%;
+    background-color: lightcoral;
+  }
+}
+
+@media (max-width: 799px) and (min-width: 500px) {
+  .columna {
+    width: 50%;
+    background-color: lightyellow;
+  }
+}
+
+@media (max-width: 499px) {
+  .columna {
+    width: 100%;
+    background-color: lightpink;
+  }
+}

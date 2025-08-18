@@ -13,25 +13,26 @@
 .caja {
   width: 33.33%;
   height: 20vh;
-  margin: 10px auto;
   display: flex;
   justify-content: flex-start; 
   align-items: flex-start;     
-  padding: 10px; 
   box-sizing: border-box;
 }
 
 .caja1 {
   background-color: lightgreen;
+  text-align: center;
 }
 @media (max-width: 1080px) and (min-width: 600px) {
   .caja1 {
     background-color: pink;
+    text-align: center;
   }
 }
 @media (max-width: 600px) {
   .caja1 {
     background-color: burlywood;
+    text-align: center;
   }
 }
 

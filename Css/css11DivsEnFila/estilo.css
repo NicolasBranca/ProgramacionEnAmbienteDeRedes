@@ -16,15 +16,50 @@
   align-items: center;
   color: black;    
   font-weight: bold;
+  font-size: 1.2em; 
   box-sizing: border-box;
 }
 
+.caja1 { 
+  background: linear-gradient(to bottom, lightgreen, darkgreen); 
+  justify-content: flex-start;
+  padding-left: 10px;
+}
 
-.caja1 { background: linear-gradient(to bottom, lightgreen, darkgreen); }
-.caja2 { background: radial-gradient(circle, lightyellow, orange, red); }
-.caja3 { background: linear-gradient(to bottom, skyblue, navy); overflow: hidden; }
-.caja3 img { max-width: 100%; max-height: 100%; object-fit: contain; }
-.caja4 { background: radial-gradient(circle, lightgray, black); overflow: hidden; }
-.caja4 img { max-width: 100%; max-height: 100%; object-fit: contain; }
-.caja5 { background: linear-gradient(to bottom, lightcoral, darkred); }
-.caja6 { background: radial-gradient(circle, lightblue, darkblue); }
+.caja2 { 
+  background: radial-gradient(circle, lightyellow, orange, red); 
+}
+
+.caja3 { 
+  background: linear-gradient(to bottom, skyblue, navy); 
+  overflow: hidden; 
+  justify-content: flex-start;
+}
+
+.caja3 img { 
+  max-width: 100%; 
+  max-height: 100%; 
+  object-fit: contain; 
+}
+
+.caja4 { 
+  background: radial-gradient(circle, lightgray, black); 
+  overflow: hidden; 
+  justify-content: flex-start;
+}
+
+.caja4 img { 
+  max-width: 100%; 
+  max-height: 100%; 
+  object-fit: contain; 
+}
+
+.caja5 { 
+  background: linear-gradient(to bottom, lightcoral, darkred); 
+  justify-content: flex-start;
+  padding-left: 10px;
+}
+
+.caja6 { 
+  background: radial-gradient(circle, lightblue, darkblue); 
+}
