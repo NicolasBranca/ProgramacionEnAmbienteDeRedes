@@ -65,7 +65,7 @@
 }
 
 .caja4 {
-  background: linear-gradient(to right, lightcoral 50%, purple 50%);
+  background: linear-gradient(to right, lightcoral, purple);
   color: white;
   padding: 20px;
   box-sizing: border-box;
