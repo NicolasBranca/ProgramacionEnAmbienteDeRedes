@@ -1,0 +1,21 @@
+body {
+  font-size: 12px;
+  line-height: 1.5;
+  color: black;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+@media (min-width: 800px) and (max-width: 1080px) {
+  body {
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 1081px) {
+  body {
+    font-size: 36px;
+  }
+}
