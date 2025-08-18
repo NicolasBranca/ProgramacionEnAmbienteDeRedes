@@ -16,19 +16,17 @@ h1 {
   border-radius: 8px;
 }
 
-
 .sin-padding {
   background-color: #d8b9ff;
 }
 
-
 .con-padding {
   background-color: #87ceeb;
-  padding: 200px;
+  padding: 0 200px; 
 }
 
 .con-padding-borderbox {
-  background-color: #f08080; 
-  padding: 200px;
-  box-sizing: border-box; /
+  background-color: #f08080;
+  padding: 0 200px;
+  box-sizing: border-box;
 }

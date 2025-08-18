@@ -1,0 +1,37 @@
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+  background-color: #f7f7f7;
+  padding: 20px;
+}
+
+.contenedor {
+  width: 90%;
+  margin: 0 auto;
+  background-color: lightblue;
+  text-align: center;
+  overflow: hidden; 
+}
+
+.caja {
+  float: left;
+  width: 16.5%; 
+  height: 200px;
+  margin: 0.5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+
+
+.caja1 { background: linear-gradient(to bottom, lightgreen, darkgreen); color: black; }
+.caja2 { background: radial-gradient(circle, lightyellow, orange, red); }
+.caja3 { background: linear-gradient(to bottom, skyblue, navy); overflow: hidden; }
+.caja3 img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.caja4 { background: radial-gradient(circle, lightgray, black); overflow: hidden; }
+.caja4 img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.caja5 { background: linear-gradient(to bottom, lightcoral, darkred); }
+.caja6 { background: radial-gradient(circle, lightblue, darkblue); }
