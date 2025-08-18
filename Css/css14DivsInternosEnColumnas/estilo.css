@@ -3,6 +3,7 @@
   margin: 0 auto;
   background-color: lightblue;
   padding: 20px;
+  overflow: hidden; 
 }
 
 .contenedor h1 {
@@ -19,6 +20,7 @@
   box-sizing: border-box;
   background-color: lightgreen;
   margin-bottom: 10px;
+  font-size: 2em; 
 }
 
 .columna img {
@@ -47,4 +49,10 @@
     width: 100%;
     background-color: lightpink;
   }
+}
+
+.contenedor::after {
+  content: "";
+  display: table;
+  clear: both;
 }
