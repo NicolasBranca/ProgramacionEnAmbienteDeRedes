@@ -24,11 +24,11 @@ h1 {
 
 .con-padding {
   background-color: #87ceeb;
-  padding: 20px;
+  padding: 200px;
 }
 
 .con-padding-borderbox {
   background-color: #f08080; 
-  padding: 20px;
+  padding: 200px;
   box-sizing: border-box; /
 }
