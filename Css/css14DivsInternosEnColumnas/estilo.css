@@ -5,6 +5,7 @@
   padding: 20px;
   display: grid;
   grid-template-columns: repeat(4, 1fr); 
+  grid-auto-rows: auto;
   gap: 10px;
 }
 
@@ -12,7 +13,7 @@
   font-weight: bold;
   text-align: left;
   margin-bottom: 20px;
-  grid-column: 1 / -1; 
+  grid-column: 1 / -1;
 }
 
 .columna {
@@ -20,6 +21,18 @@
   padding: 10px;
   font-size: 1.2em;
   box-sizing: border-box;
+}
+
+.columna1 {
+  height: 25vh; 
+}
+
+.columna5 {
+  grid-column: 1 / 2; 
+}
+
+.columna6 {
+  grid-column: 2 / 3; 
 }
 
 .columna img {
