@@ -7,7 +7,8 @@
   flex-direction: column; 
   gap: 10px; 
   min-height: 100vh;      
-  overflow-y: auto;       
+  overflow-y: auto;
+  align-items: center;     
 }
 
 .contenedor h1 {
@@ -27,26 +28,25 @@
 
 .caja1 {
   background-color: lightgreen;
-  text-align: center;  
-  justify-content: flex-start; 
-  align-items: center;
+  display: flex;              
+  justify-content: center;    
+  align-items: flex-start;    
+  text-align: center;         
+  padding-top: 10px;          
 }
+
 @media (max-width: 1080px) and (min-width: 600px) {
   .caja1 {
     background-color: pink;
-    text-align: center;
-    justify-content: flex-start;
-    align-items: center;
   }
 }
+
 @media (max-width: 600px) {
   .caja1 {
     background-color: burlywood;
-    text-align: center;
-    justify-content: flex-start;
-    align-items: center;
   }
 }
+
 
 .caja2 {
   background: radial-gradient(circle, lightyellow, orange, red);

@@ -3,24 +3,23 @@
   margin: 0 auto;
   background-color: lightblue;
   padding: 20px;
-  overflow: hidden; 
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 10px;
 }
 
 .contenedor h1 {
   font-weight: bold;
   text-align: left;
   margin-bottom: 20px;
+  grid-column: 1 / -1; 
 }
 
 .columna {
-  float: left;
-  width: 15%;
-  padding: 10px;
-  color: black;
-  box-sizing: border-box;
   background-color: lightgreen;
-  margin-bottom: 10px;
-  font-size: 2em; 
+  padding: 10px;
+  font-size: 1.2em;
+  box-sizing: border-box;
 }
 
 .columna img {
@@ -31,28 +30,19 @@
 }
 
 @media (max-width: 1080px) and (min-width: 800px) {
+  .contenedor {
+    grid-template-columns: repeat(2, 1fr);
+  }
   .columna {
-    width: 33.33%;
     background-color: lightcoral;
   }
 }
 
-@media (max-width: 799px) and (min-width: 500px) {
+@media (max-width: 799px) {
+  .contenedor {
+    grid-template-columns: 1fr;
+  }
   .columna {
-    width: 50%;
     background-color: lightyellow;
   }
-}
-
-@media (max-width: 499px) {
-  .columna {
-    width: 100%;
-    background-color: lightpink;
-  }
-}
-
-.contenedor::after {
-  content: "";
-  display: table;
-  clear: both;
 }
