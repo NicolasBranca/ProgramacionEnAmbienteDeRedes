@@ -1,7 +1,7 @@
 .contenedor {
   position: relative;
   width: 80%;
-  min-height: 150vh;
+  min-height: 200vh;
   margin: 0 auto;
   background-color: yellow;
   padding: 20px;
@@ -47,12 +47,12 @@
   box-sizing: border-box;
   overflow: hidden;
   transform: rotate(20deg);
+  object-fit: contain;
 }
 
 .div2 img {
   width: 45%;
   margin: 2%;
-  display: inline-block;
 }
 
 .div3 {
@@ -65,5 +65,5 @@
   color: white;
   padding: 10px;
   box-sizing: border-box;
-  overflow: auto;
+  overflow: break-word;
 }
