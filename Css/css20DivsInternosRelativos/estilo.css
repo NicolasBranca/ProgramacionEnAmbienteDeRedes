@@ -33,9 +33,11 @@
 .div2 {
   background-color: green;
   width: 50%;
-  margin: 15px auto; 
   min-height: 50px;
   position: relative;
+  left: 50%;
+  transform: translateX(-50%); 
+  margin: 15px 0;
   padding: 10px;
   box-sizing: border-box;
   color: white;
@@ -69,8 +71,8 @@
   transform: translate(-50%, -50%);
   width: 50%;
   height: 50%;
-  background-color: rgba(255, 165, 0, 0.8);
-  color: white;
+  background-color: rgba(255, 165, 0, 0.5); 
+  color: rgba(255, 255, 255, 0.7); 
   padding: 20px;
   box-sizing: border-box;
   overflow-y: auto;
