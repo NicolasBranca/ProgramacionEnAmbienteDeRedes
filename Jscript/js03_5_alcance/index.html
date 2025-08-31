@@ -3,29 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Alcance de variable global</title>
+    <script src="script.js"></script>
+</head>
+<body>
     <script>
         alert("Una variableGlobal fue declarada pero no asignada:\nvariableGlobal;");
         var variableGlobal;
         alert("El valor de variableGlobal es: " + variableGlobal);
     </script>
-    <script src="script.js"></script>
-</head>
-<body>
     <h1>Asignaremos valor a la variable global desde adentro de una función:</h1>
     <button 
         onclick="asignacionConDeclaracion()" 
-        onmouseover="alert('inicializa variable global desde dentro de una funcion con declaracion var')">
+        onmouseenter="mostrarCartel('inicializa variable global desde dentro de una funcion con declaracion var')" 
+        onmouseleave="ocultarCartel()">
         Asignacion con declaración ( declaracion + asignación )
     </button>
     <button 
         onclick="asignacionSinDeclaracion()" 
-        onmouseover="alert('inicializa variable global desde adentro de una función sin declaracion var')">
+        onmouseenter="mostrarCartel('inicializa variable global desde adentro de una función sin declaracion var')" 
+        onmouseleave="ocultarCartel()">
         Asignacion forzada sin declaración
     </button>
     <button onclick="mostrarVariableGlobal()">
         Muestra variable global
     </button>
+    <span id="cartelito" style="display:none; background: #eee; border: 1px solid #aaa; padding: 4px; position: absolute;"></span>
     <div id="resultado"></div>
 </body>
-</html>
 </html>
