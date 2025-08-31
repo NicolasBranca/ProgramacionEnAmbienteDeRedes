@@ -1,5 +1,15 @@
 let arregloFrutas = ["banana", "manzana"];
-alert("El arregloFrutas ya tiene dos elementos asignados por programa (banana y manzana). agregue el tercer elemento con indice numerico.");
+let tercerElemento = null;
+window.onload = function() {
+    alert("El arregloFrutas ya tiene dos elementos asignados por programa (banana y manzana). agregue el tercer elemento con indice numerico.");
+    tercerElemento = prompt("Ingrese el tercer elemento para el arregloFrutas:");
+    if (tercerElemento && tercerElemento.trim() !== "") {
+        arregloFrutas[2] = tercerElemento.trim();
+        document.getElementById("frutaInput").value = tercerElemento.trim();
+        document.getElementById("frutaInput").disabled = true;
+    }
+    mostrarDatos();
+};
 
 function mostrarDatos() {
     document.getElementById("tipo").innerHTML = "Tipo para arregloFrutas: " + typeof arregloFrutas;
@@ -10,16 +20,3 @@ function mostrarDatos() {
         : "";
     document.getElementById("cantidad").innerHTML = "Cantidad de elementos: " + arregloFrutas.length;
 }
-
-function agregarFruta() {
-    const input = document.getElementById("frutaInput");
-    if (input.value.trim() !== "") {
-        arregloFrutas[2] = input.value.trim();
-        mostrarDatos();
-        input.disabled = true;
-    }
-}
-
-window.onload = function() {
-    mostrarDatos();
-};
