@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Operaciones entre Inputs</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <h2 style="text-align:center;">
+        Introducir un valor en los cuadros de texto y luego pulsar el boton para ejecutar la función correspondiente.
+    </h2>
+    <div class="contenedor">
+        <table>
+            <tr>
+                <td>Entrada 1:</td>
+                <td><input type="number" id="entrada1" value="0"></td>
+            </tr>
+            <tr>
+                <td>Entrada 2:</td>
+                <td><input type="number" id="entrada2" value="0"></td>
+            </tr>
+            <tr>
+                <td>Entrada 3:</td>
+                <td><input type="number" id="entrada3" value="0"></td>
+            </tr>
+            <tr>
+                <td>Resultado:</td>
+                <td><input type="text" id="resultado" readonly></td>
+            </tr>
+        </table>
+        <button onclick="sumar()">Suma</button>
+        <button onclick="promediar()">Promedia</button>
+        <button onclick="mayor()">Mayor</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
