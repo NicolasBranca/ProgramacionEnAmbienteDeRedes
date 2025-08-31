@@ -1,13 +1,14 @@
 let arregloFrutas = ["banana", "manzana"];
 let tercerElemento = null;
+
+alert("El arregloFrutas ya tiene dos elementos asignados por programa (banana y manzana). Agregue el tercer elemento con índice numérico.");
+tercerElemento = prompt("Ingrese el tercer elemento para el arregloFrutas:");
+
+if (tercerElemento && tercerElemento.trim() !== "") {
+    arregloFrutas[2] = tercerElemento.trim();
+}
+
 window.onload = function() {
-    alert("El arregloFrutas ya tiene dos elementos asignados por programa (banana y manzana). agregue el tercer elemento con indice numerico.");
-    tercerElemento = prompt("Ingrese el tercer elemento para el arregloFrutas:");
-    if (tercerElemento && tercerElemento.trim() !== "") {
-        arregloFrutas[2] = tercerElemento.trim();
-        document.getElementById("frutaInput").value = tercerElemento.trim();
-        document.getElementById("frutaInput").disabled = true;
-    }
     mostrarDatos();
 };
 
