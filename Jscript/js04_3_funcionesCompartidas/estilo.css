@@ -1,0 +1,51 @@
+.main-container {
+    width: 600px;
+    margin: 50px auto;
+    background: #eee;
+    padding: 20px;
+    border-radius: 10px;
+}
+.display {
+    width: 100%;
+    height: 40px;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+.contenedor {
+    background-color: #b3d9ea;
+    padding: 20px 0;
+    margin-bottom: 0;
+}
+.teclado {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    justify-items: center;
+    margin: 0 auto 20px auto;
+    width: 80%;
+}
+.teclado button {
+    width: 100px;
+    height: 40px;
+    font-size: 1.2em;
+    background: #f5f5fa;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.acciones {
+    background: #ffffe0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 20px;
+    margin-top: 0;
+}
+.acciones button {
+    width: 100%;
+    height: 40px;
+    font-size: 1.1em;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: #fff;
+}

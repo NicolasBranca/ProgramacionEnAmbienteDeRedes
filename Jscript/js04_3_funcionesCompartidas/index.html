@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Funciones Compartidas</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <div class="main-container">
+        <input type="text" id="display" readonly class="display">
+        <div class="contenedor">
+            <div class="teclado">
+                <button onclick="agregarNumero('1')">1</button>
+                <button onclick="agregarNumero('2')">2</button>
+                <button onclick="agregarNumero('3')">3</button>
+                <button onclick="agregarNumero('4')">4</button>
+                <button onclick="agregarNumero('5')">5</button>
+                <button onclick="agregarNumero('6')">6</button>
+                <button onclick="agregarNumero('7')">7</button>
+                <button onclick="agregarNumero('8')">8</button>
+                <button onclick="agregarNumero('9')">9</button>
+                <button onclick="agregarNumero('0')">0</button>
+            </div>
+        </div>
+        <div class="acciones">
+            <button onclick="acumular()">+Acumulador</button>
+            <button onclick="mostrarAcumulador()">Muestra Acumulador</button>
+            <button onclick="borrarAcumulador()">Borra Acumulador</button>
+            <button onclick="borrarDisplay()">Borra display</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
