@@ -4,32 +4,34 @@
   <meta charset="UTF-8">
 </head>
 <body>
+<pre>
 var condicionesIVAJSON = '{"condicionesIVA": ' +
 '[ ' +
-'{"idIVA":1,"tipoIVA":"General","porcentaje":21},' +
-'{"idIVA":2,"tipoIVA":"Reducido","porcentaje":10.5},' +
-'{"idIVA":3,"tipoIVA":"Aumentado","porcentaje":27},' +
-'{"idIVA":4,"tipoIVA":"Exento","porcentaje":0}' +
+'  {"idIVA":1,"tipoIVA":"General","porcentaje":21},' +
+'  {"idIVA":2,"tipoIVA":"Reducido","porcentaje":10.5},' +
+'  {"idIVA":3,"tipoIVA":"Aumentado","porcentaje":27},' +
+'  {"idIVA":4,"tipoIVA":"Exento","porcentaje":0}' +
 ']' +
 '}'
 ;
 
 var proveedoresJSON = '{"proveedores": ' +
 '[ ' +
-'{"CodProveedor":1,"RazonSocial":"Proveedor 1 SA","CUIT":"30-00000001-1","idIVA":1,"SaldoCuentaCorriente":10000,"CertificadosCalidad":""},' +
-'{"CodProveedor":2,"RazonSocial":"Proveedor 2 SRL","CUIT":"30-00000002-2","idIVA":2,"SaldoCuentaCorriente":20000,"CertificadosCalidad":""},' +
-'{"CodProveedor":3,"RazonSocial":"Proveedor 3 SA","CUIT":"30-00000003-3","idIVA":3,"SaldoCuentaCorriente":15000,"CertificadosCalidad":""},' +
-'{"CodProveedor":4,"RazonSocial":"Proveedor 4 SRL","CUIT":"30-00000004-4","idIVA":4,"SaldoCuentaCorriente":5000,"CertificadosCalidad":""},' +
-'{"CodProveedor":5,"RazonSocial":"Proveedor 5 SA","CUIT":"30-00000005-5","idIVA":1,"SaldoCuentaCorriente":30000,"CertificadosCalidad":""},' +
-'{"CodProveedor":6,"RazonSocial":"Proveedor 6 SRL","CUIT":"30-00000006-6","idIVA":2,"SaldoCuentaCorriente":25000,"CertificadosCalidad":""},' +
-'{"CodProveedor":7,"RazonSocial":"Proveedor 7 SA","CUIT":"30-00000007-7","idIVA":3,"SaldoCuentaCorriente":12000,"CertificadosCalidad":""},' +
-'{"CodProveedor":8,"RazonSocial":"Proveedor 8 SRL","CUIT":"30-00000008-8","idIVA":4,"SaldoCuentaCorriente":18000,"CertificadosCalidad":""},' +
-'{"CodProveedor":9,"RazonSocial":"Proveedor 9 SA","CUIT":"30-00000009-9","idIVA":1,"SaldoCuentaCorriente":40000,"CertificadosCalidad":""},' +
-'{"CodProveedor":10,"RazonSocial":"Proveedor 10 SRL","CUIT":"30-00000010-0","idIVA":2,"SaldoCuentaCorriente":22000,"CertificadosCalidad":""}' +
+'  {"CodProveedor":1,"RazonSocial":"Proveedor 1 SA","CUIT":"30-00000001-1","idIVA":1,"SaldoCuentaCorriente":10000,"CertificadosCalidad":""},' +
+'  {"CodProveedor":2,"RazonSocial":"Proveedor 2 SRL","CUIT":"30-00000002-2","idIVA":2,"SaldoCuentaCorriente":20000,"CertificadosCalidad":""},' +
+'  {"CodProveedor":3,"RazonSocial":"Proveedor 3 SA","CUIT":"30-00000003-3","idIVA":3,"SaldoCuentaCorriente":15000,"CertificadosCalidad":""},' +
+'  {"CodProveedor":4,"RazonSocial":"Proveedor 4 SRL","CUIT":"30-00000004-4","idIVA":4,"SaldoCuentaCorriente":5000,"CertificadosCalidad":""},' +
+'  {"CodProveedor":5,"RazonSocial":"Proveedor 5 SA","CUIT":"30-00000005-5","idIVA":1,"SaldoCuentaCorriente":30000,"CertificadosCalidad":""},' +
+'  {"CodProveedor":6,"RazonSocial":"Proveedor 6 SRL","CUIT":"30-00000006-6","idIVA":2,"SaldoCuentaCorriente":25000,"CertificadosCalidad":""},' +
+'  {"CodProveedor":7,"RazonSocial":"Proveedor 7 SA","CUIT":"30-00000007-7","idIVA":3,"SaldoCuentaCorriente":12000,"CertificadosCalidad":""},' +
+'  {"CodProveedor":8,"RazonSocial":"Proveedor 8 SRL","CUIT":"30-00000008-8","idIVA":4,"SaldoCuentaCorriente":18000,"CertificadosCalidad":""},' +
+'  {"CodProveedor":9,"RazonSocial":"Proveedor 9 SA","CUIT":"30-00000009-9","idIVA":1,"SaldoCuentaCorriente":40000,"CertificadosCalidad":""},' +
+'  {"CodProveedor":10,"RazonSocial":"Proveedor 10 SRL","CUIT":"30-00000010-0","idIVA":2,"SaldoCuentaCorriente":22000,"CertificadosCalidad":""}' +
 ']' +
 '}';
 
 objCondicionesIVA = JSON.parse(condicionesIVAJSON);
 objProveedores = JSON.parse(proveedoresJSON);
+</pre>
 </body>
 </html>
