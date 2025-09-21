@@ -15,7 +15,7 @@
             <div class="fila-formulario">
                 <div class="grupo-formulario">
                     <label for="codProveedor">codProveedor:</label>
-                    <input type="number" id="codProveedor" name="codProveedor" required>
+                    <input type="number" id="codProveedor" name="codProveedor" required placeholder="Solo números" title="Ingrese solo números">
                 </div>
                 <div class="grupo-formulario">
                     <label for="condicionIVA">Condición IVA:</label>
@@ -30,17 +30,19 @@
                 </div>
                 <div class="grupo-formulario">
                     <label for="cuit">CUIT:</label>
-                    <input type="text" id="cuit" name="cuit" placeholder="00000000000" maxlength="11" inputmode="numeric" required>
+                    <input type="text" id="cuit" name="cuit" placeholder="Solo números (11 dígitos)" maxlength="11" inputmode="numeric" pattern="[0-9]{11}" required title="Ingrese solo números, 11 dígitos">
                 </div>
             </div>
             <div class="fila-formulario">
                 <div class="grupo-formulario">
                     <label for="saldoCuentaCorriente">Saldo Cuenta Corriente:</label>
-                    <input type="number" id="saldoCuentaCorriente" name="saldoCuentaCorriente" value="0" required>
+                    <input type="number" id="saldoCuentaCorriente" name="saldoCuentaCorriente" value="0" required placeholder="Solo números" title="Ingrese solo números">
                 </div>
                 <div class="grupo-formulario">
                     <label for="certificadosCalidad">Certificados de Calidad (PDF):</label>
-                    <input type="file" id="certificadosCalidad" name="certificadosCalidad" accept="application/pdf" required>
+                    <input type="file" id="certificadosCalidad" name="certificadosCalidad" accept="application/pdf" required style="display:none;">
+                    <button type="button" id="botonAdjuntarArchivo">Adjuntar archivo PDF</button>
+                    <span id="nombreArchivo"></span>
                 </div>
             </div>
             <div class="fila-formulario">
@@ -65,6 +67,14 @@
       });
     }
     poblarOpcionesIVA();
+
+    document.getElementById('botonAdjuntarArchivo').addEventListener('click', function() {
+        document.getElementById('certificadosCalidad').click();
+    });
+    document.getElementById('certificadosCalidad').addEventListener('change', function(e) {
+        var nombre = e.target.files.length > 0 ? e.target.files[0].name : '';
+        document.getElementById('nombreArchivo').textContent = nombre;
+    });
     </script>
 </body>
 </html>
