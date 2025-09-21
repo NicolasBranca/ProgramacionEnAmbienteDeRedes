@@ -3,6 +3,7 @@ html, body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 body {
@@ -133,8 +134,7 @@ main {
     background: aliceblue;
 }
 
-@media (max-width: 600px) {
-    /* Oculta la columna certificadosCalidad en baja resolución */
+@media (max-width: 800px) {
     .tabla-articulos th.certificadosCalidad,
     .tabla-articulos td.certificadosCalidad {
         display: none;

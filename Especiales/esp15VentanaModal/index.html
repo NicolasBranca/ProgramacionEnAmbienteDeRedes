@@ -3,10 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>Ventana Modal</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            alert("ancho de la ventana: " + window.innerWidth);
+        });
+    </script>
 </head>
 <body>
+    <div id="contenedor" class="contenedorActivo">
+        <h2>Esto es el div contenedor</h2>
+        <button id="abrirModal">Abre DIV modal</button>
+        <h3>Ayudas para el ejercicio</h3>
+        <p>
+            El div contenedor deberá ser desactivado cuando se active la ventana modal.<br>
+            Desactivar el contenedor podría ser darle transparencia y deshabilitar todos sus botones.<br>
+            <b>Desactivado:</b><br>
+            pointer-events: none;<br>
+            opacity:0.3;<br>
+            <b>Activado:</b><br>
+            pointer-events: auto;<br>
+            opacity:1;
+        </p>
+    </div>
+    <div id="ventanaModal" class="ventanaModalApagado">
+        <div class="modalContenido">
+            <div class="modalHeader">
+                <span>Encabezado modal</span>
+                <button id="cerrarModal" class="cerrarModal">X</button>
+            </div>
+            <iframe src="../esp05FormVariableArregloDeObjetos/index.html" frameborder="0"></iframe>
+        </div>
+    </div>
     <script>
-        alert("ancho de la ventana: " + window.innerWidth);
+        const contenedor = document.getElementById('contenedor');
+        const modal = document.getElementById('ventanaModal');
+        const abrir = document.getElementById('abrirModal');
+        const cerrar = document.getElementById('cerrarModal');
+
+        abrir.addEventListener('click', function() {
+            contenedor.classList.remove('contenedorActivo');
+            contenedor.classList.add('contenedorPasivo');
+            modal.classList.remove('ventanaModalApagado');
+            modal.classList.add('ventanaModalPrendido');
+        });
+        cerrar.addEventListener('click', function() {
+            contenedor.classList.remove('contenedorPasivo');
+            contenedor.classList.add('contenedorActivo');
+            modal.classList.remove('ventanaModalPrendido');
+            modal.classList.add('ventanaModalApagado');
+        });
     </script>
 </body>
 </html>
