@@ -5,6 +5,135 @@ body {
     font-family: Arial, sans-serif;
 }
 
+header, footer {
+    background: lightblue;
+    font-weight: bold;
+    padding: 1rem;
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header {
+    top: 0;
+    height: 70px;
+    border-bottom: 1px solid lightgray;
+    font-size: 1.5rem;
+    justify-content: flex-start;
+}
+
+header h2 {
+    flex: 1 1 auto;
+    margin: 0;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.botones-header {
+    display: flex;
+    gap: 0.5rem;
+    margin-left: auto;
+    margin-right: 0;
+    align-items: center;
+}
+
+.botones-header button {
+    padding: 0.5rem 1rem;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    background: lightgray;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.botones-header button:hover {
+    background: lightcyan;
+}
+
+footer {
+    bottom: 0;
+    height: 50px;
+    border-top: 1px solid lightgray;
+    font-size: 1.1rem;
+    justify-content: center;
+}
+
+main {
+    margin-top: 90px;
+    margin-bottom: 60px;
+}
+
+.contenedor-tabla {
+    background: lavender;
+    padding: 1rem;
+}
+
+.tabla-articulos {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    table-layout: fixed;
+}
+
+.tabla-articulos th, .tabla-articulos td {
+    border: 1px solid lightgray;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.tabla-articulos thead th {
+    background: lightgreen;
+    font-weight: bold;
+    font-size: 1.1rem;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.tabla-articulos tfoot td {
+    background: khaki;
+    font-weight: 500;
+    font-size: 0.95rem;
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+}
+
+.tabla-articulos tbody {
+    display: block;
+    max-height: 350px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.tabla-articulos thead, .tabla-articulos tfoot {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.tabla-articulos tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.tabla-articulos tbody tr:nth-child(even) {
+    background: aliceblue;
+}
+
+@media (max-width: 800px) {
+    .tabla-articulos th.certificadosCalidad,
+    .tabla-articulos td.certificadosCalidad {
+        display: none;
+    }
+}
+
 .contenedorActivo {
     opacity: 1;
     pointer-events: auto;
