@@ -29,7 +29,7 @@ header {
     height: 70px;
     border-bottom: 1px solid lightgray;
     font-size: 1.5rem;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 header h2 {
@@ -131,4 +131,12 @@ main {
 
 .tabla-articulos tbody tr:nth-child(even) {
     background: aliceblue;
+}
+
+@media (max-width: 600px) {
+    /* Oculta la columna certificadosCalidad en baja resolución */
+    .tabla-articulos th.certificadosCalidad,
+    .tabla-articulos td.certificadosCalidad {
+        display: none;
+    }
 }
