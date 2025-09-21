@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario para ALTA - Maestro de Proveedores</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="../condicionesIVA.js"></script>
+</head>
+<body>
+    <header>
+        <h2>Formulario para ALTA<br>Maestro de Proveedores</h2>
+    </header>
+    <main class="principal">
+        <form>
+            <div class="fila-formulario">
+                <div class="grupo-formulario">
+                    <label for="codProveedor">codProveedor:</label>
+                    <input type="number" id="codProveedor" name="codProveedor">
+                </div>
+                <div class="grupo-formulario">
+                    <label for="condicionIVA">Condición IVA:</label>
+                    <select id="condicionIVA" name="condicionIVA">
+                    </select>
+                </div>
+            </div>
+            <div class="fila-formulario">
+                <div class="grupo-formulario">
+                    <label for="razonSocial">Razón Social:</label>
+                    <input type="text" id="razonSocial" name="razonSocial">
+                </div>
+                <div class="grupo-formulario">
+                    <label for="cuit">CUIT:</label>
+                    <input type="text" id="cuit" name="cuit" placeholder="00-00000000-0">
+                </div>
+            </div>
+            <div class="fila-formulario">
+                <div class="grupo-formulario">
+                    <label for="saldoCuentaCorriente">Saldo Cuenta Corriente:</label>
+                    <input type="number" id="saldoCuentaCorriente" name="saldoCuentaCorriente" value="0">
+                </div>
+                <div class="grupo-formulario">
+                    <label for="certificadosCalidad">Certificados de Calidad:</label>
+                    <input type="text" id="certificadosCalidad" name="certificadosCalidad">
+                </div>
+            </div>
+            <div class="fila-formulario">
+                <div class="grupo-formulario"></div>
+                <div class="grupo-formulario">
+                    <button type="submit">ENVIAR</button>
+                </div>
+            </div>
+        </form>
+    </main>
+    <footer>
+        <h3>Pie del formulario</h3>
+    </footer>
+    <script>
+    function poblarOpcionesIVA() {
+      condicionesIVAJSON.condicionesIVA.forEach(function(condicion) {
+        var opcion = document.createElement("option");
+        opcion.setAttribute("class", "elementoOptionSelect");
+        opcion.setAttribute("value", condicion.idIVA);
+        opcion.innerHTML = condicion.tipoIVA;
+        document.getElementById("condicionIVA").appendChild(opcion);
+      });
+    }
+    poblarOpcionesIVA();
+    </script>
+</body>
+</html>

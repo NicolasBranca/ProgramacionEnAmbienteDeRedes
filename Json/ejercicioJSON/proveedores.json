@@ -1,0 +1,16 @@
+{
+  "proveedoresJSON": {
+    "proveedores": [
+      { "CodProveedor": 1, "RazonSocial": "YPF", "CUIT": "30-70700001-0", "idIVA": 1, "SaldoCuentaCorriente": 150000, "CertificadosCalidad": "" },
+      { "CodProveedor": 2, "RazonSocial": "Arcor", "CUIT": "30-70700002-9", "idIVA": 2, "SaldoCuentaCorriente": 80000, "CertificadosCalidad": "" },
+      { "CodProveedor": 3, "RazonSocial": "Molinos Río de la Plata", "CUIT": "30-70700003-8", "idIVA": 3, "SaldoCuentaCorriente": 95000, "CertificadosCalidad": "" },
+      { "CodProveedor": 4, "RazonSocial": "Telecom", "CUIT": "30-70700004-7", "idIVA": 4, "SaldoCuentaCorriente": 60000, "CertificadosCalidad": "" },
+      { "CodProveedor": 5, "RazonSocial": "Tenaris", "CUIT": "30-70700005-6", "idIVA": 1, "SaldoCuentaCorriente": 200000, "CertificadosCalidad": "" },
+      { "CodProveedor": 6, "RazonSocial": "Coca-Cola", "CUIT": "30-70700006-5", "idIVA": 2, "SaldoCuentaCorriente": 120000, "CertificadosCalidad": "" },
+      { "CodProveedor": 7, "RazonSocial": "Quilmes", "CUIT": "30-70700007-4", "idIVA": 3, "SaldoCuentaCorriente": 110000, "CertificadosCalidad": "" },
+      { "CodProveedor": 8, "RazonSocial": "Mercado Libre", "CUIT": "30-70700008-3", "idIVA": 4, "SaldoCuentaCorriente": 175000, "CertificadosCalidad": "" },
+      { "CodProveedor": 9, "RazonSocial": "Aerolineas Argentinas", "CUIT": "30-70700009-2", "idIVA": 1, "SaldoCuentaCorriente": 220000, "CertificadosCalidad": "" },
+      { "CodProveedor": 10, "RazonSocial": "Techint Ingeniería y Construcción", "CUIT": "30-70700010-1", "idIVA": 2, "SaldoCuentaCorriente": 135000, "CertificadosCalidad": "" }
+    ]
+  }
+}
