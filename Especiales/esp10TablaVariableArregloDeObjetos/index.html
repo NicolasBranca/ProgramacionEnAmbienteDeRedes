@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Artículos - Tabla dinámica</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="../proveedores.js"></script>
+    <script src="../condicionesIVA.js"></script>
+</head>
+<body>
+    <header>
+        <h2>Artículos</h2>
+        <div class="botones-header">
+            <button id="botonCargar">Cargar datos</button>
+            <button id="botonVaciar">Vaciar datos</button>
+        </div>
+    </header>
+    <main>
+        <div id="contenedorTabla" class="contenedor-tabla">
+            <table class="tabla-articulos">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Razón Social</th>
+                        <th>CUIT</th>
+                        <th>Condición IVA</th>
+                        <th>Saldo Cta. Cte.</th>
+                        <th>Certificados Calidad</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaBody">
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>sum código</td>
+                        <td>sum razón social</td>
+                        <td>sum cuit</td>
+                        <td>sum condición iva</td>
+                        <td>sum saldo cta. cte.</td>
+                        <td>sum certificados calidad</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </main>
+    <footer>
+        <span>Pie</span>
+    </footer>
+    <script>
+    const columnas = [
+        { campo: "CodProveedor", titulo: "Código" },
+        { campo: "RazonSocial", titulo: "Razón Social" },
+        { campo: "CUIT", titulo: "CUIT" },
+        { campo: "idIVA", titulo: "Condición IVA" },
+        { campo: "SaldoCuentaCorriente", titulo: "Saldo Cta. Cte." },
+        { campo: "CertificadosCalidad", titulo: "Certificados Calidad" }
+    ];
+
+    function crearFilas(datos) {
+        const tbody = document.getElementById('tablaBody');
+        datos.forEach(function(item) {
+            var objTr = document.createElement("tr");
+            columnas.forEach(function(col) {
+                var objTd = document.createElement("td");
+                objTd.setAttribute("campo-dato", col.campo);
+                if (col.campo === "idIVA") {
+                    var iva = condicionesIVAJSON.condicionesIVA.find(function(c) { return c.idIVA === item.idIVA; });
+                    objTd.innerHTML = iva ? iva.tipoIVA : "";
+                } else {
+                    objTd.innerHTML = item[col.campo];
+                }
+                objTr.appendChild(objTd);
+            });
+            tbody.appendChild(objTr);
+        });
+    }
+
+    document.getElementById('botonCargar').addEventListener('click', function() {
+        crearFilas(proveedoresJSON.proveedores);
+    });
+
+    document.getElementById('botonVaciar').addEventListener('click', function() {
+        var tbody = document.getElementById('tablaBody');
+        while (tbody.firstChild) {
+            tbody.removeChild(tbody.firstChild);
+        }
+    });
+    </script>
+</body>
+</html>

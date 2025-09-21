@@ -60,7 +60,6 @@
     function poblarOpcionesIVA() {
       condicionesIVAJSON.condicionesIVA.forEach(function(condicion) {
         var opcion = document.createElement("option");
-        opcion.setAttribute("class", "elementoOptionSelect");
         opcion.setAttribute("value", condicion.idIVA);
         opcion.innerHTML = condicion.tipoIVA;
         document.getElementById("condicionIVA").appendChild(opcion);
