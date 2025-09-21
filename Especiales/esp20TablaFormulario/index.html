@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Proveedores - Tabla dinámica</title>
+    <title>Tabla Formulario</title>
     <link rel="stylesheet" href="estilos.css">
     <script src="../proveedores.js"></script>
     <script src="../condicionesIVA.js"></script>
@@ -10,14 +10,15 @@
 <body>
     <header>
         <h2>Proveedores</h2>
-        <div class="botones-header">
+        <div>
             <button id="botonCargar">Cargar datos</button>
             <button id="botonVaciar">Vaciar datos</button>
+            <button id="botonCargarForm">CargarForm</button>
         </div>
     </header>
     <main>
-        <div id="contenedorTabla" class="contenedor-tabla">
-            <table class="tabla-articulos">
+        <div id="contenedorTabla" class="contenedorActivo">
+            <table>
                 <thead>
                     <tr>
                         <th>Código</th>
@@ -32,17 +33,26 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td>sum código</td>
-                        <td>sum razón social</td>
-                        <td>sum cuit</td>
-                        <td>sum condición iva</td>
-                        <td>sum saldo cta. cte.</td>
-                        <td>sum certificados calidad</td>
+                        <td>s código</td>
+                        <td>s razón social</td>
+                        <td>s cuit</td>
+                        <td>s condición iva</td>
+                        <td>s saldo cta. cte.</td>
+                        <td>s certificados calidad</td>
                     </tr>
                 </tfoot>
             </table>
         </div>
     </main>
+    <div id="ventanaModal" class="ventanaModalApagado">
+        <div class="modalContenido">
+            <div class="modalHeader">
+                <span>Encabezado Modal</span>
+                <button id="cerrarModal" class="cerrarModal">X</button>
+            </div>
+            <iframe src="../esp05FormVariableArregloDeObjetos/index.html"></iframe>
+        </div>
+    </div>
     <footer>
         <span>Pie</span>
     </footer>
@@ -87,6 +97,24 @@
         while (tbody.firstChild) {
             tbody.removeChild(tbody.firstChild);
         }
+    });
+
+    const contenedorTabla = document.getElementById('contenedorTabla');
+    const modal = document.getElementById('ventanaModal');
+    const abrirForm = document.getElementById('botonCargarForm');
+    const cerrar = document.getElementById('cerrarModal');
+
+    abrirForm.addEventListener('click', function() {
+        contenedorTabla.classList.remove('contenedorActivo');
+        contenedorTabla.classList.add('contenedorPasivo');
+        modal.classList.remove('ventanaModalApagado');
+        modal.classList.add('ventanaModalPrendido');
+    });
+    cerrar.addEventListener('click', function() {
+        contenedorTabla.classList.remove('contenedorPasivo');
+        contenedorTabla.classList.add('contenedorActivo');
+        modal.classList.remove('ventanaModalPrendido');
+        modal.classList.add('ventanaModalApagado');
     });
     </script>
 </body>

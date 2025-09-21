@@ -1,0 +1,73 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: lightblue;
+    font-family: Arial, sans-serif;
+}
+
+.contenedorActivo {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.contenedorPasivo {
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.ventanaModalApagado {
+    visibility: hidden;
+}
+
+.ventanaModalPrendido {
+    visibility: visible;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.modalContenido {
+    background: lightgray;
+    border-radius: 6px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+    min-width: 900px;
+    min-height: 500px;
+    max-width: 95vw;
+    max-height: 95vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.modalHeader {
+    background: gray;
+    color: black;
+    font-weight: bold;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.cerrarModal {
+    background: transparent;
+    border: none;
+    color: red;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+iframe {
+    flex: 1 1 auto;
+    border: none;
+    width: 100%;
+    min-height: 500px;
+    background: whitesmoke;
+}
