@@ -15,32 +15,32 @@
             <div class="fila-formulario">
                 <div class="grupo-formulario">
                     <label for="codProveedor">codProveedor:</label>
-                    <input type="number" id="codProveedor" name="codProveedor">
+                    <input type="number" id="codProveedor" name="codProveedor" required>
                 </div>
                 <div class="grupo-formulario">
                     <label for="condicionIVA">Condición IVA:</label>
-                    <select id="condicionIVA" name="condicionIVA">
+                    <select id="condicionIVA" name="condicionIVA" required>
                     </select>
                 </div>
             </div>
             <div class="fila-formulario">
                 <div class="grupo-formulario">
                     <label for="razonSocial">Razón Social:</label>
-                    <input type="text" id="razonSocial" name="razonSocial">
+                    <input type="text" id="razonSocial" name="razonSocial" required>
                 </div>
                 <div class="grupo-formulario">
                     <label for="cuit">CUIT:</label>
-                    <input type="text" id="cuit" name="cuit" placeholder="00-00000000-0">
+                    <input type="text" id="cuit" name="cuit" placeholder="00000000000" maxlength="11" inputmode="numeric" required>
                 </div>
             </div>
             <div class="fila-formulario">
                 <div class="grupo-formulario">
                     <label for="saldoCuentaCorriente">Saldo Cuenta Corriente:</label>
-                    <input type="number" id="saldoCuentaCorriente" name="saldoCuentaCorriente" value="0">
+                    <input type="number" id="saldoCuentaCorriente" name="saldoCuentaCorriente" value="0" required>
                 </div>
                 <div class="grupo-formulario">
-                    <label for="certificadosCalidad">Certificados de Calidad:</label>
-                    <input type="text" id="certificadosCalidad" name="certificadosCalidad">
+                    <label for="certificadosCalidad">Certificados de Calidad (PDF):</label>
+                    <input type="file" id="certificadosCalidad" name="certificadosCalidad" accept="application/pdf" required>
                 </div>
             </div>
             <div class="fila-formulario">
