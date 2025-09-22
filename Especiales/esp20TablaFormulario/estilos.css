@@ -1,8 +1,15 @@
-body {
+html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
-    background: white; 
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+body {
+    min-height: 100vh;
     font-family: Arial, sans-serif;
+    background: white; 
 }
 
 header, footer {
@@ -69,6 +76,7 @@ main {
     height: calc(100vh - 90px - 60px);
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .contenedor-tabla {
@@ -80,6 +88,7 @@ main {
     display: flex;
     flex-direction: column;
     min-height: 0;
+    overflow: hidden;
 }
 
 .tabla-proveedores {
@@ -145,7 +154,7 @@ main {
     background: aliceblue;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
     .tabla-proveedores th.certificadosCalidad,
     .tabla-proveedores td.certificadosCalidad {
         display: none;
