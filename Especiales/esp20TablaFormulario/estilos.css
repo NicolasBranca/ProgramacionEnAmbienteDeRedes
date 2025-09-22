@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background: lightblue;
+    background: white; 
     font-family: Arial, sans-serif;
 }
 
@@ -71,22 +71,27 @@ main {
 .contenedor-tabla {
     background: lavender;
     padding: 1rem;
+    border-radius: 6px;
+    margin: 0 10px;
 }
 
-.tabla-articulos {
+.tabla-proveedores {
     width: 100%;
     border-collapse: collapse;
     background: white;
     table-layout: fixed;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-.tabla-articulos th, .tabla-articulos td {
+.tabla-proveedores th, .tabla-proveedores td {
     border: 1px solid lightgray;
     padding: 0.5rem;
     text-align: center;
 }
 
-.tabla-articulos thead th {
+.tabla-proveedores thead th {
     background: lightgreen;
     font-weight: bold;
     font-size: 1.1rem;
@@ -95,7 +100,7 @@ main {
     z-index: 1;
 }
 
-.tabla-articulos tfoot td {
+.tabla-proveedores tfoot td {
     background: khaki;
     font-weight: 500;
     font-size: 0.95rem;
@@ -104,32 +109,32 @@ main {
     z-index: 1;
 }
 
-.tabla-articulos tbody {
+.tabla-proveedores tbody {
     display: block;
     max-height: 350px;
     overflow-y: auto;
     width: 100%;
 }
 
-.tabla-articulos thead, .tabla-articulos tfoot {
+.tabla-proveedores thead, .tabla-proveedores tfoot {
     display: table;
     width: 100%;
     table-layout: fixed;
 }
 
-.tabla-articulos tbody tr {
+.tabla-proveedores tbody tr {
     display: table;
     width: 100%;
     table-layout: fixed;
 }
 
-.tabla-articulos tbody tr:nth-child(even) {
+.tabla-proveedores tbody tr:nth-child(even) {
     background: aliceblue;
 }
 
 @media (max-width: 800px) {
-    .tabla-articulos th.certificadosCalidad,
-    .tabla-articulos td.certificadosCalidad {
+    .tabla-proveedores th.certificadosCalidad,
+    .tabla-proveedores td.certificadosCalidad {
         display: none;
     }
 }
