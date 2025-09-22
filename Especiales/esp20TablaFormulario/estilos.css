@@ -66,6 +66,9 @@ footer {
 main {
     margin-top: 90px;
     margin-bottom: 60px;
+    height: calc(100vh - 90px - 60px);
+    display: flex;
+    flex-direction: column;
 }
 
 .contenedor-tabla {
@@ -73,6 +76,10 @@ main {
     padding: 1rem;
     border-radius: 6px;
     margin: 0 10px;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
 }
 
 .tabla-proveedores {
@@ -83,6 +90,31 @@ main {
     border-radius: 6px;
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.tabla-proveedores thead,
+.tabla-proveedores tfoot {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    flex-shrink: 0;
+}
+
+.tabla-proveedores tbody {
+    display: block;
+    flex: 1 1 auto;
+    overflow-y: auto;
+    width: 100%;
+    min-height: 0;
+}
+
+.tabla-proveedores tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
 }
 
 .tabla-proveedores th, .tabla-proveedores td {
@@ -107,25 +139,6 @@ main {
     position: sticky;
     bottom: 0;
     z-index: 1;
-}
-
-.tabla-proveedores tbody {
-    display: block;
-    max-height: 350px;
-    overflow-y: auto;
-    width: 100%;
-}
-
-.tabla-proveedores thead, .tabla-proveedores tfoot {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
-}
-
-.tabla-proveedores tbody tr {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
 }
 
 .tabla-proveedores tbody tr:nth-child(even) {
