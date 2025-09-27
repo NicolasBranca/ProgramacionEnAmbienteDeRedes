@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>01php_echo</title>
+    <title>Texto PHP</title>
 </head>
 <body>
     <p>esto en un parrafo en html</p>
