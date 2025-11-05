@@ -300,15 +300,32 @@ function cargaTabla() {
 }
 
 // Puedes llamar cargaTabla() desde un botón o al cargar la página si lo deseas
-document.getElementById('btnCargarDatos').onclick = function() {
-    cargaTabla();
-};
-document.getElementById('btnVaciarDatos').onclick = function() {
+// Cambiar a addEventListener y asegurar que los elementos existen
+document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('tbodyProveedores').innerHTML = '';
-};
-document.getElementById('btnCargarForm').onclick = function() {
-    abrirModal();
-};
+
+    // Usar addEventListener en vez de asignación directa
+    const btnCargarDatos = document.getElementById('btnCargarDatos');
+    if (btnCargarDatos) {
+        btnCargarDatos.addEventListener('click', function() {
+            cargaTabla();
+        });
+    }
+
+    const btnVaciarDatos = document.getElementById('btnVaciarDatos');
+    if (btnVaciarDatos) {
+        btnVaciarDatos.addEventListener('click', function() {
+            document.getElementById('tbodyProveedores').innerHTML = '';
+        });
+    }
+
+    const btnCargarForm = document.getElementById('btnCargarForm');
+    if (btnCargarForm) {
+        btnCargarForm.addEventListener('click', function() {
+            abrirModal();
+        });
+    }
+});
 
 function abrirModal(proveedor = null) {
     const modal = new bootstrap.Modal(document.getElementById('modalFormulario'));
