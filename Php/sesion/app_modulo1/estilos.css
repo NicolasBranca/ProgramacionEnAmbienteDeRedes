@@ -1,0 +1,101 @@
+/* --- Basado en ambos estilos.css adjuntos --- */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: aliceblue;
+    min-height: 100vh;
+    overflow-y: auto;
+}
+
+.principal {
+    background: honeydew;
+    padding: 30px 0;
+    margin-top: 30px;
+    border-radius: 8px;
+}
+
+.contenedor-tabla {
+    background: lavender;
+    padding: 1rem;
+    border-radius: 6px;
+    margin: 0 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.tabla-proveedores {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.tabla-proveedores th, .tabla-proveedores td {
+    border: 1px solid lightgray;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.tabla-proveedores thead th {
+    background: lightgreen;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.tabla-proveedores tbody tr:nth-child(even) {
+    background: aliceblue;
+}
+
+/* Formulario */
+form {
+    width: 100%;
+    margin: 0 auto;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: darkslategray;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    padding: 10px;
+    font-size: 1.1em;
+    border: 1px solid teal;
+    border-radius: 2px;
+    background: white;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 1.1em;
+    background: orange;
+    border: 1px solid darkorange;
+    border-radius: 2px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+}
+
+button[type="submit"]:hover {
+    background: darkorange;
+}
+
+@media (max-width: 700px) {
+    .contenedor-tabla {
+        padding: 0.5rem;
+    }
+    form {
+        width: 95%;
+    }
+}
