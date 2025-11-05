@@ -65,37 +65,57 @@ $ivas = $pdo->query("SELECT * FROM CondicionIVA")->fetchAll(PDO::FETCH_UNIQUE);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body>
-<div class="container mt-4 principal">
-    <h2>Proveedores</h2>
-    <button class="btn btn-primary mb-3" onclick="abrirModal()">Agregar Proveedor</button>
+<header class="header-fijo">
+    <div class="header-content">
+        <h1>Proveedores</h1>
+        <div class="header-botones">
+            <button class="btn-header" id="btnCargarDatos">Cargar datos</button>
+            <button class="btn-header" id="btnVaciarDatos">Vaciar datos</button>
+            <button class="btn-header" id="btnCargarForm">CargarForm</button>
+        </div>
+    </div>
+</header>
+<div class="principal">
     <div class="contenedor-tabla">
-    <table class="table table-bordered tabla-proveedores">
+    <table class="tabla-proveedores">
         <thead>
             <tr>
+                <th>Código</th>
                 <th>Razón Social</th>
                 <th>CUIT</th>
                 <th>Condición IVA</th>
                 <th>Saldo Cta. Cte.</th>
-                <th>Acciones</th>
+                <th>Certificados Calidad</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="tbodyProveedores">
         <?php foreach ($proveedores as $p): ?>
             <tr>
+                <td><?= htmlspecialchars($p['CodProveedor']) ?></td>
                 <td><?= htmlspecialchars($p['RazonSocial']) ?></td>
                 <td><?= htmlspecialchars($p['CUIT']) ?></td>
                 <td><?= htmlspecialchars($ivas[$p['idIVA']]['tipoIVA'] ?? '') ?></td>
                 <td><?= number_format($p['SaldoCuentaCorriente'], 2, ',', '.') ?></td>
-                <td>
-                    <button class="btn btn-warning btn-sm" onclick='abrirModal(<?= json_encode($p) ?>)'>Editar</button>
-                    <a href="?eliminar=<?= $p['CodProveedor'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar?')">Eliminar</a>
-                </td>
+                <td><!-- Certificados Calidad, si tienes el dato, ponlo aquí --></td>
             </tr>
         <?php endforeach; ?>
         </tbody>
+        <tfoot>
+            <tr>
+                <td>s código</td>
+                <td>s razón social</td>
+                <td>s cuit</td>
+                <td>s condición iva</td>
+                <td>s saldo cta. cte.</td>
+                <td>s certificados calidad</td>
+            </tr>
+        </tfoot>
     </table>
     </div>
 </div>
+<footer class="footer-fijo">
+    <span>Pie</span>
+</footer>
 
 <!-- Modal -->
 <div class="modal fade" id="modalFormulario" tabindex="-1" aria-labelledby="modalFormularioLabel" aria-hidden="true">
@@ -141,6 +161,44 @@ $ivas = $pdo->query("SELECT * FROM CondicionIVA")->fetchAll(PDO::FETCH_UNIQUE);
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+const datosOriginales = <?php echo json_encode($proveedores); ?>;
+const ivas = <?php echo json_encode($ivas); ?>;
+
+function renderTabla(datos) {
+    const tbody = document.getElementById('tbodyProveedores');
+    tbody.innerHTML = '';
+    datos.forEach(p => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${p.CodProveedor ? escapeHtml(p.CodProveedor) : ''}</td>
+            <td>${p.RazonSocial ? escapeHtml(p.RazonSocial) : ''}</td>
+            <td>${p.CUIT ? escapeHtml(p.CUIT) : ''}</td>
+            <td>${ivas[p.idIVA]?.tipoIVA || ''}</td>
+            <td>${Number(p.SaldoCuentaCorriente).toLocaleString('es-AR', {minimumFractionDigits:2})}</td>
+            <td></td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+function escapeHtml(text) {
+    return text.replace(/[&<>"']/g, function(m) {
+        return ({
+            '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        })[m];
+    });
+}
+
+document.getElementById('btnCargarDatos').onclick = function() {
+    renderTabla(datosOriginales);
+};
+document.getElementById('btnVaciarDatos').onclick = function() {
+    document.getElementById('tbodyProveedores').innerHTML = '';
+};
+document.getElementById('btnCargarForm').onclick = function() {
+    abrirModal();
+};
+
 function abrirModal(proveedor = null) {
     const modal = new bootstrap.Modal(document.getElementById('modalFormulario'));
     document.getElementById('formProveedor').reset();
@@ -154,6 +212,11 @@ function abrirModal(proveedor = null) {
     }
     modal.show();
 }
+
+// Al cargar la página, la tabla aparece vacía
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('tbodyProveedores').innerHTML = '';
+});
 </script>
 </body>
 </html>

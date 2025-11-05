@@ -11,91 +11,165 @@ body {
     background: aliceblue;
     min-height: 100vh;
     overflow-y: auto;
+    padding-top: 90px; /* espacio para header */
+    padding-bottom: 60px; /* espacio para footer */
+    overflow-x: hidden;
 }
 
 .principal {
-    background: honeydew;
-    padding: 30px 0;
-    margin-top: 30px;
-    border-radius: 8px;
+    background: none;
+    padding: 0;
+    margin-top: 0;
+    border-radius: 0;
 }
 
 .contenedor-tabla {
-    background: lavender;
-    padding: 1rem;
-    border-radius: 6px;
-    margin: 0 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    background: none;
+    padding: 0;
+    border-radius: 0;
+    margin: 0 8px;
+    box-shadow: none;
+    max-width: 100vw;
+    overflow-x: auto;
 }
 
 .tabla-proveedores {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     background: white;
-    border-radius: 6px;
+    border-radius: 0;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    box-shadow: none;
+    margin-bottom: 0;
+    table-layout: fixed;
+    font-size: 1.25rem;
 }
 
 .tabla-proveedores th, .tabla-proveedores td {
-    border: 1px solid lightgray;
-    padding: 0.5rem;
+    border: 1px solid #b3e6b3;
+    padding: 0.7rem 0.2rem;
     text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1.18rem;
 }
 
 .tabla-proveedores thead th {
-    background: lightgreen;
+    background: #99f59c;
     font-weight: bold;
+    font-size: 1.25rem;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.tabla-proveedores tfoot td {
+    background: #f7f7b3;
     font-size: 1.1rem;
+    font-weight: 500;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.tabla-proveedores tbody {
+    display: block;
+    max-height: 420px;
+    min-height: 420px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+    background: #fff;
+}
+
+.tabla-proveedores thead, .tabla-proveedores tfoot, .tabla-proveedores tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
 }
 
 .tabla-proveedores tbody tr:nth-child(even) {
-    background: aliceblue;
-}
-
-/* Formulario */
-form {
-    width: 100%;
-    margin: 0 auto;
-}
-
-label {
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: darkslategray;
-}
-
-input[type="text"],
-input[type="number"],
-select {
-    padding: 10px;
-    font-size: 1.1em;
-    border: 1px solid teal;
-    border-radius: 2px;
-    background: white;
-}
-
-button[type="submit"] {
-    width: 100%;
-    padding: 12px 0;
-    font-size: 1.1em;
-    background: orange;
-    border: 1px solid darkorange;
-    border-radius: 2px;
-    cursor: pointer;
-    font-weight: bold;
-    color: white;
-}
-
-button[type="submit"]:hover {
-    background: darkorange;
+    background: #f8fcff;
 }
 
 @media (max-width: 700px) {
-    .contenedor-tabla {
-        padding: 0.5rem;
+    .header-fijo, .footer-fijo {
+        font-size: 1rem;
+        padding: 10px 0;
     }
-    form {
-        width: 95%;
+    .header-content {
+        flex-direction: column;
+        height: auto;
+        padding: 0 2vw;
     }
+    .tabla-proveedores tbody {
+        max-height: 200px;
+        min-height: 200px;
+    }
+}
+
+/* Estilos para header y footer fijos */
+.header-fijo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    background: #b3dbe8;
+    color: #111;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 0;
+}
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100vw;
+    padding: 0 2vw;
+    height: 90px;
+}
+.header-fijo h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    letter-spacing: 1px;
+}
+.header-botones {
+    display: flex;
+    gap: 10px;
+}
+.btn-header {
+    background: #e6e6e6;
+    color: #222;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 18px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-left: 0;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.btn-header:hover {
+    background: #d0d0d0;
+}
+
+.footer-fijo {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    background: #b3dbe8;
+    color: #111;
+    text-align: center;
+    padding: 18px 0 10px 0;
+    z-index: 1000;
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
