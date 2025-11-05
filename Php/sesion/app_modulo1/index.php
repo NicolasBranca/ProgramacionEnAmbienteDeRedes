@@ -2,7 +2,7 @@
 // Conexión a la base de datos
 $host = 'localhost';
 $db = 'u162024603_miBaseDeDatos';
-$user = 'root';
+$user = 'u162024603_NicolasBranca';
 $pass = '';
 $charset = 'utf8mb4';
 
