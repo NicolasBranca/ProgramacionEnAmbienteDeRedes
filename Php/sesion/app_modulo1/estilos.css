@@ -54,6 +54,7 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 1.18rem;
+    background: #fff;
 }
 
 .tabla-proveedores thead th {
@@ -71,8 +72,6 @@ body {
     background: #f7f7b3;
     font-size: 1.1rem;
     font-weight: 500;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
 }
 
 .tabla-proveedores tbody {
@@ -95,6 +94,53 @@ body {
     background: #f8fcff;
 }
 
+/* --- Nuevos estilos para tabla fija --- */
+.tabla-fija-encabezado {
+    position: fixed;
+    top: 90px;
+    left: 0;
+    width: 100vw;
+    z-index: 900;
+    background: #fff;
+}
+.tabla-fija-pie {
+    position: fixed;
+    bottom: 60px;
+    left: 0;
+    width: 100vw;
+    z-index: 900;
+    background: #fff;
+}
+.tabla-fija-encabezado table,
+.tabla-fija-pie table {
+    margin-bottom: 0;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.contenedor-tabla-scroll {
+    position: fixed;
+    top: 146px; /* header + thead height */
+    bottom: 106px; /* footer + tfoot height */
+    left: 0;
+    width: 100vw;
+    overflow-y: auto;
+    background: #fff;
+    z-index: 800;
+}
+.contenedor-tabla-scroll table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+/* Oculta thead y tfoot en la tabla scrollable */
+.contenedor-tabla-scroll thead,
+.contenedor-tabla-scroll tfoot {
+    display: none;
+}
+
 @media (max-width: 700px) {
     .header-fijo, .footer-fijo {
         font-size: 1rem;
@@ -108,6 +154,16 @@ body {
     .tabla-proveedores tbody {
         max-height: 200px;
         min-height: 200px;
+    }
+    .tabla-fija-encabezado {
+        top: 70px;
+    }
+    .contenedor-tabla-scroll {
+        top: 126px;
+        bottom: 90px;
+    }
+    .tabla-fija-pie {
+        bottom: 40px;
     }
 }
 

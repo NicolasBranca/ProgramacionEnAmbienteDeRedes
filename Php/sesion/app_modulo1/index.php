@@ -75,8 +75,8 @@ $ivas = $pdo->query("SELECT * FROM CondicionIVA")->fetchAll(PDO::FETCH_UNIQUE);
         </div>
     </div>
 </header>
-<div class="principal">
-    <div class="contenedor-tabla">
+
+<div class="tabla-fija-encabezado">
     <table class="tabla-proveedores">
         <thead>
             <tr>
@@ -88,6 +88,10 @@ $ivas = $pdo->query("SELECT * FROM CondicionIVA")->fetchAll(PDO::FETCH_UNIQUE);
                 <th>Certificados Calidad</th>
             </tr>
         </thead>
+    </table>
+</div>
+<div class="contenedor-tabla-scroll">
+    <table class="tabla-proveedores">
         <tbody id="tbodyProveedores">
         <?php foreach ($proveedores as $p): ?>
             <tr>
@@ -96,25 +100,28 @@ $ivas = $pdo->query("SELECT * FROM CondicionIVA")->fetchAll(PDO::FETCH_UNIQUE);
                 <td><?= htmlspecialchars($p['CUIT']) ?></td>
                 <td><?= htmlspecialchars($ivas[$p['idIVA']]['tipoIVA'] ?? '') ?></td>
                 <td><?= number_format($p['SaldoCuentaCorriente'], 2, ',', '.') ?></td>
-                <td><!-- Certificados Calidad, si tienes el dato, ponlo aquí --></td>
+                <td></td>
             </tr>
         <?php endforeach; ?>
         </tbody>
+    </table>
+</div>
+<div class="tabla-fija-pie">
+    <table class="tabla-proveedores">
         <tfoot>
             <tr>
-                <td>s código</td>
-                <td>s razón social</td>
-                <td>s cuit</td>
-                <td>s condición iva</td>
-                <td>s saldo cta. cte.</td>
-                <td>s certificados calidad</td>
+                <td>Código</td>
+                <td>Razón Social</td>
+                <td>CUIT</td>
+                <td>Condición IVA</td>
+                <td>Saldo Cta. Cte.</td>
+                <td>Certificados Calidad</td>
             </tr>
         </tfoot>
     </table>
-    </div>
 </div>
 <footer class="footer-fijo">
-    <span>Pie</span>
+    <span>Pie de página</span>
 </footer>
 
 <!-- Modal -->
@@ -189,8 +196,87 @@ function escapeHtml(text) {
     });
 }
 
+function cargaTabla() {
+    const tbody = document.getElementById('tbodyProveedores');
+    tbody.innerHTML = '';
+
+    // Mensaje de espera
+    const trMsg = document.createElement('tr');
+    const tdMsg = document.createElement('td');
+    tdMsg.colSpan = 6;
+    tdMsg.textContent = 'Esperando respuesta del servidor';
+    trMsg.appendChild(tdMsg);
+    tbody.appendChild(trMsg);
+
+    // Datos a enviar (puedes agregar filtros si tienes)
+    const objDatosOrdenFiltros = new URLSearchParams();
+
+    fetch('./salidaJsonProveedoresConPrepare.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: objDatosOrdenFiltros
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Respuesta de red no OK');
+        return response.json();
+    })
+    .then(proveedores => {
+        tbody.innerHTML = '';
+        if (!Array.isArray(proveedores) || proveedores.length === 0) {
+            const tr = document.createElement('tr');
+            const td = document.createElement('td');
+            td.colSpan = 6;
+            td.textContent = 'No se encontraron proveedores';
+            tr.appendChild(td);
+            tbody.appendChild(tr);
+            return;
+        }
+        // Columnas a mostrar y su mapeo a campos del objeto
+        const columnas = [
+            { campo: 'CodProveedor', label: 'Código' },
+            { campo: 'RazonSocial', label: 'Razón Social' },
+            { campo: 'CUIT', label: 'CUIT' },
+            { campo: 'tipoIVA', label: 'Condición IVA' },
+            { campo: 'SaldoCuentaCorriente', label: 'Saldo Cta. Cte.' },
+            { campo: 'tieneCertificado', label: 'Certificados Calidad' }
+        ];
+        proveedores.forEach(objProveedor => {
+            var objTr = document.createElement('tr');
+            columnas.forEach(col => {
+                var objTd = document.createElement('td');
+                objTd.setAttribute('campo-dato', col.campo);
+                let valor = objProveedor[col.campo];
+                if (col.campo === 'SaldoCuentaCorriente' && valor !== undefined && valor !== null) {
+                    valor = Number(valor).toLocaleString('es-AR', {minimumFractionDigits:2});
+                } else if (col.campo === 'tieneCertificado') {
+                    if (valor) {
+                        valor = `<a href="descargarCertificado.php?cod=${objProveedor.CodProveedor}" target="_blank" title="Ver PDF">📄</a>`;
+                    } else {
+                        valor = '';
+                    }
+                }
+                objTd.innerHTML = valor !== undefined && valor !== null ? valor : '';
+                objTr.appendChild(objTd);
+            });
+            tbody.appendChild(objTr);
+        });
+    })
+    .catch(error => {
+        tbody.innerHTML = '';
+        const tr = document.createElement('tr');
+        const td = document.createElement('td');
+        td.colSpan = 6;
+        td.textContent = 'Error producido: ' + error;
+        tr.appendChild(td);
+        tbody.appendChild(tr);
+    });
+}
+
+// Puedes llamar cargaTabla() desde un botón o al cargar la página si lo deseas
 document.getElementById('btnCargarDatos').onclick = function() {
-    renderTabla(datosOriginales);
+    cargaTabla();
 };
 document.getElementById('btnVaciarDatos').onclick = function() {
     document.getElementById('tbodyProveedores').innerHTML = '';
