@@ -76,8 +76,26 @@ $ivas = $pdo->query("SELECT * FROM CondicionIVA")->fetchAll(PDO::FETCH_UNIQUE);
     </div>
 </header>
 
+<!-- Colgroup para igualar anchos -->
+<colgroup id="tabla-colgroup">
+    <col style="width: 10%;">
+    <col style="width: 25%;">
+    <col style="width: 15%;">
+    <col style="width: 15%;">
+    <col style="width: 15%;">
+    <col style="width: 20%;">
+</colgroup>
+
 <div class="tabla-fija-encabezado">
     <table class="tabla-proveedores">
+        <colgroup>
+            <col style="width: 10%;">
+            <col style="width: 25%;">
+            <col style="width: 15%;">
+            <col style="width: 15%;">
+            <col style="width: 15%;">
+            <col style="width: 20%;">
+        </colgroup>
         <thead>
             <tr>
                 <th>Código</th>
@@ -92,22 +110,29 @@ $ivas = $pdo->query("SELECT * FROM CondicionIVA")->fetchAll(PDO::FETCH_UNIQUE);
 </div>
 <div class="contenedor-tabla-scroll">
     <table class="tabla-proveedores">
+        <colgroup>
+            <col style="width: 10%;">
+            <col style="width: 25%;">
+            <col style="width: 15%;">
+            <col style="width: 15%;">
+            <col style="width: 15%;">
+            <col style="width: 20%;">
+        </colgroup>
         <tbody id="tbodyProveedores">
-        <?php foreach ($proveedores as $p): ?>
-            <tr>
-                <td><?= htmlspecialchars($p['CodProveedor']) ?></td>
-                <td><?= htmlspecialchars($p['RazonSocial']) ?></td>
-                <td><?= htmlspecialchars($p['CUIT']) ?></td>
-                <td><?= htmlspecialchars($ivas[$p['idIVA']]['tipoIVA'] ?? '') ?></td>
-                <td><?= number_format($p['SaldoCuentaCorriente'], 2, ',', '.') ?></td>
-                <td></td>
-            </tr>
-        <?php endforeach; ?>
+        <!-- La tabla inicia vacía -->
         </tbody>
     </table>
 </div>
 <div class="tabla-fija-pie">
     <table class="tabla-proveedores">
+        <colgroup>
+            <col style="width: 10%;">
+            <col style="width: 25%;">
+            <col style="width: 15%;">
+            <col style="width: 15%;">
+            <col style="width: 15%;">
+            <col style="width: 20%;">
+        </colgroup>
         <tfoot>
             <tr>
                 <td>Código</td>
@@ -299,7 +324,7 @@ function abrirModal(proveedor = null) {
     modal.show();
 }
 
-// Al cargar la página, la tabla aparece vacía
+// Al cargar la página, la tabla aparece vacía (ya está vacío el tbody en el HTML)
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('tbodyProveedores').innerHTML = '';
 });

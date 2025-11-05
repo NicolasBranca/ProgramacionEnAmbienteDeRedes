@@ -95,27 +95,31 @@ body {
 }
 
 /* --- Nuevos estilos para tabla fija --- */
-.tabla-fija-encabezado {
-    position: fixed;
-    top: 90px;
+.tabla-fija-encabezado,
+.tabla-fija-pie {
     left: 0;
     width: 100vw;
     z-index: 900;
     background: #fff;
+    padding: 0;
+}
+.tabla-fija-encabezado {
+    position: fixed;
+    top: 90px;
 }
 .tabla-fija-pie {
     position: fixed;
     bottom: 60px;
-    left: 0;
-    width: 100vw;
-    z-index: 900;
-    background: #fff;
 }
+
 .tabla-fija-encabezado table,
-.tabla-fija-pie table {
+.tabla-fija-pie table,
+.contenedor-tabla-scroll table {
     margin-bottom: 0;
     width: 100%;
     table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
 }
 
 .contenedor-tabla-scroll {
@@ -127,12 +131,7 @@ body {
     overflow-y: auto;
     background: #fff;
     z-index: 800;
-}
-.contenedor-tabla-scroll table {
-    width: 100%;
-    table-layout: fixed;
-    border-collapse: separate;
-    border-spacing: 0;
+    padding: 0;
 }
 
 /* Oculta thead y tfoot en la tabla scrollable */
