@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 05-11-2025 a las 23:29:53
+-- Tiempo de generación: 06-11-2025 a las 02:57:31
 -- Versión del servidor: 11.8.3-MariaDB-log
 -- Versión de PHP: 7.2.34
 
@@ -123,7 +123,7 @@ CREATE TABLE `Usuarios` (
 --
 
 INSERT INTO `Usuarios` (`idUsuario`, `login`, `apellido`, `nombre`, `clave`, `contadorSesion`) VALUES
-(1, 'usuario1', 'Nicolás', 'Branca', 'e2c865db4162bed963bfaa9ef6ac18f0b0e5f8fadaf9963c0b4d7c52b064bfa4', 0);
+(1, 'usuario1', 'Nicolás', 'Branca', '4813494d137e1631bba301d5acab6e7bb7aa74ce1185d456565ef51d737677b2', 0);
 
 --
 -- Índices para tablas volcadas
