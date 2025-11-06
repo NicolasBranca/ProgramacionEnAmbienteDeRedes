@@ -1,8 +1,8 @@
 <?php
 $host = 'localhost';
-$db = 'futbol';
-$user = 'root';
-$pass = '';
+$db = 'u162024603_miBaseDeDatos';
+$user = 'rootu162024603_NicolasBranca';
+$pass = 'Alcachofa189';
 
 
 function registrarLog($mensaje) {
@@ -15,12 +15,12 @@ function registrarLog($mensaje) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $login = $_POST['login'];
     $apellido = $_POST['apellido'];
-    $nombres = $_POST['nombres'];
-    $password = $_POST['password'];
+    $nombre = $_POST['nombre'];
+    $clave = $_POST['clave'];
 
-    registrarLog("Datos recibidos para crear usuario: login = $login, apellido = $apellido, nombres = $nombres");
+    registrarLog("Datos recibidos para crear usuario: login = $login, apellido = $apellido, nombre = $nombre");
 
-    $hashedPassword = hash('sha256', $password);
+    $hashedPassword = hash('sha256', $clave);
     registrarLog("Contraseña encriptada: $hashedPassword");
 
     try {
@@ -38,14 +38,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             die("Error de conexión: " . $e->getMessage());
         }
         
-
-        $sql = "INSERT INTO Usuario (loginUsuario, apellidoUsuario, nombresUsuario, passwordUsuario) 
-                VALUES (:login, :apellido, :nombres, :password)";
+        $sql = "INSERT INTO Usuarios (login, apellido, nombre, clave) 
+                VALUES (:login, :apellido, :nombre, :clave)";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':login', $login);
         $stmt->bindParam(':apellido', $apellido);
-        $stmt->bindParam(':nombres', $nombres);
-        $stmt->bindParam(':password', $hashedPassword);
+        $stmt->bindParam(':nombre', $nombre);
+        $stmt->bindParam(':clave', $hashedPassword);
 
         if ($stmt->execute()) {
             registrarLog("Usuario $login creado exitosamente.");

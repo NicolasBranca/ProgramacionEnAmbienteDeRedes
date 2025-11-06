@@ -4,7 +4,7 @@ include('../manejoSesion.inc');
 <?php
 
 $identificacionSesion = $_SESSION['sesionParaUsuario'];
-$usuario = $_SESSION['login'];
+$login = $_SESSION['login'];
 $contadorSesion = $_SESSION['contador'];
 ?>
 <!DOCTYPE html>
@@ -88,7 +88,7 @@ body {
     <div class="welcome-container">
         <h1>Acceso permitido</h1>
         <p><strong class="highlight">Identificación de sesión:</strong> <?php echo $identificacionSesion; ?></p>
-        <p><strong class="highlight">Usuario:</strong> <?php echo $usuario; ?></p>
+        <p><strong class="highlight">Usuario:</strong> <?php echo $login; ?></p>
         <p><strong class="highlight">Contador de sesión para este usuario:</strong> <?php echo $contadorSesion; ?></p>
 
         <button onClick="location.href='./index.php'">Ingresar a la aplicación</button>

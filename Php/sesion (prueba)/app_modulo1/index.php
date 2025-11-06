@@ -7,7 +7,7 @@ include('../manejoSesion.inc');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabla de Partidos de Fútbol</title>
+    <title>Maestro de proveedores</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
 body {
@@ -204,102 +204,102 @@ footer {
 
 <body>
 <header>
-        <h1>Gestión de Partidos de Fútbol</h1>
+        <h1>Maestro de Proveedores</h1>
     </header>
     <main>
+    <!-- Filtros adaptados a proveedores -->
     <div>
-        <label for="identificadorFiltro">Identificador:</label>
-        <input type="text" id="identificadorFiltro" name="identificadorFiltro">
+        <label for="CodProveedorFiltro">Código Proveedor:</label>
+        <input type="text" id="CodProveedorFiltro" name="CodProveedorFiltro">
 
-        <label for="descripcionFiltro">Descripción:</label>
-        <input type="text" id="descripcionFiltro" name="descripcionFiltro">
+        <label for="RazonSocialFiltro">Razón Social:</label>
+        <input type="text" id="RazonSocialFiltro" name="RazonSocialFiltro">
 
-        <label for="estadioFiltro">Estadio:</label>
-        <select id="estadioFiltro" name="estadioFiltro">
+        <label for="CUITFiltro">CUIT:</label>
+        <input type="text" id="CUITFiltro" name="CUITFiltro">
+
+        <label for="idIVAFiltro">Condición IVA:</label>
+        <select id="idIVAFiltro" name="idIVAFiltro">
             <option value="">Todos</option>
         </select>
 
-        <label for="golesTotalesFiltro">Goles Totales:</label>
-        <input type="number" id="golesTotalesFiltro" name="golesTotalesFiltro">
-
-        <label for="fechaFiltro">Fecha del Partido:</label>
-        <input type="date" id="fechaFiltro" name="fechaFiltro">
+        <label for="SaldoCuentaCorrienteFiltro">Saldo Cuenta Corriente:</label>
+        <input type="number" id="SaldoCuentaCorrienteFiltro" name="SaldoCuentaCorrienteFiltro">
 
         <button id="cargarDatos">Cargar datos</button>
-        <button id="altaDato" class="btn">Alta dato</button>
+        <button id="altaDato" class="btn">Alta proveedor</button>
         <button id="limpiarFiltros" class="btn btn-secondary">Limpiar Filtros</button>
         <button id="borrarTabla" class="btn btn-danger">Borrar Datos de la Tabla</button>
         <button id="btCierraSesion">Cierra Sesión</button>
-
     </div>
 
-    <table id="tablaFutbol" border="1" style="width: 100%;">
+    <table id="tablaProveedores" border="1" style="width: 100%;">
         <thead>
             <tr>
-                <th><button class="sort" data-column="identificadorPartido">Identificador</button></th>
-                <th><button class="sort" data-column="descripcion">Descripción</button></th>
-                <th><button class="sort" data-column="estadio_id">Estadio</button></th>
-                <th><button class="sort" data-column="golesTotales">Goles Totales</button></th>
-                <th><button class="sort" data-column="fechaPartido">Fecha</button></th>
+                <th><button class="sort" data-column="CodProveedor">Código</button></th>
+                <th><button class="sort" data-column="RazonSocial">Razón Social</button></th>
+                <th><button class="sort" data-column="CUIT">CUIT</button></th>
+                <th><button class="sort" data-column="idIVA">Condición IVA</button></th>
+                <th><button class="sort" data-column="SaldoCuentaCorriente">Saldo Cuenta Corriente</button></th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
         </tbody>
     </table>
+
+    <!-- Modal Alta Proveedor -->
     <div id="modalAlta" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>Alta de Partido y Subida de Resumen</h2>
-            <form id="altaPartidoForm">
-                <label for="identificadorPartido">Identificador del partido:</label>
-                <input type="text" id="identificadorPartido" name="identificadorPartido" required>
+            <h2>Alta de Proveedor</h2>
+            <form id="altaProveedorForm">
+                <label for="RazonSocial">Razón Social:</label>
+                <input type="text" id="RazonSocial" name="RazonSocial" required>
 
-                <label for="descripcion">Descripción:</label>
-                <input type="text" id="descripcion" name="descripcion" required>
+                <label for="CUIT">CUIT:</label>
+                <input type="text" id="CUIT" name="CUIT" required>
 
-                <label for="estadio_id">Estadio:</label>
-                <select id="estadio_id" name="estadio_id" required>
-                    <option value="">Seleccione un estadio</option>
+                <label for="idIVA">Condición IVA:</label>
+                <select id="idIVA" name="idIVA" required>
+                    <option value="">Seleccione condición IVA</option>
                 </select>
 
-                <label for="golesTotales">Goles Totales:</label>
-                <input type="number" id="golesTotales" name="golesTotales" required>
+                <label for="SaldoCuentaCorriente">Saldo Cuenta Corriente:</label>
+                <input type="number" id="SaldoCuentaCorriente" name="SaldoCuentaCorriente" step="0.01" required>
 
-                <label for="fechaPartido">Fecha del partido:</label>
-                <input type="date" id="fechaPartido" name="fechaPartido" required>
-
-                <label for="resumen">Subir resumen (PDF, JPG, PNG):</label>
-                <input type="file" id="resumen" name="resumen" accept=".pdf, .jpg, .jpeg, .png">
+                <label for="CertificadosCalidad">Subir Certificado Calidad (PDF, JPG, PNG):</label>
+                <input type="file" id="CertificadosCalidad" name="CertificadosCalidad" accept=".pdf, .jpg, .jpeg, .png">
 
                 <br><br>
-                <button type="submit">Dar de alta Partido</button>
+                <button type="submit">Dar de alta Proveedor</button>
             </form>
         </div>
     </div>
 
+    <!-- Modal Modificar Proveedor -->
     <div id="modalModificar" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>Modificar Partido</h2>
-            <form id="modificarPartidoForm">
-                <input type="hidden" id="modificarIdentificadorPartido" name="identificadorPartido">
+            <h2>Modificar Proveedor</h2>
+            <form id="modificarProveedorForm">
+                <input type="hidden" id="modificarCodProveedor" name="CodProveedor">
 
-                <label for="modificarDescripcion">Descripción:</label>
-                <input type="text" id="modificarDescripcion" name="descripcion" required>
+                <label for="modificarRazonSocial">Razón Social:</label>
+                <input type="text" id="modificarRazonSocial" name="RazonSocial" required>
 
-                <label for="modificarEstadio">Estadio:</label>
-                <select id="modificarEstadio" name="estadio_id" required>
+                <label for="modificarCUIT">CUIT:</label>
+                <input type="text" id="modificarCUIT" name="CUIT" required>
+
+                <label for="modificarIdIVA">Condición IVA:</label>
+                <select id="modificarIdIVA" name="idIVA" required>
                 </select>
 
-                <label for="modificarGolesTotales">Goles Totales:</label>
-                <input type="number" id="modificarGolesTotales" name="golesTotales" required>
+                <label for="modificarSaldoCuentaCorriente">Saldo Cuenta Corriente:</label>
+                <input type="number" id="modificarSaldoCuentaCorriente" name="SaldoCuentaCorriente" step="0.01" required>
 
-                <label for="modificarFechaPartido">Fecha del Partido:</label>
-                <input type="date" id="modificarFechaPartido" name="fechaPartido" required>
-
-                <label for="modificarResumen">Actualizar Resumen (opcional):</label>
-                <input type="file" id="modificarResumen" name="resumen" accept=".pdf, .jpg, .jpeg, .png">
+                <label for="modificarCertificadosCalidad">Actualizar Certificado Calidad (opcional):</label>
+                <input type="file" id="modificarCertificadosCalidad" name="CertificadosCalidad" accept=".pdf, .jpg, .jpeg, .png">
 
                 <br><br>
                 <button type="submit">Guardar Cambios</button>
@@ -313,30 +313,32 @@ footer {
             <iframe id="iframeArchivo" src="" frameborder="0" style="width: 100%; height: 500px;"></iframe>
         </div>
     </div>
-
-    <div class="modal fade" id="modalArchivo" tabindex="-1" aria-labelledby="modalArchivoLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalArchivoLabel">Ver Archivo</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <iframe id="iframeArchivo" src="" style="width: 100%; height: 500px; border: none;"></iframe>
-                </div>
-            </div>
-        </div>
-    </div>
 </main>
 <footer>
-        <p id="contadorRegistros">Cantidad de registros: 0</p>
-    </footer>
-    <script>
+    <p id="contadorRegistros">Cantidad de registros: 0</p>
+</footer>
+<script>
 $(document).ready(function () {
-    let sort_column = ''; 
-    let sort_direction = 'ASC'; 
+    let sort_column = '';
+    let sort_direction = 'ASC';
+
+    // Cargar condiciones IVA en los selects
+    function cargarIVASelects() {
+        $.ajax({
+            url: 'load_iva.php',
+            method: 'GET',
+            success: function (data) {
+                const ivas = JSON.parse(data);
+                $('#idIVAFiltro, #idIVA, #modificarIdIVA').empty().append('<option value="">Todos</option>');
+                ivas.forEach(function (iva) {
+                    $('#idIVAFiltro').append(`<option value="${iva.idIVA}">${iva.tipoIVA} (${iva.porcentaje}%)</option>`);
+                    $('#idIVA').append(`<option value="${iva.idIVA}">${iva.tipoIVA} (${iva.porcentaje}%)</option>`);
+                    $('#modificarIdIVA').append(`<option value="${iva.idIVA}">${iva.tipoIVA} (${iva.porcentaje}%)</option>`);
+                });
+            }
+        });
+    }
+    cargarIVASelects();
 
     $('#cargarDatos').on('click', function () {
         cargarDatos();
@@ -344,8 +346,8 @@ $(document).ready(function () {
 
     $('.sort').on('click', function () {
         sort_column = $(this).data('column');
-        sort_direction = sort_direction === 'ASC' ? 'DESC' : 'ASC'; 
-        cargarDatos(); 
+        sort_direction = sort_direction === 'ASC' ? 'DESC' : 'ASC';
+        cargarDatos();
     });
 
     $("#btCierraSesion").click(function() {
@@ -353,33 +355,32 @@ $(document).ready(function () {
     });
 
     function actualizarContador() {
-        const cantidadRegistros = $('#tablaFutbol tbody tr').length;
+        const cantidadRegistros = $('#tablaProveedores tbody tr').length;
         $('#contadorRegistros').text('Cantidad de registros: ' + cantidadRegistros);
     }
 
-        $('#limpiarFiltros').on('click', function () {
-        $('#identificadorFiltro').val('');
-        $('#descripcionFiltro').val('');
-        $('#estadioFiltro').val('');
-        $('#golesTotalesFiltro').val('');
-        $('#fechaFiltro').val('');
-
+    $('#limpiarFiltros').on('click', function () {
+        $('#CodProveedorFiltro').val('');
+        $('#RazonSocialFiltro').val('');
+        $('#CUITFiltro').val('');
+        $('#idIVAFiltro').val('');
+        $('#SaldoCuentaCorrienteFiltro').val('');
         alert('Filtros limpiados.');
     });
 
     $('#borrarTabla').on('click', function () {
-        $('#tablaFutbol tbody').html(''); 
+        $('#tablaProveedores tbody').html('');
     });
 
     function cargarDatos() {
-        const identificadorFiltro = $('#identificadorFiltro').val();
-        const descripcionFiltro = $('#descripcionFiltro').val();
-        const estadioFiltro = $('#estadioFiltro').val();
-        const golesTotalesFiltro = $('#golesTotalesFiltro').val();
-        const fechaFiltro = $('#fechaFiltro').val();
+        const CodProveedorFiltro = $('#CodProveedorFiltro').val();
+        const RazonSocialFiltro = $('#RazonSocialFiltro').val();
+        const CUITFiltro = $('#CUITFiltro').val();
+        const idIVAFiltro = $('#idIVAFiltro').val();
+        const SaldoCuentaCorrienteFiltro = $('#SaldoCuentaCorrienteFiltro').val();
 
         $('#loading').show();
-        $('#tablaFutbol tbody').html(''); 
+        $('#tablaProveedores tbody').html('');
 
         $.ajax({
             url: 'load_data.php',
@@ -387,33 +388,33 @@ $(document).ready(function () {
             data: {
                 sort_column: sort_column,
                 sort_direction: sort_direction,
-                identificadorPartido: identificadorFiltro,
-                descripcion: descripcionFiltro,
-                estadio_id: estadioFiltro,
-                golesTotales: golesTotalesFiltro,
-                fechaPartido: fechaFiltro
+                CodProveedor: CodProveedorFiltro,
+                RazonSocial: RazonSocialFiltro,
+                CUIT: CUITFiltro,
+                idIVA: idIVAFiltro,
+                SaldoCuentaCorriente: SaldoCuentaCorrienteFiltro
             },
             success: function (data) {
                 $('#loading').hide();
-                const partidos = JSON.parse(data);
+                const proveedores = JSON.parse(data);
                 let html = '';
-                partidos.forEach(function (partido) {
-                    html += `<tr data-id="${partido.identificadorPartido}">
-                        <td>${partido.identificadorPartido}</td>
-                        <td>${partido.descripcion}</td>
-                        <td>${partido.estadio_id}</td>
-                        <td>${partido.golesTotales}</td>
-                        <td>${partido.fechaPartido}</td>
+                proveedores.forEach(function (prov) {
+                    html += `<tr data-id="${prov.CodProveedor}">
+                        <td>${prov.CodProveedor}</td>
+                        <td>${prov.RazonSocial}</td>
+                        <td>${prov.CUIT}</td>
+                        <td>${prov.idIVA}</td>
+                        <td>${prov.SaldoCuentaCorriente}</td>
                         <td>
-                            <button class="btn btn-primary ver-archivo" data-id="${partido.identificadorPartido}">Ver Archivo</button>
-                            <button class="btn btn-warning modificar-partido" data-id="${partido.identificadorPartido}">Modificar</button>
-                            <button class="btn btn-danger eliminar-partido" data-id="${partido.identificadorPartido}">Eliminar</button>
+                            <button class="btn btn-primary ver-archivo" data-id="${prov.CodProveedor}">Ver Certificado</button>
+                            <button class="btn btn-warning modificar-proveedor" data-id="${prov.CodProveedor}">Modificar</button>
+                            <button class="btn btn-danger eliminar-proveedor" data-id="${prov.CodProveedor}">Eliminar</button>
                         </td>
                     </tr>`;
                 });
 
-                $('#tablaFutbol tbody').html(html);
-                bindActionsToButtons(); 
+                $('#tablaProveedores tbody').html(html);
+                bindActionsToButtons();
                 actualizarContador();
             },
             error: function () {
@@ -422,147 +423,125 @@ $(document).ready(function () {
             }
         });
     }
-});
 
-
-function bindActionsToButtons() {
-    /*$('.ver-archivo').on('click', function () {
-        const identificadorPartido = $(this).data('id');
-        window.location.href = 'ver_archivo.php?identificadorPartido=' + identificadorPartido;
-    });*/
-    $('.ver-archivo').on('click', function () {
-            var identificadorPartido = $(this).data('id');
-            $('#iframeArchivo').attr('src', 'ver_archivo.php?identificadorPartido=' + identificadorPartido);            $('#modalArchivo').show(); // Mostrar el modal
+    function bindActionsToButtons() {
+        $('.ver-archivo').on('click', function () {
+            var CodProveedor = $(this).data('id');
+            $('#iframeArchivo').attr('src', 'ver_archivo.php?CodProveedor=' + CodProveedor);
+            $('#modalArchivo').show();
         });
 
-    $(document).on('click', '.close', function () {
-        $('#modalArchivo').fadeOut(); 
-        $('#iframeArchivo').attr('src', ''); 
-    });
-
-    $(window).on('click', function (event) {
-        if ($(event.target).is('#modalArchivo')) {
-            $('#modalArchivo').fadeOut(); 
+        $(document).on('click', '.close', function () {
+            $('#modalArchivo').fadeOut();
             $('#iframeArchivo').attr('src', '');
-        }
+        });
+
+        $(window).on('click', function (event) {
+            if ($(event.target).is('#modalArchivo')) {
+                $('#modalArchivo').fadeOut();
+                $('#iframeArchivo').attr('src', '');
+            }
+        });
+
+        $('.modificar-proveedor').on('click', function () {
+            const fila = $(this).closest('tr');
+            const CodProveedor = fila.find('td').eq(0).text();
+            const RazonSocial = fila.find('td').eq(1).text();
+            const CUIT = fila.find('td').eq(2).text();
+            const idIVA = fila.find('td').eq(3).text();
+            const SaldoCuentaCorriente = fila.find('td').eq(4).text();
+
+            $('#modificarCodProveedor').val(CodProveedor);
+            $('#modificarRazonSocial').val(RazonSocial);
+            $('#modificarCUIT').val(CUIT);
+            $('#modificarIdIVA').val(idIVA);
+            $('#modificarSaldoCuentaCorriente').val(SaldoCuentaCorriente);
+
+            $('#modalModificar').show();
+        });
+
+        $('.eliminar-proveedor').on('click', function () {
+            const CodProveedor = $(this).data('id');
+            if (confirm('¿Estás seguro de que deseas eliminar este proveedor?')) {
+                $.ajax({
+                    url: 'eliminar_proveedor.php',
+                    method: 'POST',
+                    data: { CodProveedor: CodProveedor },
+                    success: function (response) {
+                        const res = JSON.parse(response);
+                        if (res.status === 'success') {
+                            $('tr[data-id="' + CodProveedor + '"]').remove();
+                            alert(res.message);
+                        } else {
+                            alert('Error: ' + res.message);
+                        }
+                    },
+                    error: function () {
+                        alert('Error al conectar con el servidor.');
+                    }
+                });
+            }
+        });
+    }
+
+    $('.close').on('click', function () {
+        $('#modalModificar').fadeOut();
     });
 
-    $('.modificar-partido').on('click', function () {
-        const fila = $(this).closest('tr');
-
-        const identificadorPartido = fila.find('td').eq(0).text();
-        const descripcion = fila.find('td').eq(1).text();
-        const estadio_id = fila.find('td').eq(2).text();
-        const golesTotales = fila.find('td').eq(3).text();
-        const fechaPartido = fila.find('td').eq(4).text();
-
-        $('#modificarIdentificadorPartido').val(identificadorPartido);
-        $('#modificarDescripcion').val(descripcion);
-        $('#modificarGolesTotales').val(golesTotales);
-        $('#modificarFechaPartido').val(fechaPartido);
-
-        $('#modificarEstadio').empty();
+    $('#modificarProveedorForm').on('submit', function (event) {
+        event.preventDefault();
+        const formData = new FormData(this);
 
         $.ajax({
-            url: 'load_estadios.php',
-            method: 'GET',
-            success: function (data) {
-                const estadios = JSON.parse(data); 
-                $('#modificarEstadio').append('<option value="">Seleccione un estadio</option>');
-
-                estadios.forEach(function (estadio) {
-                    const selected = estadio.estadio_id === estadio_id ? 'selected' : '';
-                    $('#modificarEstadio').append(`<option value="${estadio.estadio_id}" ${selected}>${estadio.estadio_id}</option>`);
-                });
-
-                $('#modalModificar').show();
+            url: 'modificar_proveedor.php',
+            method: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                alert('Proveedor modificado exitosamente');
+                $('#modalModificar').hide();
+                cargarDatos();
             },
             error: function () {
-                alert('Error al cargar los estadios.');
+                alert('Error al modificar el proveedor.');
             }
         });
     });
 
-    $('.eliminar-partido').on('click', function () {
-        const identificadorPartido = $(this).data('id');
-        if (confirm('¿Estás seguro de que deseas eliminar este partido?')) {
-            $.ajax({
-                url: 'eliminar_partido.php',
-                method: 'POST',
-                data: { identificadorPartido: identificadorPartido },
-                success: function (response) {
-                    const res = JSON.parse(response);
-                    if (res.status === 'success') {
-                        $('tr[data-id="' + identificadorPartido + '"]').remove();
-                        alert(res.message);
-                    } else {
-                        alert('Error: ' + res.message);
-                    }
-                },
-                error: function () {
-                    alert('Error al conectar con el servidor.');
-                }
-            });
-        }
+    $('#altaDato').on('click', function () {
+        $('#modalAlta').show();
     });
-}
-$('.close').on('click', function () {
-    $('#modalModificar').fadeOut();
-});
 
-$('#modificarPartidoForm').on('submit', function (event) {
-    event.preventDefault();
-    const formData = new FormData(this);
-
-    $.ajax({
-        url: 'modificar_partido.php',
-        method: 'POST',
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function (response) {
-            alert('Partido modificado exitosamente');
-            $('#modalModificar').hide();
-            location.reload(); 
-        },
-        error: function () {
-            alert('Error al modificar el partido.');
-        }
+    $('.close').on('click', function () {
+        $('#modalAlta').hide();
     });
-});
 
-$('#altaDato').on('click', function () {
-    $('#modalAlta').show(); 
-});
+    $('#altaProveedorForm').on('submit', function (event) {
+        event.preventDefault();
+        const formData = new FormData(this);
 
-$('.close').on('click', function () {
-    $('#modalAlta').hide(); 
-});
-
-$('#altaPartidoForm').on('submit', function (event) {
-    event.preventDefault();
-    const formData = new FormData(this); 
-
-    $.ajax({
-        url: 'alta_partido.php',
-        method: 'POST',
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function (response) {
-            alert('Partido dado de alta exitosamente');
-            $('#altaPartidoForm')[0].reset();
-            $('#modalAlta').hide();
-            cargarDatos();
-        },
-        error: function () {
-            alert('Error al dar de alta el partido');
-        }
+        $.ajax({
+            url: 'alta_proveedor.php',
+            method: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                alert('Proveedor dado de alta exitosamente');
+                $('#altaProveedorForm')[0].reset();
+                $('#modalAlta').hide();
+                cargarDatos();
+            },
+            error: function () {
+                alert('Error al dar de alta el proveedor');
+            }
+        });
     });
+
+    // Cargar datos al iniciar
+    cargarDatos();
 });
-
-
-    </script>
+</script>
 </body>
-
 </html>

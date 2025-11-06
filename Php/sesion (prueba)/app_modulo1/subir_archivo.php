@@ -1,21 +1,20 @@
 <?php
-$pdo = new PDO('mysql:host=localhost;dbname=futbol', 'root', '');
+$pdo = new PDO(
+    'mysql:host=localhost;dbname=u162024603_miBaseDeDatos;charset=utf8mb4',
+    'rootu162024603_NicolasBranca',
+    'Alcachofa189'
+);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $partidoId = $_POST['partidoId'];
+    $CodProveedor = $_POST['CodProveedor'];
     
     if (isset($_FILES['archivo']) && $_FILES['archivo']['error'] === UPLOAD_ERR_OK) {
         $archivoTmp = $_FILES['archivo']['tmp_name'];
-        $archivoNombre = $_FILES['archivo']['name'];
-        $archivoRuta = 'uploads/' . $archivoNombre;
-        
-        if (move_uploaded_file($archivoTmp, $archivoRuta)) {
-            $stmt = $pdo->prepare("UPDATE PartidoFutbol SET archivo = :archivo WHERE idPartido = :idPartido");
-            $stmt->execute([':archivo' => $archivoRuta, ':idPartido' => $partidoId]);
-            echo 'Archivo subido exitosamente.';
-        } else {
-            echo 'Error al mover el archivo.';
-        }
+        $archivoData = file_get_contents($archivoTmp);
+
+        $stmt = $pdo->prepare("UPDATE Proveedores SET CertificadosCalidad = :archivo WHERE CodProveedor = :CodProveedor");
+        $stmt->execute([':archivo' => $archivoData, ':CodProveedor' => $CodProveedor]);
+        echo 'Archivo subido exitosamente.';
     } else {
         echo 'No se subió ningún archivo.';
     }

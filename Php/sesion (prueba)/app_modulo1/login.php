@@ -2,9 +2,10 @@
 session_start();
 
 $host = 'localhost';
-$db = 'futbol';
-$user = 'root';
-$pass = '';
+$db = 'u162024603_miBaseDeDatos';
+$user = 'rootu162024603_NicolasBranca';
+$pass = 'Alcachofa189';
+
 $options = [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -27,17 +28,17 @@ function autenticacion($log, $cl) {
 
         $hashedPassword = hash('sha256', $cl);
 
-        $sql = "SELECT * FROM Usuario WHERE loginUsuario = :login AND passwordUsuario = :password";
+        $sql = "SELECT * FROM Usuarios WHERE login = :login AND clave = :clave";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':login', $log);
-        $stmt->bindParam(':password', $hashedPassword);
+        $stmt->bindParam(':clave', $hashedPassword);
         $stmt->execute();
 
         $usuario = $stmt->fetch();
 
         if ($usuario) {
-            $contadorActual = $usuario['contadorSesiones'] + 1;
-            $sqlUpdate = "UPDATE Usuario SET contadorSesiones = :contador WHERE loginUsuario = :login";
+            $contadorActual = $usuario['contadorSesion'] + 1;
+            $sqlUpdate = "UPDATE Usuarios SET contadorSesion = :contador WHERE login = :login";
             $stmtUpdate = $pdo->prepare($sqlUpdate);
             $stmtUpdate->bindParam(':contador', $contadorActual, PDO::PARAM_INT);
             $stmtUpdate->bindParam(':login', $log);

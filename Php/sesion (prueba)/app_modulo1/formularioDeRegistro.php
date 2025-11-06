@@ -14,11 +14,11 @@
         <label for="apellido">Apellido:</label>
         <input type="text" id="apellido" name="apellido" required><br><br>
 
-        <label for="nombres">Nombres:</label>
-        <input type="text" id="nombres" name="nombres" required><br><br>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required><br><br>
 
-        <label for="password">Contraseña:</label>
-        <input type="password" id="password" name="password" required><br><br>
+        <label for="clave">Contraseña:</label>
+        <input type="password" id="clave" name="clave" required><br><br>
 
         <button type="submit">Registrar Usuario</button>
     </form>

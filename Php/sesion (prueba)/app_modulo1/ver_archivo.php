@@ -1,7 +1,7 @@
 <?php
-$dsn = 'mysql:host=localhost;dbname=futbol;charset=utf8mb4';
-$username = 'root'; 
-$password = '';
+$dsn = 'mysql:host=localhost;dbname=u162024603_miBaseDeDatos;charset=utf8mb4';
+$username = 'rootu162024603_NicolasBranca';
+$password = 'Alcachofa189';
 $options = [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -10,37 +10,37 @@ $options = [
 try {
     $pdo = new PDO($dsn, $username, $password, $options);
 
-    if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['identificadorPartido'])) {
-        $identificadorPartido = $_GET['identificadorPartido'];
+    if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['CodProveedor'])) {
+        $CodProveedor = $_GET['CodProveedor'];
 
-        $sql = "SELECT resumen, descripcion FROM PartidoFutbol WHERE identificadorPartido = :identificadorPartido";
+        $sql = "SELECT CertificadosCalidad, RazonSocial FROM Proveedores WHERE CodProveedor = :CodProveedor";
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':identificadorPartido', $identificadorPartido);
+        $stmt->bindParam(':CodProveedor', $CodProveedor, PDO::PARAM_INT);
         $stmt->execute();
 
-        $partido = $stmt->fetch();
+        $proveedor = $stmt->fetch();
 
-        if ($partido && !empty($partido['resumen'])) {
-            $resumen = $partido['resumen'];
-            $descripcion = $partido['descripcion'];
+        if ($proveedor && !empty($proveedor['CertificadosCalidad'])) {
+            $certificado = $proveedor['CertificadosCalidad'];
+            $razonSocial = $proveedor['RazonSocial'];
 
             if (ob_get_length()) {
                 ob_end_clean();
             }
 
             $finfo = finfo_open(FILEINFO_MIME_TYPE);
-            $mimeType = finfo_buffer($finfo, $resumen);
+            $mimeType = finfo_buffer($finfo, $certificado);
             finfo_close($finfo);
 
             header('Content-Type: ' . $mimeType);
-            header('Content-Disposition: inline; filename="' . $descripcion . '"');
-            header('Content-Length: ' . strlen($resumen));
+            header('Content-Disposition: inline; filename="' . $razonSocial . '.pdf"');
+            header('Content-Length: ' . strlen($certificado));
 
-            echo $resumen;
+            echo $certificado;
             exit;
         } else {
             header('HTTP/1.0 404 Not Found');
-            echo "Error: No se encontró el archivo asociado a este partido.";
+            echo "Error: No se encontró el certificado de calidad para este proveedor.";
         }
     } else {
         header('HTTP/1.0 400 Bad Request');

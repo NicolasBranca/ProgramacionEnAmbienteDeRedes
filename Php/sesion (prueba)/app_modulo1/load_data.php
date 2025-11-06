@@ -1,7 +1,7 @@
 <?php
-$dsn = 'mysql:host=localhost;dbname=futbol;charset=utf8mb4';
-$username = 'root';
-$password = '';
+$dsn = 'mysql:host=localhost;dbname=u162024603_miBaseDeDatos;charset=utf8mb4';
+$username = 'rootu162024603_NicolasBranca';
+$password = 'Alcachofa189';
 $options = [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -9,35 +9,35 @@ $options = [
 
 try {
     $pdo = new PDO($dsn, $username, $password, $options);
-    
-    $query = "SELECT identificadorPartido, descripcion, estadio_id, golesTotales, fechaPartido FROM PartidoFutbol WHERE 1=1";
-    
+
+    $query = "SELECT CodProveedor, RazonSocial, CUIT, idIVA, SaldoCuentaCorriente FROM Proveedores WHERE 1=1";
+
     $conditions = [];
     $params = [];
-    
-    if (!empty($_POST['identificadorPartido'])) {
-        $conditions[] = "identificadorPartido LIKE :identificadorPartido";
-        $params[':identificadorPartido'] = '%' . $_POST['identificadorPartido'] . '%';
+
+    if (!empty($_POST['CodProveedor'])) {
+        $conditions[] = "CodProveedor LIKE :CodProveedor";
+        $params[':CodProveedor'] = '%' . $_POST['CodProveedor'] . '%';
     }
 
-    if (!empty($_POST['descripcion'])) {
-        $conditions[] = "descripcion LIKE :descripcion";
-        $params[':descripcion'] = '%' . $_POST['descripcion'] . '%';
+    if (!empty($_POST['RazonSocial'])) {
+        $conditions[] = "RazonSocial LIKE :RazonSocial";
+        $params[':RazonSocial'] = '%' . $_POST['RazonSocial'] . '%';
     }
 
-    if (!empty($_POST['estadio_id'])) {
-        $conditions[] = "estadio_id = :estadio_id";
-        $params[':estadio_id'] = $_POST['estadio_id'];
+    if (!empty($_POST['CUIT'])) {
+        $conditions[] = "CUIT LIKE :CUIT";
+        $params[':CUIT'] = '%' . $_POST['CUIT'] . '%';
     }
 
-    if (!empty($_POST['golesTotales'])) {
-        $conditions[] = "golesTotales = :golesTotales";
-        $params[':golesTotales'] = $_POST['golesTotales'];
+    if (!empty($_POST['idIVA'])) {
+        $conditions[] = "idIVA = :idIVA";
+        $params[':idIVA'] = $_POST['idIVA'];
     }
 
-    if (!empty($_POST['fechaPartido'])) {
-        $conditions[] = "fechaPartido = :fechaPartido";
-        $params[':fechaPartido'] = $_POST['fechaPartido'];
+    if (!empty($_POST['SaldoCuentaCorriente'])) {
+        $conditions[] = "SaldoCuentaCorriente = :SaldoCuentaCorriente";
+        $params[':SaldoCuentaCorriente'] = $_POST['SaldoCuentaCorriente'];
     }
 
     if (count($conditions) > 0) {
@@ -45,11 +45,13 @@ try {
     }
 
     if (!empty($_POST['sort_column'])) {
-        $query .= " ORDER BY " . $_POST['sort_column'];
+        $allowedSort = ['CodProveedor', 'RazonSocial', 'CUIT', 'idIVA', 'SaldoCuentaCorriente'];
+        if (in_array($_POST['sort_column'], $allowedSort)) {
+            $query .= " ORDER BY " . $_POST['sort_column'];
+        }
     }
 
     $stmt = $pdo->prepare($query);
-
     $stmt->execute($params);
 
     $result = $stmt->fetchAll();

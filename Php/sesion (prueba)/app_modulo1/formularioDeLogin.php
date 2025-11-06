@@ -84,10 +84,10 @@ body {
 <div class="form-container">
         <h1>Iniciar Sesión</h1>
         <form action="login.php" method="POST">
-            <label for="login">Usuario: maxi</label>
+            <label for="login">Usuario: usuario1</label>
             <input type="text" id="login" name="login" required>
             
-            <label for="password">Contraseña: 123</label>
+            <label for="password">Contraseña: root</label>
             <input type="password" id="password" name="password" required>
             
             <button type="submit">Iniciar Sesión</button>
