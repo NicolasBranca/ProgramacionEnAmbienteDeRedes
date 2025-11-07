@@ -115,6 +115,7 @@ main {
     display: block;
     height: calc(100vh - 60px - 40px - 50px - 50px); /* header, footer, filtros, margen */
     overflow-y: auto;
+    overflow-x: hidden; /* Elimina scroll horizontal */
     width: 100%;
 }
 #tablaProveedores thead, #tablaProveedores tfoot {
@@ -174,6 +175,13 @@ footer {
     #tablaProveedores th, #tablaProveedores td {
         font-size: 0.93em;
         padding: 3px;
+    }
+    /* Oculta columnas CUIT y Saldo Cuenta Corriente en pantallas chicas */
+    #tablaProveedores th:nth-child(3),
+    #tablaProveedores td:nth-child(3),
+    #tablaProveedores th:nth-child(5),
+    #tablaProveedores td:nth-child(5) {
+        display: none;
     }
     .modal-content { width: 98%; }
 }
