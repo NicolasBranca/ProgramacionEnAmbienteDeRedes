@@ -202,6 +202,9 @@ footer {
                 <!-- La tabla inicia vacía -->
             </tbody>
         </table>
+        <div style="flex:0 0 auto; text-align:center; color:#888; font-size:1em; padding:8px 0;">
+            Página web de Nicolás Fernández Branca
+        </div>
     </div>
 
     <!-- Modal Alta Proveedor -->
