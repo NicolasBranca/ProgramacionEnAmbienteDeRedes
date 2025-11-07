@@ -34,9 +34,9 @@ header h1 {
 main {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 60px - 40px);
+    height: calc(100vh - 60px); /* Solo resta el header */
     padding-top: 60px;
-    padding-bottom: 40px;
+    /* Quitar padding-bottom para que el contenido llegue hasta el footer */
     min-height: 0;
 }
 .filtros-container {
