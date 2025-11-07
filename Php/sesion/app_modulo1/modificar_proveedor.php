@@ -22,11 +22,17 @@ try {
 
     //adaptar los campos del formulario a modificar proveedor segun el formato de la base de datos
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['CodProveedor'])) {
-        $CodProveedor = $_POST['CodProveedor'];
-        $RazonSocial = $_POST['RazonSocial'];
-        $CUIT = $_POST['CUIT'];
-        $idIVA = $_POST['idIVA'];
-        $SaldoCuentaCorriente = isset($_POST['SaldoCuentaCorriente']) ? $_POST['SaldoCuentaCorriente'] : 0.00;
+        $CodProveedor = isset($_POST['CodProveedor']) ? trim($_POST['CodProveedor']) : '';
+        $RazonSocial = isset($_POST['RazonSocial']) ? trim($_POST['RazonSocial']) : '';
+        $CUIT = isset($_POST['CUIT']) ? trim($_POST['CUIT']) : '';
+        $idIVA = isset($_POST['idIVA']) ? trim($_POST['idIVA']) : '';
+        $SaldoCuentaCorriente = isset($_POST['SaldoCuentaCorriente']) ? trim($_POST['SaldoCuentaCorriente']) : '';
+
+        // Validar campos obligatorios
+        if ($CodProveedor === '' || $RazonSocial === '' || $CUIT === '' || $idIVA === '' || $SaldoCuentaCorriente === '' || !is_numeric($SaldoCuentaCorriente)) {
+            echo json_encode(["status" => "error", "message" => "Todos los campos son obligatorios y deben ser válidos."]);
+            exit;
+        }
 
         // Validar formato CUIT: XX-XXXXXXXX-X
         if (!preg_match('/^\d{2}-\d{8}-\d{1}$/', $CUIT)) {
@@ -39,6 +45,14 @@ try {
 
         if (isset($_FILES['CertificadosCalidad']) && $_FILES['CertificadosCalidad']['error'] === 0) {
             $fileTmpName = $_FILES['CertificadosCalidad']['tmp_name'];
+            $fileSize = $_FILES['CertificadosCalidad']['size'];
+
+            // Validar archivo obligatorio si se envía
+            if ($fileTmpName === '' || $fileSize === 0) {
+                echo json_encode(["status" => "error", "message" => "Debe adjuntar un archivo de certificado válido."]);
+                exit;
+            }
+
             $fileData = file_get_contents($fileTmpName);
 
             registrarLog("Archivo recibido para CertificadosCalidad, tamaño: " . strlen($fileData) . " bytes");
