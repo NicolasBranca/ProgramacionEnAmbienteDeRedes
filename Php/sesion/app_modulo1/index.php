@@ -9,22 +9,19 @@ include('../manejoSesion.inc');
     <title>Maestro de proveedores</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-/* Reset y estructura básica */
 body {
     margin: 0;
-    padding: 0;
     font-family: Arial, sans-serif;
     background: #f5f5dc;
     height: 100vh;
     box-sizing: border-box;
-    /* Quitar overflow: hidden para permitir scroll si es necesario */
 }
 header {
     position: fixed;
     top: 0; left: 0; right: 0;
     height: 60px;
     background: #f5f5dc;
-    border-bottom: 2px solid #808080;
+    border-bottom: 1px solid #aaa;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,180 +29,107 @@ header {
 }
 header h1 {
     margin: 0;
-    font-size: 2em;
-    font-weight: bold;
+    font-size: 1.7em;
 }
 main {
-    position: relative;
-    padding-top: 60px;
-    padding-bottom: 40px;
-    height: calc(100vh - 60px - 40px); /* Ajuste: ocupa todo el espacio entre header y footer */
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    min-height: 0; /* Permite que los hijos usen todo el espacio */
+    height: calc(100vh - 60px - 40px);
+    padding-top: 60px;
+    padding-bottom: 40px;
+    min-height: 0;
 }
 .filtros-container {
-    background: #f5f5dc;
-    border-bottom: 1px solid #ccc;
-    padding: 8px 6px 0 6px;
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 8px;
     align-items: center;
+    background: #f5f5dc;
+    border-bottom: 1px solid #ccc;
+    padding: 8px;
 }
 .filtros-campos label {
     font-weight: bold;
     margin-right: 2px;
-    font-size: 0.97em;
+    font-size: 1em;
 }
 .filtros-campos input, .filtros-campos select {
-    margin-right: 6px;
+    margin-right: 8px;
     padding: 2px 4px;
     border-radius: 2px;
     border: 1px solid #ccc;
-    font-size: 0.97em;
-    width: 120px;
-    max-width: 140px;
-    min-width: 60px;
+    font-size: 1em;
 }
 .filtros-botones {
     display: flex;
-    gap: 6px;
-    margin-top: 0;
-    flex-wrap: wrap;
+    gap: 8px;
 }
 .filtros-botones button {
-    padding: 4px 8px;
+    padding: 4px 10px;
     border-radius: 2px;
-    border: 1px solid #808080;
+    border: 1px solid #888;
     background: #e0e0e0;
     cursor: pointer;
-    font-size: 0.97em;
 }
 .filtros-botones button:hover {
     background: #d0d0d0;
 }
 .table-wrapper {
     flex: 1 1 0;
-    min-height: 0; /* Permite que el tbody crezca hasta el footer */
+    min-height: 0;
     overflow: hidden;
     background: #f5f5dc;
     display: flex;
     flex-direction: column;
-    width: 100vw;
 }
 #tablaProveedores {
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed;
     background: #f5f5dc;
     height: 100%;
-    min-height: 0;
-    /* Quitar display: flex y flex-direction */
 }
-#tablaProveedores thead, #tablaProveedores tfoot {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
+#tablaProveedores thead {
+    background: #ff6347;
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+#tablaProveedores th, #tablaProveedores td {
+    border: 1px solid #bbb;
+    padding: 4px;
+    text-align: center;
+    font-size: 1em;
+    word-break: break-word;
 }
 #tablaProveedores tbody {
     display: block;
     height: 100%;
     min-height: 0;
     overflow-y: auto;
-    overflow-x: hidden;
     width: 100%;
+}
+#tablaProveedores thead, #tablaProveedores tfoot {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
 }
 #tablaProveedores tr {
     display: table;
     width: 100%;
     table-layout: fixed;
 }
-#tablaProveedores th, #tablaProveedores td {
-    border: 1px solid #c0c0c0;
-    padding: 4px;
-    text-align: center;
-    font-size: 0.97em;
-    word-break: break-word;
-}
 footer {
     position: fixed;
     left: 0; right: 0; bottom: 0;
     height: 40px;
     background: #f5f5dc;
-    border-top: 2px solid #808080;
+    border-top: 1px solid #aaa;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1em;
     z-index: 10;
-}
-/* Modal simple */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 100;
-    left: 0; top: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.5);
-}
-.modal-content {
-    background: #808080;
-    color: #fff;
-    margin: 5% auto;
-    padding: 20px;
-    border-radius: 8px;
-    width: 90%;
-    max-width: 500px;
-    position: relative;
-    /* Para la ventana de ver certificado, que ocupe más espacio */
-}
-#modalArchivo .modal-content {
-    width: 95vw;
-    max-width: 900px;
-    height: 90vh;
-    max-height: 90vh;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-}
-#modalArchivo .close {
-    position: absolute;
-    top: 10px; right: 20px;
-    z-index: 2;
-}
-#iframeArchivo {
-    width: 100%;
-    height: 100%;
-    border: none;
-    display: block;
-    /* Para que PDF o imagen ocupe todo el espacio */
-}
-.filtros-orden {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-left: 10px;
-}
-.filtros-orden input[type="text"] {
-    width: 130px;
-    padding: 2px 4px;
-    border-radius: 2px;
-    border: 1px solid #ccc;
-    font-size: 0.97em;
-    background: #eee;
-}
-.filtros-orden select {
-    padding: 2px 4px;
-    border-radius: 2px;
-    border: 1px solid #ccc;
-    font-size: 0.97em;
-    background: #eee;
-}
-.filtros-orden input[readonly] {
-    background: #e9e9e9;
-    color: #333;
-    cursor: default;
 }
 @media (max-width: 900px) {
     .filtros-container, .filtros-botones, .filtros-campos {
@@ -213,22 +137,10 @@ footer {
         align-items: stretch;
         gap: 4px;
     }
-    .filtros-orden {
-        margin-left: 0;
-        margin-top: 6px;
-    }
     #tablaProveedores th, #tablaProveedores td {
         font-size: 0.93em;
         padding: 3px;
     }
-    /* Oculta columnas CUIT y Saldo Cuenta Corriente en pantallas chicas */
-    #tablaProveedores th:nth-child(3),
-    #tablaProveedores td:nth-child(3),
-    #tablaProveedores th:nth-child(5),
-    #tablaProveedores td:nth-child(5) {
-        display: none;
-    }
-    .modal-content { width: 98%; }
 }
     </style>
 </head>
