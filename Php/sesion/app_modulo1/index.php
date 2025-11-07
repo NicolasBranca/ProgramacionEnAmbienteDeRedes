@@ -157,20 +157,64 @@ footer {
     width: 90%;
     max-width: 500px;
     position: relative;
+    /* Para la ventana de ver certificado, que ocupe más espacio */
 }
-.close {
+#modalArchivo .modal-content {
+    width: 95vw;
+    max-width: 900px;
+    height: 90vh;
+    max-height: 90vh;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+#modalArchivo .close {
     position: absolute;
     top: 10px; right: 20px;
-    font-size: 28px;
-    font-weight: bold;
-    color: #fff;
-    cursor: pointer;
+    z-index: 2;
+}
+#iframeArchivo {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+    /* Para que PDF o imagen ocupe todo el espacio */
+}
+.filtros-orden {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 10px;
+}
+.filtros-orden input[type="text"] {
+    width: 130px;
+    padding: 2px 4px;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    font-size: 0.97em;
+    background: #eee;
+}
+.filtros-orden select {
+    padding: 2px 4px;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    font-size: 0.97em;
+    background: #eee;
+}
+.filtros-orden input[readonly] {
+    background: #e9e9e9;
+    color: #333;
+    cursor: default;
 }
 @media (max-width: 900px) {
     .filtros-container, .filtros-botones, .filtros-campos {
         flex-direction: column;
         align-items: stretch;
         gap: 4px;
+    }
+    .filtros-orden {
+        margin-left: 0;
+        margin-top: 6px;
     }
     #tablaProveedores th, #tablaProveedores td {
         font-size: 0.93em;
@@ -211,6 +255,15 @@ footer {
 
             <label for="SaldoCuentaCorrienteFiltro">Saldo Cuenta Corriente:</label>
             <input type="number" id="SaldoCuentaCorrienteFiltro" name="SaldoCuentaCorrienteFiltro">
+
+            <div class="filtros-orden">
+                <label for="ordenColumna">Ordenar por:</label>
+                <input type="text" id="ordenColumna" name="ordenColumna" readonly placeholder="Columna" tabindex="-1">
+                <select id="ordenTipo" name="ordenTipo" disabled>
+                    <option value="ASC">ASC</option>
+                    <option value="DESC">DESC</option>
+                </select>
+            </div>
         </div>
         <div class="filtros-botones">
             <button id="cargarDatos">Cargar datos</button>
@@ -300,7 +353,7 @@ footer {
     <div id="modalArchivo" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <iframe id="iframeArchivo" src="" frameborder="0" style="width: 100%; height: 500px;"></iframe>
+            <iframe id="iframeArchivo" src="" frameborder="0"></iframe>
         </div>
     </div>
 </main>
@@ -330,13 +383,27 @@ $(document).ready(function () {
     }
     cargarIVASelects();
 
-    $('#cargarDatos').on('click', function () {
-        cargarDatos();
+    // Nuevo: manejo de selección de columna y tipo de orden
+    $('.sort').on('click', function () {
+        const col = $(this).data('column');
+        let colLabel = $(this).text().trim();
+        $('#ordenColumna').val(colLabel).data('column', col);
+        $('#ordenTipo').prop('disabled', false);
     });
 
-    $('.sort').on('click', function () {
-        sort_column = $(this).data('column');
-        sort_direction = sort_direction === 'ASC' ? 'DESC' : 'ASC';
+    $('#ordenTipo').on('change', function () {
+        sort_direction = $(this).val();
+    });
+
+    $('#cargarDatos').on('click', function () {
+        // Si hay columna seleccionada, usarla
+        const col = $('#ordenColumna').data('column');
+        if (col) {
+            sort_column = col;
+            sort_direction = $('#ordenTipo').val();
+        } else {
+            sort_column = '';
+        }
         cargarDatos();
     });
 
@@ -355,6 +422,8 @@ $(document).ready(function () {
         $('#CUITFiltro').val('');
         $('#idIVAFiltro').val('');
         $('#SaldoCuentaCorrienteFiltro').val('');
+        $('#ordenColumna').val('').removeData('column');
+        $('#ordenTipo').prop('disabled', true).val('ASC');
         alert('Filtros limpiados.');
     });
 
