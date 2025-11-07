@@ -47,34 +47,40 @@ main {
 .filtros-container {
     background: #f5f5dc;
     border-bottom: 1px solid #ccc;
-    padding: 10px 10px 0 10px;
+    padding: 8px 6px 0 6px;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 6px;
     align-items: center;
 }
 .filtros-campos label {
     font-weight: bold;
-    margin-right: 4px;
+    margin-right: 2px;
+    font-size: 0.97em;
 }
 .filtros-campos input, .filtros-campos select {
-    margin-right: 10px;
-    padding: 4px;
-    border-radius: 3px;
+    margin-right: 6px;
+    padding: 2px 4px;
+    border-radius: 2px;
     border: 1px solid #ccc;
+    font-size: 0.97em;
+    width: 120px;
+    max-width: 140px;
+    min-width: 60px;
 }
 .filtros-botones {
     display: flex;
-    gap: 8px;
-    margin-top: 8px;
+    gap: 6px;
+    margin-top: 0;
     flex-wrap: wrap;
 }
 .filtros-botones button {
-    padding: 6px 12px;
-    border-radius: 3px;
+    padding: 4px 8px;
+    border-radius: 2px;
     border: 1px solid #808080;
     background: #e0e0e0;
     cursor: pointer;
+    font-size: 0.97em;
 }
 .filtros-botones button:hover {
     background: #d0d0d0;
@@ -101,13 +107,13 @@ main {
 }
 #tablaProveedores th, #tablaProveedores td {
     border: 1px solid #c0c0c0;
-    padding: 6px;
+    padding: 4px;
     text-align: center;
-    font-size: 1em;
+    font-size: 0.97em;
 }
 #tablaProveedores tbody {
     display: block;
-    height: calc(100vh - 60px - 40px - 70px - 60px); /* header, footer, filtros, margen */
+    height: calc(100vh - 60px - 40px - 50px - 50px); /* header, footer, filtros, margen */
     overflow-y: auto;
     width: 100%;
 }
@@ -163,11 +169,11 @@ footer {
     .filtros-container, .filtros-botones, .filtros-campos {
         flex-direction: column;
         align-items: stretch;
-        gap: 6px;
+        gap: 4px;
     }
     #tablaProveedores th, #tablaProveedores td {
-        font-size: 0.95em;
-        padding: 4px;
+        font-size: 0.93em;
+        padding: 3px;
     }
     .modal-content { width: 98%; }
 }
@@ -477,7 +483,6 @@ $(document).ready(function () {
             success: function (response) {
                 alert('Proveedor modificado exitosamente');
                 $('#modalModificar').hide();
-                cargarDatos();
             },
             error: function () {
                 alert('Error al modificar el proveedor.');
@@ -507,16 +512,12 @@ $(document).ready(function () {
                 alert('Proveedor dado de alta exitosamente');
                 $('#altaProveedorForm')[0].reset();
                 $('#modalAlta').hide();
-                cargarDatos();
             },
             error: function () {
                 alert('Error al dar de alta el proveedor');
             }
         });
     });
-
-    // Quitar la llamada automática a cargarDatos()
-    // cargarDatos(); <-- Eliminar o comentar esta línea
 });
 </script>
 </body>
