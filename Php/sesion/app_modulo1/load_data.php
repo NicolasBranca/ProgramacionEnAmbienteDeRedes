@@ -49,6 +49,12 @@ try {
         $allowedSort = ['CodProveedor', 'RazonSocial', 'CUIT', 'idIVA', 'SaldoCuentaCorriente'];
         if (in_array($_POST['sort_column'], $allowedSort)) {
             $query .= " ORDER BY " . $_POST['sort_column'];
+            // Nuevo: soporte para ASC/DESC
+            $direction = 'ASC';
+            if (!empty($_POST['sort_direction']) && in_array(strtoupper($_POST['sort_direction']), ['ASC', 'DESC'])) {
+                $direction = strtoupper($_POST['sort_direction']);
+            }
+            $query .= " " . $direction;
         }
     }
 
