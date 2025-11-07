@@ -34,9 +34,9 @@ header h1 {
 main {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 60px); /* Solo resta el header */
+    height: calc(100vh - 60px - 40px); /* Resta header y footer */
     padding-top: 60px;
-    /* Quitar padding-bottom para que el contenido llegue hasta el footer */
+    /* Elimina cualquier padding-bottom */
     min-height: 0;
 }
 .filtros-container {
@@ -81,6 +81,7 @@ main {
     background: #f5f5dc;
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 #tablaProveedores {
     width: 100%;
@@ -108,6 +109,9 @@ main {
     min-height: 0;
     overflow-y: auto;
     width: 100%;
+    /* Elimina cualquier margin o padding extra */
+    margin: 0;
+    padding: 0;
 }
 #tablaProveedores thead, #tablaProveedores tfoot {
     display: table;
@@ -202,9 +206,6 @@ footer {
                 <!-- La tabla inicia vacía -->
             </tbody>
         </table>
-        <div style="flex:0 0 auto; text-align:center; color:#888; font-size:1em; padding:8px 0;">
-            Página web de Nicolás Fernández Branca
-        </div>
     </div>
 
     <!-- Modal Alta Proveedor -->
@@ -440,57 +441,53 @@ $(document).ready(function () {
             if (confirm('¿Estás seguro de que deseas eliminar este proveedor?')) {
                 $.ajax({
                     url: 'eliminar_proveedor.php',
-                    method: 'POST',
-                    data: { CodProveedor: CodProveedor },
-                    success: function (response) {
-                        const res = JSON.parse(response);
                         if (res.status === 'success') {
                             $('tr[data-id="' + CodProveedor + '"]').remove();
                             alert(res.message);
                         } else {
                             alert('Error: ' + res.message);
-                        }
-                    },
+                        }) {
+                    },s = JSON.parse(response);
                     error: function () {
-                        alert('Error al conectar con el servidor.');
-                    }
+                        alert('Error al conectar con el servidor.');   $('tr[data-id="' + CodProveedor + '"]').remove();
+                    }      alert(res.message);
                 });
             }
-        });
-    }
-
-    $('.close').on('click', function () {
-        $('#modalModificar').fadeOut();
-    });
+        });   }
+    } },
+       error: function () {
+    $('.close').on('click', function () {             alert('Error al conectar con el servidor.');
+        $('#modalModificar').fadeOut();               }
+    });                });
 
     $('#modificarProveedorForm').on('submit', function (event) {
         event.preventDefault();
         const formData = new FormData(this);
 
-        $.ajax({
+        $.ajax({deOut();
             url: 'modificar_proveedor.php',
             method: 'POST',
-            data: formData,
+            data: formData,rProveedorForm').on('submit', function (event) {
             contentType: false,
-            processData: false,
+            processData: false,w FormData(this);
             success: function (response) {
                 alert('Proveedor modificado exitosamente');
-                $('#modalModificar').hide();
+                $('#modalModificar').hide();veedor.php',
             },
             error: function () {
                 alert('Error al modificar el proveedor.');
-            }
-        });
-    });
-
-    $('#altaDato').on('click', function () {
-        $('#modalAlta').show();
-    });
+            }ocessData: false,
+        });esponse) {
+    });;
+   $('#modalModificar').hide();
+    $('#altaDato').on('click', function () { },
+        $('#modalAlta').show();     error: function () {
+    });                alert('Error al modificar el proveedor.');
 
     $('.close').on('click', function () {
         $('#modalAlta').hide();
     });
-
+) {
     $('#altaProveedorForm').on('submit', function (event) {
         event.preventDefault();
         const formData = new FormData(this);
@@ -498,20 +495,23 @@ $(document).ready(function () {
         $.ajax({
             url: 'alta_proveedor.php',
             method: 'POST',
-            data: formData,
+            data: formData,eedorForm').on('submit', function (event) {
             contentType: false,
-            processData: false,
+            processData: false,w FormData(this);
             success: function (response) {
                 alert('Proveedor dado de alta exitosamente');
-                $('#altaProveedorForm')[0].reset();
+                $('#altaProveedorForm')[0].reset();r.php',
                 $('#modalAlta').hide();
             },
             error: function () {
                 alert('Error al dar de alta el proveedor');
-            }
-        });
+            }ccess: function (response) {
+        }); dado de alta exitosamente');
     });
-});
+});   $('#modalAlta').hide();
+</script> },
+</body>     error: function () {
+</html>});
 </script>
 </body>
 </html>
