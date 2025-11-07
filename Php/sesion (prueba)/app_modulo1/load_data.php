@@ -61,6 +61,13 @@ try {
     echo json_encode($result);
 
 } catch (PDOException $e) {
-    file_put_contents('debug.log', "[" . date('Y-m-d H:i:s') . "] Error en la base de datos: " . $e->getMessage() . "\n", FILE_APPEND);
+    registrarLog("Error en la base de datos: " . $e->getMessage());
     echo json_encode(['error' => 'Error en la base de datos']);
+}
+
+function registrarLog($mensaje) {
+    $logFile = __DIR__ . '/debug.log';
+    $fecha = date('Y-m-d H:i:s');
+    $logMessage = "[$fecha] - $mensaje" . PHP_EOL;
+    file_put_contents($logFile, $logMessage, FILE_APPEND);
 }

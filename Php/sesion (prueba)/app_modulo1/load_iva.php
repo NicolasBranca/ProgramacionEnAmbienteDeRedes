@@ -9,6 +9,13 @@ $options = [
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
 ];
 
+function registrarLog($mensaje) {
+    $logFile = __DIR__ . '/debug.log';
+    $fecha = date('Y-m-d H:i:s');
+    $logMessage = "[$fecha] - $mensaje" . PHP_EOL;
+    file_put_contents($logFile, $logMessage, FILE_APPEND);
+}
+
 try {
     $pdo = new PDO($dsn, $username, $password, $options);
 
@@ -21,7 +28,7 @@ try {
     echo json_encode($ivas);
 
 } catch (PDOException $e) {
-    file_put_contents('debug.log', '[' . date('Y-m-d H:i:s') . '] Error al obtener IVA: ' . $e->getMessage() . PHP_EOL, FILE_APPEND);
+    registrarLog('Error al obtener IVA: ' . $e->getMessage());
     echo json_encode(['error' => 'Error al obtener los tipos de IVA']);
 }
 ?>

@@ -3,7 +3,7 @@ include('../manejoSesion.inc');
 header('Content-Type: application/json');
 
 function registrarLog($mensaje) {
-    $logFile = 'debug.log';
+    $logFile = __DIR__ . '/debug.log';
     $fecha = date('Y-m-d H:i:s');
     $logMessage = "[$fecha] - $mensaje" . PHP_EOL;
     file_put_contents($logFile, $logMessage, FILE_APPEND);
