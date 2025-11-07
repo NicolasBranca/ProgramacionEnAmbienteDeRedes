@@ -258,7 +258,7 @@ footer {
                 <input type="text" id="RazonSocial" name="RazonSocial" required>
 
                 <label for="CUIT">CUIT:</label>
-                <input type="text" id="CUIT" name="CUIT" required>
+                <input type="text" id="CUIT" name="CUIT" required placeholder="XX-XXXXXXXX-X">
 
                 <label for="idIVA">Condición IVA:</label>
                 <select id="idIVA" name="idIVA" required>
@@ -289,7 +289,7 @@ footer {
                 <input type="text" id="modificarRazonSocial" name="RazonSocial" required>
 
                 <label for="modificarCUIT">CUIT:</label>
-                <input type="text" id="modificarCUIT" name="CUIT" required>
+                <input type="text" id="modificarCUIT" name="CUIT" required placeholder="XX-XXXXXXXX-X">
 
                 <label for="modificarIdIVA">Condición IVA:</label>
                 <select id="modificarIdIVA" name="idIVA" required>

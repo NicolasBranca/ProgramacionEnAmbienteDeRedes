@@ -1,4 +1,6 @@
 <?php
+include('../manejoSesion.inc');
+
 $host = 'localhost';
 $db = 'u162024603_miBaseDeDatos';
 $user = 'u162024603_NicolasBranca';
@@ -6,7 +8,7 @@ $pass = 'Alcachofa189';
 
 
 function registrarLog($mensaje) {
-    $logFile = '/tmp/debug.log';
+    $logFile = 'debug.log';
     $fecha = date('Y-m-d H:i:s');
     $logMessage = "[$fecha] - $mensaje" . PHP_EOL;
     file_put_contents($logFile, $logMessage, FILE_APPEND);

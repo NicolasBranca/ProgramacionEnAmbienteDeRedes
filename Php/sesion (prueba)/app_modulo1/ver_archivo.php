@@ -1,4 +1,6 @@
 <?php
+include('../manejoSesion.inc');
+
 $dsn = 'mysql:host=localhost;dbname=u162024603_miBaseDeDatos;charset=utf8mb4';
 $username = 'u162024603_NicolasBranca';
 $password = 'Alcachofa189';

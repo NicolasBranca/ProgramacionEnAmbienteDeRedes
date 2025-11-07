@@ -1,8 +1,9 @@
 <?php
+include('../manejoSesion.inc');
 header('Content-Type: application/json');
 
 function registrarLog($mensaje) {
-    $logFile = '/tmp/debug.log';
+    $logFile = 'debug.log';
     $fecha = date('Y-m-d H:i:s');
     $logMessage = "[$fecha] - $mensaje" . PHP_EOL;
     file_put_contents($logFile, $logMessage, FILE_APPEND);
@@ -27,6 +28,12 @@ try {
         $CUIT = $_POST['CUIT'];
         $idIVA = $_POST['idIVA'];
         $SaldoCuentaCorriente = isset($_POST['SaldoCuentaCorriente']) ? $_POST['SaldoCuentaCorriente'] : 0.00;
+
+        // Validar formato CUIT: XX-XXXXXXXX-X
+        if (!preg_match('/^\d{2}-\d{8}-\d{1}$/', $CUIT)) {
+            echo json_encode(["status" => "error", "message" => "El CUIT debe tener el formato XX-XXXXXXXX-X"]);
+            exit;
+        }
 
         registrarLog("Modificación iniciada para CodProveedor: $CodProveedor");
         registrarLog("idIVA seleccionado para modificar: $idIVA");
