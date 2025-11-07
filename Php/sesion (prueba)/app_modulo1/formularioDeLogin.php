@@ -92,7 +92,6 @@ body {
             
             <button type="submit">Iniciar Sesión</button>
         </form>
-        <button onclick="window.location.href='formularioDeRegistro.php'" style="margin-top:10px;">Crear usuario</button>
     </div>
 </body>
 </html>
