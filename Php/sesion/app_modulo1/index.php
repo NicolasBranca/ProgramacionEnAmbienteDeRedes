@@ -24,7 +24,7 @@ header {
     background-color: #F5F5DC; 
     color: black;
     text-align: center;
-    padding: 20px;
+    padding: 0;
     font-size: 24px;
     font-weight: bold;
     border-bottom: 2px solid #808080;
@@ -33,48 +33,83 @@ header {
     left: 0;
     width: 100%;
     z-index: 10;
-    height: 70px;
+    height: 60px;
     box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-footer {
-    background-color: #F5F5DC; 
-    color: black;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
+header h1 {
+    margin: 0;
+    font-size: 2.2em;
+    font-weight: bold;
     width: 100%;
-    border-top: 2px solid #808080;
-    z-index: 10;
-    height: 40px;
-    box-sizing: border-box;
+    text-align: center;
+}
+
+.filtros-container {
+    margin-top: 70px; /* debajo del header */
+    padding: 10px 20px 0 20px;
+    background: #F5F5DC;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 2px solid #808080;
+    z-index: 5;
+    position: relative;
+}
+
+.filtros-container label {
+    font-weight: bold;
+    margin-right: 2px;
+}
+
+.filtros-container input,
+.filtros-container select {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #C0C0C0;
+    font-size: 1em;
+    min-width: 120px;
+    max-width: 180px;
+}
+
+.filtros-container button {
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 1px solid #808080;
+    background: #e0e0e0;
+    font-size: 1em;
+    cursor: pointer;
+    margin-right: 2px;
+}
+
+.filtros-container button:hover {
+    background: #d0d0d0;
 }
 
 main {
-    padding-top: 90px; /* header height + margin */
-    padding-bottom: 50px; /* footer height + margin */
-    height: calc(100vh - 110px);
+    padding-top: 120px; /* header + filtros */
+    padding-bottom: 50px; /* footer */
+    height: calc(100vh - 120px - 50px);
     box-sizing: border-box;
     overflow: hidden;
-}
-
-.container {
-    padding: 20px;
 }
 
 .table-wrapper {
     width: 100%;
-    height: calc(100vh - 260px); /* header + footer + filtros + margen */
+    height: calc(100vh - 180px - 50px); /* header + filtros + footer */
     box-sizing: border-box;
     overflow: hidden;
-    margin-top: 20px;
 }
 
 #tablaProveedores {
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
+    background: #F5F5DC;
 }
 
 #tablaProveedores thead {
@@ -90,6 +125,7 @@ main {
     border: 1px solid #C0C0C0;
     padding: 8px;
     background-clip: padding-box;
+    font-size: 1em;
 }
 
 #tablaProveedores th {
@@ -106,7 +142,7 @@ main {
     display: block;
     width: 100%;
     overflow-y: auto;
-    height: calc(100vh - 320px); /* Ajustar según header, footer y filtros */
+    height: calc(100vh - 230px - 50px); /* header + filtros + thead + footer */
 }
 
 #tablaProveedores thead, #tablaProveedores tfoot {
@@ -119,6 +155,21 @@ main {
     display: table;
     width: 100%;
     table-layout: fixed;
+}
+
+footer {
+    background-color: #F5F5DC; 
+    color: black;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-top: 2px solid #808080;
+    z-index: 10;
+    height: 40px;
+    box-sizing: border-box;
+    font-size: 1em;
 }
 
 .action-button {
@@ -216,6 +267,23 @@ main {
     background-color: #D94E3B;
 }
 
+@media (max-width: 1100px) {
+    .filtros-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+    main {
+        padding-top: 170px;
+    }
+    .table-wrapper {
+        height: calc(100vh - 230px - 50px);
+    }
+    #tablaProveedores tbody {
+        height: calc(100vh - 280px - 50px);
+    }
+}
+
 @media (max-width: 768px) {
     .modal-content {
         width: 80%;
@@ -246,11 +314,11 @@ main {
 
 <body>
 <header>
-        <h1>Maestro de Proveedores</h1>
-    </header>
-    <main>
+    <h1>Maestro de Proveedores</h1>
+</header>
+<main>
     <!-- Filtros adaptados a proveedores -->
-    <div>
+    <div class="filtros-container">
         <label for="CodProveedorFiltro">Código Proveedor:</label>
         <input type="text" id="CodProveedorFiltro" name="CodProveedorFiltro">
 
@@ -274,7 +342,6 @@ main {
         <button id="borrarTabla" class="btn btn-danger">Borrar Datos de la Tabla</button>
         <button id="btCierraSesion">Cierra Sesión</button>
     </div>
-
     <div class="table-wrapper">
         <table id="tablaProveedores" border="1">
             <thead>
