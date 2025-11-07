@@ -15,6 +15,9 @@ body {
     background-color: #F5F5DC; 
     margin: 0;
     padding: 0;
+    height: 100vh;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 header {
@@ -25,6 +28,13 @@ header {
     font-size: 24px;
     font-weight: bold;
     border-bottom: 2px solid #808080;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    height: 70px;
+    box-sizing: border-box;
 }
 
 footer {
@@ -36,53 +46,79 @@ footer {
     bottom: 0;
     width: 100%;
     border-top: 2px solid #808080;
+    z-index: 10;
+    height: 40px;
+    box-sizing: border-box;
+}
+
+main {
+    padding-top: 90px; /* header height + margin */
+    padding-bottom: 50px; /* footer height + margin */
+    height: calc(100vh - 110px);
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .container {
     padding: 20px;
 }
 
-.table-input {
+.table-wrapper {
     width: 100%;
-    background-color: #FF6347;
-    color: white;
-    border-collapse: collapse;
+    height: calc(100vh - 260px); /* header + footer + filtros + margen */
+    box-sizing: border-box;
+    overflow: hidden;
+    margin-top: 20px;
 }
 
-.table-input th {
-    padding: 10px;
-    font-weight: bold;
-    border-bottom: 2px solid #fff;
-}
-
-.table-input input,
-.table-input select {
-    width: 90%;
-    padding: 5px;
-    margin: 5px 0;
-    border: 1px solid #C0C0C0;
-    border-radius: 4px;
-}
-
-.table-data {
+#tablaProveedores {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
 }
 
-.table-data th {
+#tablaProveedores thead {
     background-color: #FF6347;
     color: white;
-    padding: 10px;
-    border: 1px solid #C0C0C0;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+#tablaProveedores th, #tablaProveedores td {
     text-align: center;
+    border: 1px solid #C0C0C0;
+    padding: 8px;
+    background-clip: padding-box;
 }
 
-.table-data td {
+#tablaProveedores th {
+    background-color: #FF6347;
+    color: white;
+}
+
+#tablaProveedores td {
     background-color: #808080;
     color: white;
-    padding: 8px;
-    border: 1px solid #C0C0C0;
-    text-align: center;
+}
+
+#tablaProveedores tbody {
+    display: block;
+    width: 100%;
+    overflow-y: auto;
+    height: calc(100vh - 320px); /* Ajustar según header, footer y filtros */
+}
+
+#tablaProveedores thead, #tablaProveedores tfoot {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+#tablaProveedores tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
 }
 
 .action-button {
@@ -113,7 +149,7 @@ footer {
 .modal {
     display: none; 
     position: fixed;
-    z-index: 1;
+    z-index: 100;
     left: 0;
     top: 0;
     width: 100%;
@@ -196,9 +232,15 @@ footer {
     .action-button {
         font-size: 12px;
     }
+
+    /* Ocultar columnas Saldo Cuenta Corriente y Acciones en la tabla */
+    #tablaProveedores th:nth-child(5),
+    #tablaProveedores td:nth-child(5),
+    #tablaProveedores th:nth-child(6),
+    #tablaProveedores td:nth-child(6) {
+        display: none;
+    }
 }
-
-
     </style>
 </head>
 
@@ -233,20 +275,23 @@ footer {
         <button id="btCierraSesion">Cierra Sesión</button>
     </div>
 
-    <table id="tablaProveedores" border="1" style="width: 100%;">
-        <thead>
-            <tr>
-                <th><button class="sort" data-column="CodProveedor">Código</button></th>
-                <th><button class="sort" data-column="RazonSocial">Razón Social</button></th>
-                <th><button class="sort" data-column="CUIT">CUIT</button></th>
-                <th><button class="sort" data-column="idIVA">Condición IVA</button></th>
-                <th><button class="sort" data-column="SaldoCuentaCorriente">Saldo Cuenta Corriente</button></th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+    <div class="table-wrapper">
+        <table id="tablaProveedores" border="1">
+            <thead>
+                <tr>
+                    <th><button class="sort" data-column="CodProveedor">Código</button></th>
+                    <th><button class="sort" data-column="RazonSocial">Razón Social</button></th>
+                    <th><button class="sort" data-column="CUIT">CUIT</button></th>
+                    <th><button class="sort" data-column="idIVA">Condición IVA</button></th>
+                    <th><button class="sort" data-column="SaldoCuentaCorriente">Saldo Cuenta Corriente</button></th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- La tabla inicia vacía -->
+            </tbody>
+        </table>
+    </div>
 
     <!-- Modal Alta Proveedor -->
     <div id="modalAlta" class="modal">
@@ -539,8 +584,8 @@ $(document).ready(function () {
         });
     });
 
-    // Cargar datos al iniciar
-    cargarDatos();
+    // Quitar la llamada automática a cargarDatos()
+    // cargarDatos(); <-- Eliminar o comentar esta línea
 });
 </script>
 </body>
