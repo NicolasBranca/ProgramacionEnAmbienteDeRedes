@@ -17,7 +17,7 @@ body {
     background: #f5f5dc;
     height: 100vh;
     box-sizing: border-box;
-    overflow: hidden;
+    /* Quitar overflow: hidden para permitir scroll si es necesario */
 }
 header {
     position: fixed;
@@ -39,7 +39,7 @@ main {
     position: relative;
     padding-top: 60px;
     padding-bottom: 40px;
-    height: 100vh;
+    height: calc(100vh - 60px - 40px); /* Ajuste: ocupa todo el espacio entre header y footer */
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -87,10 +87,13 @@ main {
 }
 .table-wrapper {
     flex: 1 1 auto;
-    overflow: hidden;
+    overflow: auto;
     background: #f5f5dc;
     display: flex;
     flex-direction: column;
+    /* Nuevo: ocupa todo el espacio disponible */
+    width: 100vw;
+    min-width: 0;
 }
 #tablaProveedores {
     width: 100%;
@@ -110,12 +113,16 @@ main {
     padding: 4px;
     text-align: center;
     font-size: 0.97em;
+    /* Nuevo: para que las celdas ocupen el espacio proporcional */
+    word-break: break-word;
 }
 #tablaProveedores tbody {
     display: block;
-    height: calc(100vh - 60px - 40px - 50px - 50px); /* header, footer, filtros, margen */
+    /* Ajuste: ocupa todo el alto disponible en el contenedor */
+    height: 100%;
+    max-height: none;
     overflow-y: auto;
-    overflow-x: hidden; /* Elimina scroll horizontal */
+    overflow-x: hidden;
     width: 100%;
 }
 #tablaProveedores thead, #tablaProveedores tfoot {
