@@ -1,5 +1,4 @@
 <?php
-include('../manejoSesion.inc');
 header('Content-Type: application/json');
 
 function registrarLog($mensaje) {

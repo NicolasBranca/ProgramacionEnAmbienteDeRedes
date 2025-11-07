@@ -1,5 +1,4 @@
 <?php
-include('../manejoSesion.inc');
 
 // Datos de conexión para tu base de datos
 $host = 'localhost';

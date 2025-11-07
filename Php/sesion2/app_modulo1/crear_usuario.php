@@ -1,5 +1,4 @@
 <?php
-include('../manejoSesion.inc');
 
 $host = 'localhost';
 $db = 'u162024603_miBaseDeDatos';

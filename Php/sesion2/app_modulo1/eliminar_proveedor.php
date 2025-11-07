@@ -1,5 +1,4 @@
 <?php
-include('../manejoSesion.inc');
 
 function registrarLog($mensaje) {
     $logFile = __DIR__ . '/debug.log';

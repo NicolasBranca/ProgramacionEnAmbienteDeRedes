@@ -1,5 +1,4 @@
 <?php
-include('../manejoSesion.inc');
 session_start();
 
 $host = 'localhost';

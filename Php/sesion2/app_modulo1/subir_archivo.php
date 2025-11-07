@@ -1,5 +1,4 @@
 <?php
-include('../manejoSesion.inc');
 
 $pdo = new PDO(
     'mysql:host=localhost;dbname=u162024603_miBaseDeDatos;charset=utf8mb4',

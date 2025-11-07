@@ -1,5 +1,4 @@
 <?php
-include('../manejoSesion.inc');
 header('Content-Type: application/json');
 //adaptar los datos de conexion a la base de datos
 $dsn = 'mysql:host=localhost;dbname=u162024603_miBaseDeDatos;charset=utf8mb4';
