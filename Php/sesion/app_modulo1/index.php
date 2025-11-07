@@ -43,6 +43,7 @@ main {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    min-height: 0; /* Permite que los hijos usen todo el espacio */
 }
 .filtros-container {
     background: #f5f5dc;
@@ -86,14 +87,13 @@ main {
     background: #d0d0d0;
 }
 .table-wrapper {
-    flex: 1 1 auto;
+    flex: 1 1 0;
+    min-height: 0; /* Permite que el tbody crezca hasta el footer */
     overflow: hidden;
     background: #f5f5dc;
     display: flex;
     flex-direction: column;
     width: 100vw;
-    min-width: 0;
-    height: 100%; /* Asegura que ocupe todo el espacio disponible en main */
 }
 #tablaProveedores {
     width: 100%;
@@ -101,19 +101,18 @@ main {
     table-layout: fixed;
     background: #f5f5dc;
     height: 100%;
-    display: flex;
-    flex-direction: column;
+    min-height: 0;
+    /* Quitar display: flex y flex-direction */
 }
 #tablaProveedores thead, #tablaProveedores tfoot {
     display: table;
     width: 100%;
     table-layout: fixed;
-    flex: 0 0 auto;
 }
 #tablaProveedores tbody {
     display: block;
-    flex: 1 1 auto;
     height: 100%;
+    min-height: 0;
     overflow-y: auto;
     overflow-x: hidden;
     width: 100%;
