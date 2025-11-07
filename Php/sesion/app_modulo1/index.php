@@ -50,17 +50,33 @@ header h1 {
 
 /* Filtros: todos en una línea y pegados al header */
 .filtros-container {
-    margin-top: 60px; /* justo debajo del header */
+    margin-top: 60px;
     padding: 10px 20px 0 20px;
     background: #F5F5DC;
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     align-items: center;
     gap: 10px;
     border-bottom: 2px solid #808080;
     z-index: 5;
     position: relative;
     min-height: 60px;
+}
+
+.filtros-campos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.filtros-botones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+    margin-top: 10px;
 }
 
 .filtros-container label {
@@ -87,7 +103,6 @@ header h1 {
     background: #e0e0e0;
     font-size: 1em;
     cursor: pointer;
-    margin-right: 2px;
     flex: 0 0 auto;
 }
 
@@ -97,9 +112,9 @@ header h1 {
 
 /* Main: menos padding-top para que la tabla suba */
 main {
-    padding-top: 120px; /* header + filtros */
+    padding-top: 140px; /* header + filtros + botones */
     padding-bottom: 60px; /* footer */
-    height: calc(100vh - 120px - 60px);
+    height: calc(100vh - 140px - 60px);
     box-sizing: border-box;
     overflow: hidden;
 }
@@ -107,7 +122,7 @@ main {
 /* Tabla: ajustar wrapper y tbody para que se vea completa */
 .table-wrapper {
     width: 100%;
-    height: calc(100vh - 120px - 60px); /* header + filtros + footer */
+    height: calc(100vh - 140px - 60px); /* header + filtros + botones + footer */
     box-sizing: border-box;
     overflow: auto;
 }
@@ -149,7 +164,7 @@ main {
     display: block;
     width: 100%;
     overflow-y: auto;
-    height: calc(100vh - 120px - 60px - 42px); /* header + filtros + footer + thead aprox */
+    height: calc(100vh - 140px - 60px - 42px); /* header + filtros + botones + footer + thead aprox */
 }
 
 #tablaProveedores thead, #tablaProveedores tfoot {
@@ -179,6 +194,10 @@ footer {
     box-sizing: border-box;
     font-size: 1em;
     left: 0;
+    /* Asegura que el footer esté siempre visible */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .action-button {
@@ -277,23 +296,18 @@ footer {
 }
 
 @media (max-width: 1100px) {
-    .filtros-container {
-        flex-wrap: wrap;
+    .filtros-campos, .filtros-botones {
+        flex-direction: column;
         gap: 6px;
     }
-    .filtros-container input,
-    .filtros-container select {
-        min-width: 60px;
-        font-size: 0.95em;
-    }
     main {
-        padding-top: 120px;
+        padding-top: 180px;
     }
     .table-wrapper {
-        height: calc(100vh - 120px - 60px);
+        height: calc(100vh - 180px - 60px);
     }
     #tablaProveedores tbody {
-        height: calc(100vh - 120px - 60px - 42px);
+        height: calc(100vh - 180px - 60px - 42px);
     }
 }
 
@@ -302,6 +316,11 @@ footer {
         flex-direction: column;
         align-items: stretch;
         flex-wrap: wrap;
+    }
+    .filtros-campos, .filtros-botones {
+        flex-direction: column;
+        gap: 6px;
+        width: 100%;
     }
     .filtros-container label,
     .filtros-container input,
@@ -346,28 +365,31 @@ footer {
 <main>
     <!-- Filtros adaptados a proveedores -->
     <div class="filtros-container">
-        <label for="CodProveedorFiltro">Código Proveedor:</label>
-        <input type="text" id="CodProveedorFiltro" name="CodProveedorFiltro">
+        <div class="filtros-campos">
+            <label for="CodProveedorFiltro">Código Proveedor:</label>
+            <input type="text" id="CodProveedorFiltro" name="CodProveedorFiltro">
 
-        <label for="RazonSocialFiltro">Razón Social:</label>
-        <input type="text" id="RazonSocialFiltro" name="RazonSocialFiltro">
+            <label for="RazonSocialFiltro">Razón Social:</label>
+            <input type="text" id="RazonSocialFiltro" name="RazonSocialFiltro">
 
-        <label for="CUITFiltro">CUIT:</label>
-        <input type="text" id="CUITFiltro" name="CUITFiltro">
+            <label for="CUITFiltro">CUIT:</label>
+            <input type="text" id="CUITFiltro" name="CUITFiltro">
 
-        <label for="idIVAFiltro">Condición IVA:</label>
-        <select id="idIVAFiltro" name="idIVAFiltro">
-            <option value="">Todos</option>
-        </select>
+            <label for="idIVAFiltro">Condición IVA:</label>
+            <select id="idIVAFiltro" name="idIVAFiltro">
+                <option value="">Todos</option>
+            </select>
 
-        <label for="SaldoCuentaCorrienteFiltro">Saldo Cuenta Corriente:</label>
-        <input type="number" id="SaldoCuentaCorrienteFiltro" name="SaldoCuentaCorrienteFiltro">
-
-        <button id="cargarDatos">Cargar datos</button>
-        <button id="altaDato" class="btn">Alta proveedor</button>
-        <button id="limpiarFiltros" class="btn btn-secondary">Limpiar Filtros</button>
-        <button id="borrarTabla" class="btn btn-danger">Borrar Datos de la Tabla</button>
-        <button id="btCierraSesion">Cierra Sesión</button>
+            <label for="SaldoCuentaCorrienteFiltro">Saldo Cuenta Corriente:</label>
+            <input type="number" id="SaldoCuentaCorrienteFiltro" name="SaldoCuentaCorrienteFiltro">
+        </div>
+        <div class="filtros-botones">
+            <button id="cargarDatos">Cargar datos</button>
+            <button id="altaDato" class="btn">Alta proveedor</button>
+            <button id="limpiarFiltros" class="btn btn-secondary">Limpiar Filtros</button>
+            <button id="borrarTabla" class="btn btn-danger">Borrar Datos de la Tabla</button>
+            <button id="btCierraSesion">Cierra Sesión</button>
+        </div>
     </div>
     <div class="table-wrapper">
         <table id="tablaProveedores" border="1">
