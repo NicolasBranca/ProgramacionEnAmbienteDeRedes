@@ -3,361 +3,176 @@ include('../manejoSesion.inc');
 ?>
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maestro de proveedores</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+/* Reset y estructura básica */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #F5F5DC; 
     margin: 0;
     padding: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5dc;
     height: 100vh;
     box-sizing: border-box;
     overflow: hidden;
 }
-
 header {
-    background-color: #F5F5DC; 
-    color: black;
-    text-align: center;
-    padding: 0;
-    font-size: 24px;
-    font-weight: bold;
-    border-bottom: 2px solid #808080;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 10;
+    top: 0; left: 0; right: 0;
     height: 60px;
-    box-sizing: border-box;
+    background: #f5f5dc;
+    border-bottom: 2px solid #808080;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 10;
 }
-
 header h1 {
     margin: 0;
-    font-size: 2.2em;
+    font-size: 2em;
     font-weight: bold;
-    width: 100%;
-    text-align: center;
 }
-
-/* Filtros: todos en una línea y pegados al header */
-.filtros-container {
-    margin-top: 60px;
-    padding: 10px 20px 0 20px;
-    background: #F5F5DC;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px;
-    border-bottom: 2px solid #808080;
-    z-index: 5;
+main {
     position: relative;
-    min-height: 60px;
+    padding-top: 60px;
+    padding-bottom: 40px;
+    height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
-
-.filtros-campos {
+.filtros-container {
+    background: #f5f5dc;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 10px 0 10px;
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
     gap: 10px;
-    width: 100%;
+    align-items: center;
 }
-
+.filtros-campos label {
+    font-weight: bold;
+    margin-right: 4px;
+}
+.filtros-campos input, .filtros-campos select {
+    margin-right: 10px;
+    padding: 4px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
 .filtros-botones {
     display: flex;
+    gap: 8px;
+    margin-top: 8px;
     flex-wrap: wrap;
-    gap: 10px;
-    width: 100%;
-    margin-top: 10px;
 }
-
-.filtros-container label {
-    font-weight: bold;
-    margin-right: 2px;
-    white-space: nowrap;
-}
-
-.filtros-container input,
-.filtros-container select {
-    padding: 5px;
-    border-radius: 4px;
-    border: 1px solid #C0C0C0;
-    font-size: 1em;
-    min-width: 80px;
-    max-width: 180px;
-    flex: 1 1 0;
-}
-
-.filtros-container button {
+.filtros-botones button {
     padding: 6px 12px;
-    border-radius: 4px;
+    border-radius: 3px;
     border: 1px solid #808080;
     background: #e0e0e0;
-    font-size: 1em;
     cursor: pointer;
-    flex: 0 0 auto;
 }
-
-.filtros-container button:hover {
+.filtros-botones button:hover {
     background: #d0d0d0;
 }
-
-/* Main: menos padding-top para que la tabla suba */
-main {
-    padding-top: 140px; /* header + filtros + botones */
-    padding-bottom: 60px; /* footer */
-    height: calc(100vh - 140px - 60px);
-    box-sizing: border-box;
-    overflow: hidden;
-}
-
-/* Tabla: ajustar wrapper y tbody para que se vea completa */
 .table-wrapper {
-    width: 100%;
-    height: calc(100vh - 140px - 60px); /* header + filtros + botones + footer */
-    box-sizing: border-box;
-    overflow: auto;
+    flex: 1 1 auto;
+    overflow: hidden;
+    background: #f5f5dc;
+    display: flex;
+    flex-direction: column;
 }
-
 #tablaProveedores {
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
-    background: #F5F5DC;
+    background: #f5f5dc;
 }
-
 #tablaProveedores thead {
-    background-color: #FF6347;
-    color: white;
+    background: #ff6347;
+    color: #fff;
     position: sticky;
     top: 0;
-    z-index: 5;
+    z-index: 2;
 }
-
 #tablaProveedores th, #tablaProveedores td {
+    border: 1px solid #c0c0c0;
+    padding: 6px;
     text-align: center;
-    border: 1px solid #C0C0C0;
-    padding: 8px;
-    background-clip: padding-box;
     font-size: 1em;
 }
-
-#tablaProveedores th {
-    background-color: #FF6347;
-    color: white;
-}
-
-#tablaProveedores td {
-    background-color: #808080;
-    color: white;
-}
-
 #tablaProveedores tbody {
     display: block;
-    width: 100%;
+    height: calc(100vh - 60px - 40px - 70px - 60px); /* header, footer, filtros, margen */
     overflow-y: auto;
-    height: calc(100vh - 140px - 60px - 42px); /* header + filtros + botones + footer + thead aprox */
+    width: 100%;
 }
-
 #tablaProveedores thead, #tablaProveedores tfoot {
     display: table;
     width: 100%;
     table-layout: fixed;
 }
-
 #tablaProveedores tr {
     display: table;
     width: 100%;
     table-layout: fixed;
 }
-
-/* Footer: altura mayor y siempre visible */
 footer {
-    background-color: #F5F5DC; 
-    color: black;
-    text-align: center;
-    padding: 10px 0 10px 0;
     position: fixed;
-    bottom: 0;
-    width: 100%;
-    border-top: 2px solid #808080;
-    z-index: 10;
+    left: 0; right: 0; bottom: 0;
     height: 40px;
-    box-sizing: border-box;
-    font-size: 1em;
-    left: 0;
-    /* Asegura que el footer esté siempre visible */
+    background: #f5f5dc;
+    border-top: 2px solid #808080;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 1em;
+    z-index: 10;
 }
-
-.action-button {
-    background-color: #D3D3D3;
-    color: black;
-    border: 1px solid #808080;
-    padding: 5px 10px;
-    margin: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    border-radius: 5px;
-}
-
-.action-button:hover {
-    background-color: #C0C0C0;
-}
-
-.modify-button {
-    background-color: #4CAF50;
-    color: white;
-}
-
-.delete-button {
-    background-color: #F44336;
-    color: white;
-}
-
+/* Modal simple */
 .modal {
-    display: none; 
+    display: none;
     position: fixed;
     z-index: 100;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
+    left: 0; top: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
 }
-
 .modal-content {
-    background-color: #808080;
-    margin: 10% auto;
+    background: #808080;
+    color: #fff;
+    margin: 5% auto;
     padding: 20px;
-    border: 1px solid #888;
-    width: 60%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    color: white;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
 }
-
 .close {
-    color: #aaa;
-    float: right;
+    position: absolute;
+    top: 10px; right: 20px;
     font-size: 28px;
     font-weight: bold;
+    color: #fff;
     cursor: pointer;
 }
-
-.close:hover,
-.close:focus {
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.modal-content input[type="text"],
-.modal-content select {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-.modal-content input[type="text"]:focus,
-.modal-content select:focus {
-    border-color: #FF6347;
-    outline: none;
-}
-
-.modal-content .submit-button {
-    background-color: #FF6347;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin-top: 10px;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-.modal-content .submit-button:hover {
-    background-color: #D94E3B;
-}
-
-@media (max-width: 1100px) {
-    .filtros-campos, .filtros-botones {
-        flex-direction: column;
-        gap: 6px;
-    }
-    main {
-        padding-top: 180px;
-    }
-    .table-wrapper {
-        height: calc(100vh - 180px - 60px);
-    }
-    #tablaProveedores tbody {
-        height: calc(100vh - 180px - 60px - 42px);
-    }
-}
-
-@media (max-width: 768px) {
-    .filtros-container {
+@media (max-width: 900px) {
+    .filtros-container, .filtros-botones, .filtros-campos {
         flex-direction: column;
         align-items: stretch;
-        flex-wrap: wrap;
-    }
-    .filtros-campos, .filtros-botones {
-        flex-direction: column;
         gap: 6px;
-        width: 100%;
     }
-    .filtros-container label,
-    .filtros-container input,
-    .filtros-container select,
-    .filtros-container button {
-        width: 100%;
-        max-width: 100%;
-        min-width: 0;
-        margin-right: 0;
+    #tablaProveedores th, #tablaProveedores td {
+        font-size: 0.95em;
+        padding: 4px;
     }
-    .modal-content {
-        width: 80%;
-    }
-
-    .table-input th,
-    .table-input input,
-    .table-input select,
-    .table-data th,
-    .table-data td {
-        font-size: 14px;
-    }
-
-    .action-button {
-        font-size: 12px;
-    }
-
-    /* Ocultar columnas Saldo Cuenta Corriente y Acciones en la tabla */
-    #tablaProveedores th:nth-child(5),
-    #tablaProveedores td:nth-child(5),
-    #tablaProveedores th:nth-child(6),
-    #tablaProveedores td:nth-child(6) {
-        display: none;
-    }
+    .modal-content { width: 98%; }
 }
     </style>
 </head>
-
 <body>
 <header>
     <h1>Maestro de Proveedores</h1>
