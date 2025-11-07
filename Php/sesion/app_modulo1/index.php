@@ -48,22 +48,25 @@ header h1 {
     text-align: center;
 }
 
+/* Filtros: todos en una línea y pegados al header */
 .filtros-container {
-    margin-top: 70px; /* debajo del header */
+    margin-top: 60px; /* justo debajo del header */
     padding: 10px 20px 0 20px;
     background: #F5F5DC;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
     gap: 10px;
     border-bottom: 2px solid #808080;
     z-index: 5;
     position: relative;
+    min-height: 60px;
 }
 
 .filtros-container label {
     font-weight: bold;
     margin-right: 2px;
+    white-space: nowrap;
 }
 
 .filtros-container input,
@@ -72,8 +75,9 @@ header h1 {
     border-radius: 4px;
     border: 1px solid #C0C0C0;
     font-size: 1em;
-    min-width: 120px;
+    min-width: 80px;
     max-width: 180px;
+    flex: 1 1 0;
 }
 
 .filtros-container button {
@@ -84,25 +88,28 @@ header h1 {
     font-size: 1em;
     cursor: pointer;
     margin-right: 2px;
+    flex: 0 0 auto;
 }
 
 .filtros-container button:hover {
     background: #d0d0d0;
 }
 
+/* Main: menos padding-top para que la tabla suba */
 main {
     padding-top: 120px; /* header + filtros */
-    padding-bottom: 50px; /* footer */
-    height: calc(100vh - 120px - 50px);
+    padding-bottom: 60px; /* footer */
+    height: calc(100vh - 120px - 60px);
     box-sizing: border-box;
     overflow: hidden;
 }
 
+/* Tabla: ajustar wrapper y tbody para que se vea completa */
 .table-wrapper {
     width: 100%;
-    height: calc(100vh - 180px - 50px); /* header + filtros + footer */
+    height: calc(100vh - 120px - 60px); /* header + filtros + footer */
     box-sizing: border-box;
-    overflow: hidden;
+    overflow: auto;
 }
 
 #tablaProveedores {
@@ -142,7 +149,7 @@ main {
     display: block;
     width: 100%;
     overflow-y: auto;
-    height: calc(100vh - 230px - 50px); /* header + filtros + thead + footer */
+    height: calc(100vh - 120px - 60px - 42px); /* header + filtros + footer + thead aprox */
 }
 
 #tablaProveedores thead, #tablaProveedores tfoot {
@@ -157,11 +164,12 @@ main {
     table-layout: fixed;
 }
 
+/* Footer: altura mayor y siempre visible */
 footer {
     background-color: #F5F5DC; 
     color: black;
     text-align: center;
-    padding: 10px;
+    padding: 10px 0 10px 0;
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -170,6 +178,7 @@ footer {
     height: 40px;
     box-sizing: border-box;
     font-size: 1em;
+    left: 0;
 }
 
 .action-button {
@@ -269,22 +278,40 @@ footer {
 
 @media (max-width: 1100px) {
     .filtros-container {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-wrap: wrap;
         gap: 6px;
     }
+    .filtros-container input,
+    .filtros-container select {
+        min-width: 60px;
+        font-size: 0.95em;
+    }
     main {
-        padding-top: 170px;
+        padding-top: 120px;
     }
     .table-wrapper {
-        height: calc(100vh - 230px - 50px);
+        height: calc(100vh - 120px - 60px);
     }
     #tablaProveedores tbody {
-        height: calc(100vh - 280px - 50px);
+        height: calc(100vh - 120px - 60px - 42px);
     }
 }
 
 @media (max-width: 768px) {
+    .filtros-container {
+        flex-direction: column;
+        align-items: stretch;
+        flex-wrap: wrap;
+    }
+    .filtros-container label,
+    .filtros-container input,
+    .filtros-container select,
+    .filtros-container button {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        margin-right: 0;
+    }
     .modal-content {
         width: 80%;
     }
