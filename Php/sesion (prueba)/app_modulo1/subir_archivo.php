@@ -1,7 +1,7 @@
 <?php
 $pdo = new PDO(
     'mysql:host=localhost;dbname=u162024603_miBaseDeDatos;charset=utf8mb4',
-    'rootu162024603_NicolasBranca',
+    'u162024603_NicolasBranca',
     'Alcachofa189'
 );
 

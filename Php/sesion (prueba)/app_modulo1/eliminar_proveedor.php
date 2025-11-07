@@ -9,7 +9,7 @@ function registrarLog($mensaje) {
 
 // Configuración de la base de datos (adaptada a tu base de datos)
 $dsn = 'mysql:host=localhost;dbname=u162024603_miBaseDeDatos;charset=utf8mb4';
-$username = 'rootu162024603_NicolasBranca';
+$username = 'u162024603_NicolasBranca';
 $password = 'Alcachofa189';
 $options = [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

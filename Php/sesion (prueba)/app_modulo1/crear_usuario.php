@@ -1,7 +1,7 @@
 <?php
 $host = 'localhost';
 $db = 'u162024603_miBaseDeDatos';
-$user = 'rootu162024603_NicolasBranca';
+$user = 'u162024603_NicolasBranca';
 $pass = 'Alcachofa189';
 
 
