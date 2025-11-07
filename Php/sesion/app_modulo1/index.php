@@ -87,53 +87,48 @@ main {
 }
 .table-wrapper {
     flex: 1 1 auto;
-    overflow: auto;
+    overflow: hidden;
     background: #f5f5dc;
     display: flex;
     flex-direction: column;
-    /* Nuevo: ocupa todo el espacio disponible */
     width: 100vw;
     min-width: 0;
+    height: 100%; /* Asegura que ocupe todo el espacio disponible en main */
 }
 #tablaProveedores {
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
     background: #f5f5dc;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
-#tablaProveedores thead {
-    background: #ff6347;
-    color: #fff;
-    position: sticky;
-    top: 0;
-    z-index: 2;
+#tablaProveedores thead, #tablaProveedores tfoot {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    flex: 0 0 auto;
+}
+#tablaProveedores tbody {
+    display: block;
+    flex: 1 1 auto;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+}
+#tablaProveedores tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
 }
 #tablaProveedores th, #tablaProveedores td {
     border: 1px solid #c0c0c0;
     padding: 4px;
     text-align: center;
     font-size: 0.97em;
-    /* Nuevo: para que las celdas ocupen el espacio proporcional */
     word-break: break-word;
-}
-#tablaProveedores tbody {
-    display: block;
-    /* Ajuste: ocupa todo el alto disponible en el contenedor */
-    height: 100%;
-    max-height: none;
-    overflow-y: auto;
-    overflow-x: hidden;
-    width: 100%;
-}
-#tablaProveedores thead, #tablaProveedores tfoot {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
-}
-#tablaProveedores tr {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
 }
 footer {
     position: fixed;
