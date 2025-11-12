@@ -232,7 +232,7 @@ footer {
                 <input type="file" id="CertificadosCalidad" name="CertificadosCalidad" accept=".pdf, .jpg, .jpeg, .png">
 
                 <br><br>
-                <button type="submit">Dar de alta Proveedor</button>
+                <button type="submit" id="btnAltaProveedor" disabled>Dar de alta Proveedor</button>
             </form>
         </div>
     </div>
@@ -262,7 +262,7 @@ footer {
                 <input type="file" id="modificarCertificadosCalidad" name="CertificadosCalidad" accept=".pdf, .jpg, .jpeg, .png">
 
                 <br><br>
-                <button type="submit">Guardar Cambios</button>
+                <button type="submit" id="btnModificarProveedor" disabled>Guardar Cambios</button>
             </form>
         </div>
     </div>
