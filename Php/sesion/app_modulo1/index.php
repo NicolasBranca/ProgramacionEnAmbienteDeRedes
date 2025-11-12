@@ -256,28 +256,27 @@ $(document).ready(function () {
     }
     cargarIVASelects();
 
+    // Ordenamiento
     $('.sort').on('click', function () {
         const col = $(this).data('column');
         const colLabel = $(this).text().trim();
         $('#ordenColumna').val(colLabel).data('column', col);
         $('#ordenTipo').prop('disabled', false);
     });
-
     $('#ordenTipo').on('change', function () {
         sort_direction = $(this).val();
     });
 
+    // Botones principales
     $('#cargarDatos').on('click', function () {
         const col = $('#ordenColumna').data('column');
         sort_column = col || '';
         sort_direction = $('#ordenTipo').val();
         cargarDatos();
     });
-
     $('#btCierraSesion').on('click', function () {
         location.href = './destruirsesion.php';
     });
-
     $('#limpiarFiltros').on('click', function () {
         $('#CodProveedorFiltro, #RazonSocialFiltro, #CUITFiltro, #SaldoCuentaCorrienteFiltro').val('');
         $('#idIVAFiltro').val('');
@@ -285,7 +284,6 @@ $(document).ready(function () {
         $('#ordenTipo').prop('disabled', true).val('ASC');
         alert('Filtros limpiados.');
     });
-
     $('#borrarTabla').on('click', function () {
         $('#tablaProveedores tbody').empty();
         actualizarContador();
@@ -335,11 +333,26 @@ $(document).ready(function () {
         });
     }
 
-    // Alta proveedor
+    // VALIDACIÓN Y ENVÍO DE ALTA DE PROVEEDOR
     $('#altaDato').on('click', function () {
         $('#modalAlta').show();
     });
-    $('#altaProveedorForm').on('submit', function (e) {
+
+    const regexCUIT = /^\d{2}-\d{8}-\d{1}$/;
+    const formAlta = $('#altaProveedorForm');
+
+    formAlta.on('input change', 'input, select', function () {
+        const razon = $('#RazonSocial').val().trim();
+        const cuit = $('#CUIT').val().trim();
+        const idIVA = $('#idIVA').val().trim();
+        const saldo = $('#SaldoCuentaCorriente').val().trim();
+        const cuitValido = regexCUIT.test(cuit);
+        const saldoValido = saldo !== '' && !isNaN(saldo);
+        $('#btnAltaProveedor').prop('disabled', !(razon && cuitValido && idIVA && saldoValido));
+        $('#CUIT').css('borderColor', cuit && !cuitValido ? 'red' : '');
+    });
+
+    formAlta.on('submit', function (e) {
         e.preventDefault();
         const formData = new FormData(this);
         $.ajax({
@@ -348,11 +361,17 @@ $(document).ready(function () {
             data: formData,
             contentType: false,
             processData: false,
-            success: function () {
-                alert('Proveedor dado de alta exitosamente');
-                $('#modalAlta').hide();
-                $('#altaProveedorForm')[0].reset();
-                cargarDatos();
+            success: function (response) {
+                let res;
+                try { res = JSON.parse(response); } catch { res = {status: 'error', message: 'Error inesperado'}; }
+                if (res.status === 'success') {
+                    alert('Proveedor dado de alta exitosamente');
+                    $('#modalAlta').hide();
+                    formAlta[0].reset();
+                    cargarDatos();
+                } else {
+                    alert('Error: ' + res.message);
+                }
             },
             error: function () {
                 alert('Error al dar de alta el proveedor');
@@ -360,8 +379,21 @@ $(document).ready(function () {
         });
     });
 
-    // Modificar proveedor
-    $('#modificarProveedorForm').on('submit', function (e) {
+    // VALIDACIÓN Y ENVÍO DE MODIFICACIÓN DE PROVEEDOR
+    const formModificar = $('#modificarProveedorForm');
+
+    formModificar.on('input change', 'input, select', function () {
+        const razon = $('#modificarRazonSocial').val().trim();
+        const cuit = $('#modificarCUIT').val().trim();
+        const idIVA = $('#modificarIdIVA').val().trim();
+        const saldo = $('#modificarSaldoCuentaCorriente').val().trim();
+        const cuitValido = regexCUIT.test(cuit);
+        const saldoValido = saldo !== '' && !isNaN(saldo);
+        $('#btnModificarProveedor').prop('disabled', !(razon && cuitValido && idIVA && saldoValido));
+        $('#modificarCUIT').css('borderColor', cuit && !cuitValido ? 'red' : '');
+    });
+
+    formModificar.on('submit', function (e) {
         e.preventDefault();
         const formData = new FormData(this);
         $.ajax({
@@ -370,10 +402,16 @@ $(document).ready(function () {
             data: formData,
             contentType: false,
             processData: false,
-            success: function () {
-                alert('Proveedor modificado exitosamente');
-                $('#modalModificar').hide();
-                cargarDatos();
+            success: function (response) {
+                let res;
+                try { res = JSON.parse(response); } catch { res = {status: 'error', message: 'Error inesperado'}; }
+                if (res.status === 'success') {
+                    alert('Proveedor modificado exitosamente');
+                    $('#modalModificar').hide();
+                    cargarDatos();
+                } else {
+                    alert('Error: ' + res.message);
+                }
             },
             error: function () {
                 alert('Error al modificar el proveedor');

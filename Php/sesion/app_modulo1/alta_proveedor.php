@@ -96,9 +96,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['CertificadosCalidad']
 
 // Ajustar el log para este módulo (alta de proveedores)
 function registrarLog($mensaje) {
-    $logFile = __DIR__ . '/debug.log'; 
-    $fecha = date('Y-m-d H:i:s'); 
+    $logFile = __DIR__ . '/debug.log';
+    $fecha = date('Y-m-d H:i:s');
     $logMessage = "[$fecha] - $mensaje" . PHP_EOL;
-    file_put_contents($logFile, $logMessage, FILE_APPEND);
+    // Intenta escribir el log, ignora errores para no interrumpir el flujo principal
+    try {
+        file_put_contents($logFile, $logMessage, FILE_APPEND | LOCK_EX);
+    } catch (Exception $e) {
+        // Si hay error al escribir el log, no hacer nada
+    }
 }
 ?>
