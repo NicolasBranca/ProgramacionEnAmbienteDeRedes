@@ -27,16 +27,12 @@ header {
     justify-content: center;
     z-index: 10;
 }
-header h1 {
-    margin: 0;
-    font-size: 1.7em;
-}
+header h1 { margin: 0; font-size: 1.7em; }
 main {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 60px - 40px); /* Resta header y footer */
+    height: calc(100vh - 60px - 40px);
     padding-top: 60px;
-    /* Elimina cualquier padding-bottom */
     min-height: 0;
 }
 .filtros-container {
@@ -48,11 +44,7 @@ main {
     border-bottom: 1px solid #ccc;
     padding: 8px;
 }
-.filtros-campos label {
-    font-weight: bold;
-    margin-right: 2px;
-    font-size: 1em;
-}
+.filtros-campos label { font-weight: bold; margin-right: 2px; font-size: 1em; }
 .filtros-campos input, .filtros-campos select {
     margin-right: 8px;
     padding: 2px 4px;
@@ -60,10 +52,7 @@ main {
     border: 1px solid #ccc;
     font-size: 1em;
 }
-.filtros-botones {
-    display: flex;
-    gap: 8px;
-}
+.filtros-botones { display: flex; gap: 8px; }
 .filtros-botones button {
     padding: 4px 10px;
     border-radius: 2px;
@@ -71,9 +60,7 @@ main {
     background: #e0e0e0;
     cursor: pointer;
 }
-.filtros-botones button:hover {
-    background: #d0d0d0;
-}
+.filtros-botones button:hover { background: #d0d0d0; }
 .table-wrapper {
     flex: 1 1 0;
     min-height: 0;
@@ -109,7 +96,6 @@ main {
     min-height: 0;
     overflow-y: auto;
     width: 100%;
-    /* Elimina cualquier margin o padding extra */
     margin: 0;
     padding: 0;
 }
@@ -149,34 +135,24 @@ footer {
     </style>
 </head>
 <body>
-<header>
-    <h1>Maestro de Proveedores</h1>
-</header>
+<header><h1>Maestro de Proveedores</h1></header>
 <main>
-    <!-- Filtros adaptados a proveedores -->
     <div class="filtros-container">
         <div class="filtros-campos">
             <label for="CodProveedorFiltro">Código Proveedor:</label>
-            <input type="text" id="CodProveedorFiltro" name="CodProveedorFiltro">
-
+            <input type="text" id="CodProveedorFiltro">
             <label for="RazonSocialFiltro">Razón Social:</label>
-            <input type="text" id="RazonSocialFiltro" name="RazonSocialFiltro">
-
+            <input type="text" id="RazonSocialFiltro">
             <label for="CUITFiltro">CUIT:</label>
-            <input type="text" id="CUITFiltro" name="CUITFiltro">
-
+            <input type="text" id="CUITFiltro">
             <label for="idIVAFiltro">Condición IVA:</label>
-            <select id="idIVAFiltro" name="idIVAFiltro">
-                <option value="">Todos</option>
-            </select>
-
+            <select id="idIVAFiltro"><option value="">Todos</option></select>
             <label for="SaldoCuentaCorrienteFiltro">Saldo Cuenta Corriente:</label>
-            <input type="number" id="SaldoCuentaCorrienteFiltro" name="SaldoCuentaCorrienteFiltro">
-
+            <input type="number" id="SaldoCuentaCorrienteFiltro">
             <div class="filtros-orden">
                 <label for="ordenColumna">Ordenar por:</label>
-                <input type="text" id="ordenColumna" name="ordenColumna" readonly placeholder="Columna" tabindex="-1">
-                <select id="ordenTipo" name="ordenTipo" disabled>
+                <input type="text" id="ordenColumna" readonly placeholder="Columna">
+                <select id="ordenTipo" disabled>
                     <option value="ASC">ASC</option>
                     <option value="DESC">DESC</option>
                 </select>
@@ -184,12 +160,13 @@ footer {
         </div>
         <div class="filtros-botones">
             <button id="cargarDatos">Cargar datos</button>
-            <button id="altaDato" class="btn">Alta proveedor</button>
-            <button id="limpiarFiltros" class="btn btn-secondary">Limpiar Filtros</button>
-            <button id="borrarTabla" class="btn btn-danger">Borrar Datos de la Tabla</button>
+            <button id="altaDato">Alta proveedor</button>
+            <button id="limpiarFiltros">Limpiar Filtros</button>
+            <button id="borrarTabla">Borrar Datos de la Tabla</button>
             <button id="btCierraSesion">Cierra Sesión</button>
         </div>
     </div>
+
     <div class="table-wrapper">
         <table id="tablaProveedores" border="1">
             <thead>
@@ -202,87 +179,67 @@ footer {
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody>
-                <!-- La tabla inicia vacía -->
-            </tbody>
+            <tbody></tbody>
         </table>
     </div>
 
-    <!-- Modal Alta Proveedor -->
-    <div id="modalAlta" class="modal">
+    <div id="modalAlta" class="modal" style="display:none">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Alta de Proveedor</h2>
             <form id="altaProveedorForm">
-                <label for="RazonSocial">Razón Social:</label>
-                <input type="text" id="RazonSocial" name="RazonSocial" required>
-
-                <label for="CUIT">CUIT:</label>
-                <input type="text" id="CUIT" name="CUIT" required placeholder="XX-XXXXXXXX-X">
-
-                <label for="idIVA">Condición IVA:</label>
-                <select id="idIVA" name="idIVA" required>
-                    <option value="">Seleccione condición IVA</option>
-                </select>
-
-                <label for="SaldoCuentaCorriente">Saldo Cuenta Corriente:</label>
-                <input type="number" id="SaldoCuentaCorriente" name="SaldoCuentaCorriente" step="0.01" required>
-
-                <label for="CertificadosCalidad">Subir Certificado Calidad (PDF, JPG, PNG):</label>
-                <input type="file" id="CertificadosCalidad" name="CertificadosCalidad" accept=".pdf, .jpg, .jpeg, .png">
-
+                <label>Razón Social:</label>
+                <input type="text" id="RazonSocial" required>
+                <label>CUIT:</label>
+                <input type="text" id="CUIT" required placeholder="XX-XXXXXXXX-X">
+                <label>Condición IVA:</label>
+                <select id="idIVA" required></select>
+                <label>Saldo Cuenta Corriente:</label>
+                <input type="number" id="SaldoCuentaCorriente" step="0.01" required>
+                <label>Certificado Calidad:</label>
+                <input type="file" id="CertificadosCalidad" accept=".pdf, .jpg, .jpeg, .png">
                 <br><br>
-                <button type="submit" id="btnAltaProveedor" disabled>Dar de alta Proveedor</button>
+                <button type="submit" id="btnAltaProveedor">Dar de alta Proveedor</button>
             </form>
         </div>
     </div>
 
-    <!-- Modal Modificar Proveedor -->
-    <div id="modalModificar" class="modal">
+    <div id="modalModificar" class="modal" style="display:none">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Modificar Proveedor</h2>
             <form id="modificarProveedorForm">
-                <input type="hidden" id="modificarCodProveedor" name="CodProveedor">
-
-                <label for="modificarRazonSocial">Razón Social:</label>
-                <input type="text" id="modificarRazonSocial" name="RazonSocial" required>
-
-                <label for="modificarCUIT">CUIT:</label>
-                <input type="text" id="modificarCUIT" name="CUIT" required placeholder="XX-XXXXXXXX-X">
-
-                <label for="modificarIdIVA">Condición IVA:</label>
-                <select id="modificarIdIVA" name="idIVA" required>
-                </select>
-
-                <label for="modificarSaldoCuentaCorriente">Saldo Cuenta Corriente:</label>
-                <input type="number" id="modificarSaldoCuentaCorriente" name="SaldoCuentaCorriente" step="0.01" required>
-
-                <label for="modificarCertificadosCalidad">Actualizar Certificado Calidad (opcional):</label>
-                <input type="file" id="modificarCertificadosCalidad" name="CertificadosCalidad" accept=".pdf, .jpg, .jpeg, .png">
-
+                <input type="hidden" id="modificarCodProveedor">
+                <label>Razón Social:</label>
+                <input type="text" id="modificarRazonSocial" required>
+                <label>CUIT:</label>
+                <input type="text" id="modificarCUIT" required placeholder="XX-XXXXXXXX-X">
+                <label>Condición IVA:</label>
+                <select id="modificarIdIVA" required></select>
+                <label>Saldo Cuenta Corriente:</label>
+                <input type="number" id="modificarSaldoCuentaCorriente" step="0.01" required>
+                <label>Certificado Calidad (opcional):</label>
+                <input type="file" id="modificarCertificadosCalidad" accept=".pdf, .jpg, .jpeg, .png">
                 <br><br>
-                <button type="submit" id="btnModificarProveedor" disabled>Guardar Cambios</button>
+                <button type="submit" id="btnModificarProveedor">Guardar Cambios</button>
             </form>
         </div>
     </div>
 
-    <div id="modalArchivo" class="modal">
+    <div id="modalArchivo" class="modal" style="display:none">
         <div class="modal-content">
             <span class="close">&times;</span>
             <iframe id="iframeArchivo" src="" frameborder="0"></iframe>
         </div>
     </div>
 </main>
-<footer>
-    <p id="contadorRegistros">Cantidad de registros: 0</p>
-</footer>
+<footer><p id="contadorRegistros">Cantidad de registros: 0</p></footer>
+
 <script>
 $(document).ready(function () {
     let sort_column = '';
     let sort_direction = 'ASC';
 
-    // Cargar condiciones IVA en los selects
     function cargarIVASelects() {
         $.ajax({
             url: 'load_iva.php',
@@ -291,19 +248,17 @@ $(document).ready(function () {
                 const ivas = JSON.parse(data);
                 $('#idIVAFiltro, #idIVA, #modificarIdIVA').empty().append('<option value="">Todos</option>');
                 ivas.forEach(function (iva) {
-                    $('#idIVAFiltro').append(`<option value="${iva.idIVA}">${iva.tipoIVA} (${iva.porcentaje}%)</option>`);
-                    $('#idIVA').append(`<option value="${iva.idIVA}">${iva.tipoIVA} (${iva.porcentaje}%)</option>`);
-                    $('#modificarIdIVA').append(`<option value="${iva.idIVA}">${iva.tipoIVA} (${iva.porcentaje}%)</option>`);
+                    const option = `<option value="${iva.idIVA}">${iva.tipoIVA} (${iva.porcentaje}%)</option>`;
+                    $('#idIVAFiltro, #idIVA, #modificarIdIVA').append(option);
                 });
             }
         });
     }
     cargarIVASelects();
 
-    // Nuevo: manejo de selección de columna y tipo de orden
     $('.sort').on('click', function () {
         const col = $(this).data('column');
-        let colLabel = $(this).text().trim();
+        const colLabel = $(this).text().trim();
         $('#ordenColumna').val(colLabel).data('column', col);
         $('#ordenTipo').prop('disabled', false);
     });
@@ -313,65 +268,48 @@ $(document).ready(function () {
     });
 
     $('#cargarDatos').on('click', function () {
-        // Si hay columna seleccionada, usarla
         const col = $('#ordenColumna').data('column');
-        if (col) {
-            sort_column = col;
-            sort_direction = $('#ordenTipo').val();
-        } else {
-            sort_column = '';
-        }
+        sort_column = col || '';
+        sort_direction = $('#ordenTipo').val();
         cargarDatos();
     });
 
-    $("#btCierraSesion").click(function() {
-        location.href = "./destruirsesion.php";
+    $('#btCierraSesion').on('click', function () {
+        location.href = './destruirsesion.php';
     });
 
-    function actualizarContador() {
-        const cantidadRegistros = $('#tablaProveedores tbody tr').length;
-        $('#contadorRegistros').text('Cantidad de registros: ' + cantidadRegistros);
-    }
-
     $('#limpiarFiltros').on('click', function () {
-        $('#CodProveedorFiltro').val('');
-        $('#RazonSocialFiltro').val('');
-        $('#CUITFiltro').val('');
+        $('#CodProveedorFiltro, #RazonSocialFiltro, #CUITFiltro, #SaldoCuentaCorrienteFiltro').val('');
         $('#idIVAFiltro').val('');
-        $('#SaldoCuentaCorrienteFiltro').val('');
         $('#ordenColumna').val('').removeData('column');
         $('#ordenTipo').prop('disabled', true).val('ASC');
         alert('Filtros limpiados.');
     });
 
     $('#borrarTabla').on('click', function () {
-        $('#tablaProveedores tbody').html('');
+        $('#tablaProveedores tbody').empty();
+        actualizarContador();
     });
 
+    function actualizarContador() {
+        const cantidad = $('#tablaProveedores tbody tr').length;
+        $('#contadorRegistros').text('Cantidad de registros: ' + cantidad);
+    }
+
     function cargarDatos() {
-        const CodProveedorFiltro = $('#CodProveedorFiltro').val();
-        const RazonSocialFiltro = $('#RazonSocialFiltro').val();
-        const CUITFiltro = $('#CUITFiltro').val();
-        const idIVAFiltro = $('#idIVAFiltro').val();
-        const SaldoCuentaCorrienteFiltro = $('#SaldoCuentaCorrienteFiltro').val();
-
-        $('#loading').show();
-        $('#tablaProveedores tbody').html('');
-
         $.ajax({
             url: 'load_data.php',
             method: 'POST',
             data: {
-                sort_column: sort_column,
-                sort_direction: sort_direction,
-                CodProveedor: CodProveedorFiltro,
-                RazonSocial: RazonSocialFiltro,
-                CUIT: CUITFiltro,
-                idIVA: idIVAFiltro,
-                SaldoCuentaCorriente: SaldoCuentaCorrienteFiltro
+                sort_column,
+                sort_direction,
+                CodProveedor: $('#CodProveedorFiltro').val(),
+                RazonSocial: $('#RazonSocialFiltro').val(),
+                CUIT: $('#CUITFiltro').val(),
+                idIVA: $('#idIVAFiltro').val(),
+                SaldoCuentaCorriente: $('#SaldoCuentaCorrienteFiltro').val()
             },
             success: function (data) {
-                $('#loading').hide();
                 const proveedores = JSON.parse(data);
                 let html = '';
                 proveedores.forEach(function (prov) {
@@ -382,136 +320,72 @@ $(document).ready(function () {
                         <td>${prov.idIVA}</td>
                         <td>${prov.SaldoCuentaCorriente}</td>
                         <td>
-                            <button class="btn btn-primary ver-archivo" data-id="${prov.CodProveedor}">Ver Certificado</button>
-                            <button class="btn btn-warning modificar-proveedor" data-id="${prov.CodProveedor}">Modificar</button>
-                            <button class="btn btn-danger eliminar-proveedor" data-id="${prov.CodProveedor}">Eliminar</button>
+                            <button class="ver-archivo" data-id="${prov.CodProveedor}">Ver Certificado</button>
+                            <button class="modificar-proveedor" data-id="${prov.CodProveedor}">Modificar</button>
+                            <button class="eliminar-proveedor" data-id="${prov.CodProveedor}">Eliminar</button>
                         </td>
                     </tr>`;
                 });
-
                 $('#tablaProveedores tbody').html(html);
-                bindActionsToButtons();
                 actualizarContador();
             },
             error: function () {
-                $('#loading').hide();
                 alert('Error al cargar los datos');
             }
         });
     }
 
-    function bindActionsToButtons() {
-        $('.ver-archivo').on('click', function () {
-            var CodProveedor = $(this).data('id');
-            $('#iframeArchivo').attr('src', 'ver_archivo.php?CodProveedor=' + CodProveedor);
-            $('#modalArchivo').show();
-        });
-
-        $(document).on('click', '.close', function () {
-            $('#modalArchivo').fadeOut();
-            $('#iframeArchivo').attr('src', '');
-        });
-
-        $(window).on('click', function (event) {
-            if ($(event.target).is('#modalArchivo')) {
-                $('#modalArchivo').fadeOut();
-                $('#iframeArchivo').attr('src', '');
-            }
-        });
-
-        $('.modificar-proveedor').on('click', function () {
-            const fila = $(this).closest('tr');
-            const CodProveedor = fila.find('td').eq(0).text();
-            const RazonSocial = fila.find('td').eq(1).text();
-            const CUIT = fila.find('td').eq(2).text();
-            const idIVA = fila.find('td').eq(3).text();
-            const SaldoCuentaCorriente = fila.find('td').eq(4).text();
-
-            $('#modificarCodProveedor').val(CodProveedor);
-            $('#modificarRazonSocial').val(RazonSocial);
-            $('#modificarCUIT').val(CUIT);
-            $('#modificarIdIVA').val(idIVA);
-            $('#modificarSaldoCuentaCorriente').val(SaldoCuentaCorriente);
-
-            $('#modalModificar').show();
-        });
-
-        $('.eliminar-proveedor').on('click', function () {
-            const CodProveedor = $(this).data('id');
-            if (confirm('¿Estás seguro de que deseas eliminar este proveedor?')) {
-                $.ajax({
-                    url: 'eliminar_proveedor.php',
-                        if (res.status === 'success') {
-                            $('tr[data-id="' + CodProveedor + '"]').remove();
-                            alert(res.message);
-                        } else {
-                            alert('Error: ' + res.message);
-                        }) {
-                    },s = JSON.parse(response);
-                    error: function () {
-                        alert('Error al conectar con el servidor.');   $('tr[data-id="' + CodProveedor + '"]').remove();
-                    }      alert(res.message);
-                });
-            }
-        });   }
-    } },
-       error: function () {
-    $('.close').on('click', function () {             alert('Error al conectar con el servidor.');
-        $('#modalModificar').fadeOut();               }
-    });                });
-
-    $('#modificarProveedorForm').on('submit', function (event) {
-        event.preventDefault();
-        const formData = new FormData(this);
-
-        $.ajax({deOut();
-            url: 'modificar_proveedor.php',
-            method: 'POST',
-            data: formData,rProveedorForm').on('submit', function (event) {
-            contentType: false,
-            processData: false,w FormData(this);
-            success: function (response) {
-                alert('Proveedor modificado exitosamente');
-                $('#modalModificar').hide();veedor.php',
-            },
-            error: function () {
-                alert('Error al modificar el proveedor.');
-            }ocessData: false,
-        });esponse) {
-    });;
-   $('#modalModificar').hide();
-    $('#altaDato').on('click', function () { },
-        $('#modalAlta').show();     error: function () {
-    });                alert('Error al modificar el proveedor.');
-
-    $('.close').on('click', function () {
-        $('#modalAlta').hide();
+    // Alta proveedor
+    $('#altaDato').on('click', function () {
+        $('#modalAlta').show();
     });
-) {
-    $('#altaProveedorForm').on('submit', function (event) {
-        event.preventDefault();
+    $('#altaProveedorForm').on('submit', function (e) {
+        e.preventDefault();
         const formData = new FormData(this);
-
         $.ajax({
             url: 'alta_proveedor.php',
             method: 'POST',
-            data: formData,eedorForm').on('submit', function (event) {
+            data: formData,
             contentType: false,
-            processData: false,w FormData(this);
-            success: function (response) {
+            processData: false,
+            success: function () {
                 alert('Proveedor dado de alta exitosamente');
-                $('#altaProveedorForm')[0].reset();r.php',
                 $('#modalAlta').hide();
+                $('#altaProveedorForm')[0].reset();
+                cargarDatos();
             },
             error: function () {
                 alert('Error al dar de alta el proveedor');
-            }ccess: function (response) {
-        }); dado de alta exitosamente');
+            }
+        });
     });
-});   $('#modalAlta').hide();
-</script> },
-</body>     error: function () {
-</html>});
+
+    // Modificar proveedor
+    $('#modificarProveedorForm').on('submit', function (e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        $.ajax({
+            url: 'modificar_proveedor.php',
+            method: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function () {
+                alert('Proveedor modificado exitosamente');
+                $('#modalModificar').hide();
+                cargarDatos();
+            },
+            error: function () {
+                alert('Error al modificar el proveedor');
+            }
+        });
+    });
+
+    // Cerrar modales
+    $('.close').on('click', function () {
+        $(this).closest('.modal').hide();
+    });
+});
 </script>
 </body>
 </html>

@@ -39,50 +39,58 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['CertificadosCalidad']
         exit;
     }
 
+    // Validar que el CUIT no exista ya en la base de datos
+    $stmtCheck = $pdo->prepare("SELECT COUNT(*) FROM Proveedores WHERE CUIT = :CUIT");
+    $stmtCheck->bindParam(':CUIT', $CUIT);
+    $stmtCheck->execute();
+    if ($stmtCheck->fetchColumn() > 0) {
+        echo json_encode(["status" => "error", "message" => "Ya existe un proveedor con ese CUIT."]);
+        exit;
+    }
+
     $certificados = $_FILES['CertificadosCalidad'];
     $fileTmpName = $certificados['tmp_name'];
     $fileError = $certificados['error'];
     $fileSize = $certificados['size'];
 
-    // Validar archivo obligatorio
-    if ($fileError !== 0 || $fileTmpName === '' || $fileSize === 0) {
-        echo json_encode(["status" => "error", "message" => "Debe adjuntar un archivo de certificado válido."]);
-        exit;
+    // Eliminar validación obligatoria del archivo
+    // if ($fileError !== 0 || $fileTmpName === '' || $fileSize === 0) {
+    //     echo json_encode(["status" => "error", "message" => "Debe adjuntar un archivo de certificado válido."]);
+    //     exit;
+    // }
+
+    if ($fileError === 0 && $fileSize < 5000000) {
+        $fileData = file_get_contents($fileTmpName);
+    } else {
+        $fileData = null;
     }
 
-    if ($fileSize < 5000000) {
-        $fileData = file_get_contents($fileTmpName);
+    try {
+        $sql = "INSERT INTO Proveedores (RazonSocial, CUIT, idIVA, SaldoCuentaCorriente, CertificadosCalidad) 
+                VALUES (:RazonSocial, :CUIT, :idIVA, :SaldoCuentaCorriente, :CertificadosCalidad)";
 
-        try {
-            $sql = "INSERT INTO Proveedores (RazonSocial, CUIT, idIVA, SaldoCuentaCorriente, CertificadosCalidad) 
-                    VALUES (:RazonSocial, :CUIT, :idIVA, :SaldoCuentaCorriente, :CertificadosCalidad)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':RazonSocial', $RazonSocial);
+        $stmt->bindParam(':CUIT', $CUIT);
+        $stmt->bindParam(':idIVA', $idIVA, PDO::PARAM_INT);
+        $stmt->bindParam(':SaldoCuentaCorriente', $SaldoCuentaCorriente);
+        $stmt->bindParam(':CertificadosCalidad', $fileData, PDO::PARAM_LOB);
 
-            $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':RazonSocial', $RazonSocial);
-            $stmt->bindParam(':CUIT', $CUIT);
-            $stmt->bindParam(':idIVA', $idIVA, PDO::PARAM_INT);
-            $stmt->bindParam(':SaldoCuentaCorriente', $SaldoCuentaCorriente);
-            $stmt->bindParam(':CertificadosCalidad', $fileData, PDO::PARAM_LOB);
+        if ($stmt->execute()) {
+            $logMessage = "Proveedor agregado exitosamente: CUIT $CUIT";
+            registrarLog($logMessage);
 
-            if ($stmt->execute()) {
-                $logMessage = "Proveedor agregado exitosamente: CUIT $CUIT";
-                registrarLog($logMessage);
+            echo json_encode(["status" => "success", "message" => "Proveedor dado de alta exitosamente."]);
+        } else {
+            $logMessage = "Error al agregar el proveedor: " . json_encode($stmt->errorInfo());
+            registrarLog($logMessage);
 
-                echo json_encode(["status" => "success", "message" => "Proveedor dado de alta exitosamente."]);
-            } else {
-                $logMessage = "Error al agregar el proveedor: " . json_encode($stmt->errorInfo());
-                registrarLog($logMessage);
-
-                echo json_encode(["status" => "error", "message" => "Error al dar de alta el proveedor."]);
-            }
-
-        } catch (PDOException $e) {
-            registrarLog("Error de PDO: " . $e->getMessage());
-            echo json_encode(["status" => "error", "message" => "Error en la base de datos."]);
+            echo json_encode(["status" => "error", "message" => "Error al dar de alta el proveedor."]);
         }
 
-    } else {
-        echo json_encode(["status" => "error", "message" => "El archivo es demasiado grande."]);
+    } catch (PDOException $e) {
+        registrarLog("Error de PDO: " . $e->getMessage());
+        echo json_encode(["status" => "error", "message" => "Error en la base de datos."]);
     }
 }
 
