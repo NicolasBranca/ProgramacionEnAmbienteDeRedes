@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <!-- Encabezado con metadatos y título de la página -->
 </head>
 <style>
-/* Estilos generales para centrar el formulario y dar formato */
 body {
     display: flex;
     align-items: center;
@@ -15,12 +13,12 @@ body {
     height: 100vh;
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+    background-color: white;
 }
 
 /* Contenedor principal del formulario de login */
 .form-container {
-    background-color: #fff;
+    background-color: white;
     padding: 20px 40px;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -80,7 +78,7 @@ body {
     color: red;
 }
 
-/* Estilos responsivos para pantallas pequeñas */
+/* Estilos responsivos */
 @media (max-width: 600px) {
     .form-container {
         width: 90%;
@@ -95,15 +93,12 @@ body {
         <h1>Iniciar Sesión</h1>
         <!-- Formulario que envía los datos a login.php por POST -->
         <form action="login.php" method="POST">
-            <!-- Campo para el usuario -->
             <label for="login">Usuario: usuario1</label>
             <input type="text" id="login" name="login" required>
             
-            <!-- Campo para la contraseña -->
             <label for="password">Contraseña: root</label>
             <input type="password" id="password" name="password" required>
             
-            <!-- Botón para enviar el formulario -->
             <button type="submit">Iniciar Sesión</button>
         </form>
     </div>

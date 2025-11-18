@@ -1,7 +1,6 @@
 <?php
 header('Content-Type: application/json');
 
-// Función para registrar mensajes en el archivo debug.log
 function registrarLog($mensaje) {
     $logFile = __DIR__ . '/debug.log';
     $fecha = date('Y-m-d H:i:s');
@@ -9,7 +8,6 @@ function registrarLog($mensaje) {
     file_put_contents($logFile, $logMessage, FILE_APPEND);
 }
 
-// Configuración de conexión a la base de datos
 $dsn = 'mysql:host=localhost;dbname=u162024603_miBaseDeDatos;charset=utf8mb4';
 $username = 'u162024603_NicolasBranca';
 $password = 'Alcachofa189';
@@ -19,7 +17,6 @@ $options = [
 ];
 
 try {
-    // Crea una nueva conexión PDO a la base de datos
     $pdo = new PDO($dsn, $username, $password, $options);
 
     // Verifica si la petición es POST y si se recibió el identificador del proveedor
@@ -45,7 +42,6 @@ try {
         registrarLog("Modificación iniciada para CodProveedor: $CodProveedor");
         registrarLog("idIVA seleccionado para modificar: $idIVA");
 
-        // Si se envía un archivo de certificado, lo procesa y actualiza
         if (isset($_FILES['CertificadosCalidad']) && $_FILES['CertificadosCalidad']['error'] === 0) {
             $fileTmpName = $_FILES['CertificadosCalidad']['tmp_name'];
             $fileSize = $_FILES['CertificadosCalidad']['size'];
@@ -90,7 +86,6 @@ try {
             registrarLog("Proveedor modificado exitosamente para CodProveedor: $CodProveedor");
             echo json_encode(["status" => "success", "message" => "Proveedor modificado exitosamente."]);
         } else {
-            // Si falla la consulta, registra el error y muestra mensaje
             registrarLog("Error al modificar el proveedor: " . json_encode($stmt->errorInfo()));
             echo json_encode(["status" => "error", "message" => "Error al modificar el proveedor."]);
         }
@@ -100,7 +95,6 @@ try {
         echo json_encode(["status" => "error", "message" => "Solicitud no válida."]);
     }
 } catch (PDOException $e) {
-    // Si ocurre un error con PDO, lo registra y muestra mensaje de error
     registrarLog("Error en la base de datos: " . $e->getMessage());
     echo json_encode(["status" => "error", "message" => "Error en la base de datos."]);
 }

@@ -1,13 +1,11 @@
 <?php
 
-// Crea una nueva conexión PDO a la base de datos
 $pdo = new PDO(
     'mysql:host=localhost;dbname=u162024603_miBaseDeDatos;charset=utf8mb4',
     'u162024603_NicolasBranca',
     'Alcachofa189'
 );
 
-// Función para registrar mensajes en el archivo debug.log
 function registrarLog($mensaje) {
     $logFile = __DIR__ . '/debug.log';
     $fecha = date('Y-m-d H:i:s');
@@ -29,7 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([':archivo' => $archivoData, ':CodProveedor' => $CodProveedor]);
         echo 'Archivo subido exitosamente.';
     } else {
-        // Si no se subió archivo, muestra mensaje de error
         echo 'No se subió ningún archivo.';
     }
 }

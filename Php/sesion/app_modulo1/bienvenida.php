@@ -1,14 +1,10 @@
 <?php
-// Incluye el archivo para manejo de sesión
 include('../manejoSesion.inc');
 ?>
 <?php
 
-// Obtiene el identificador de la sesión actual
 $identificacionSesion = $_SESSION['sesionParaUsuario'];
-// Obtiene el nombre de usuario de la sesión
 $login = $_SESSION['login'];
-// Obtiene el contador de accesos de la sesión para el usuario
 $contadorSesion = $_SESSION['contador'];
 ?>
 <!DOCTYPE html>
@@ -19,7 +15,6 @@ $contadorSesion = $_SESSION['contador'];
     <title>Bienvenida</title>
 </head>
 <style>
-/* Estilos generales para centrar el contenido y dar formato */
 body {
     display: flex;
     align-items: center;
@@ -56,7 +51,6 @@ body {
     text-align: left;
 }
 
-/* Resalta información importante */
 .welcome-container .highlight {
     font-weight: bold;
     color: #007B7F;
@@ -79,7 +73,7 @@ body {
     background-color: #005f60;
 }
 
-/* Estilos responsivos para pantallas pequeñas */
+/* Estilos responsivos */
 @media (max-width: 600px) {
     .welcome-container {
         padding: 20px;
@@ -97,19 +91,12 @@ body {
 
 </style>
 <body>
-    <!-- Contenedor de bienvenida con información de la sesión -->
     <div class="welcome-container">
         <h1>Acceso permitido</h1>
-        <!-- Muestra el identificador de la sesión -->
-        <p><strong class="highlight">Identificación de sesión:</strong> <?php echo $identificacionSesion; ?></p>
-        <!-- Muestra el nombre de usuario -->
-        <p><strong class="highlight">Usuario:</strong> <?php echo $login; ?></p>
-        <!-- Muestra el contador de accesos de la sesión -->
-        <p><strong class="highlight">Contador de sesión para este usuario:</strong> <?php echo $contadorSesion; ?></p>
-
-        <!-- Botón para ingresar a la aplicación -->
+        <p class="highlight">Identificación de sesión: <?php echo $identificacionSesion; ?></p>
+        <p class="highlight">Usuario: <?php echo $login; ?></p>
+        <p class="highlight">Contador de sesión para este usuario: <?php echo $contadorSesion; ?></p>
         <button onClick="location.href='./index.php'">Ingresar a la aplicación</button>
-        <!-- Botón para cerrar la sesión -->
         <button onClick="location.href='./destruirsesion.php'">Terminar sesión</button>
     </div>
 </body>

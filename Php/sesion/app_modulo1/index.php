@@ -1,5 +1,4 @@
 <?php
-// Incluye el archivo para manejo de sesión
 include('../manejoSesion.inc');
 ?>
 <!DOCTYPE html>
@@ -8,7 +7,6 @@ include('../manejoSesion.inc');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maestro de proveedores</title>
-    <!-- Incluye jQuery para manejo de AJAX y DOM -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
 body {
@@ -137,13 +135,12 @@ footer {
     </style>
 </head>
 <body>
-<!-- Encabezado fijo con el título principal -->
 <header><h1>Maestro de Proveedores</h1></header>
 <main>
     <!-- Contenedor de filtros y botones de acción -->
     <div class="filtros-container">
         <div class="filtros-campos">
-            <!-- Campos de filtro para buscar proveedores -->
+            <!-- Campos de filtro para buscar -->
             <label for="CodProveedorFiltro">Código Proveedor:</label>
             <input type="text" id="CodProveedorFiltro">
             <label for="RazonSocialFiltro">Razón Social:</label>
@@ -179,7 +176,6 @@ footer {
         <table id="tablaProveedores" border="1">
             <thead>
                 <tr>
-                    <!-- Encabezados de la tabla con botones para ordenar -->
                     <th><button class="sort" data-column="CodProveedor">Código</button></th>
                     <th><button class="sort" data-column="RazonSocial">Razón Social</button></th>
                     <th><button class="sort" data-column="CUIT">CUIT</button></th>
@@ -237,7 +233,7 @@ footer {
         </div>
     </div>
 
-    <!-- Modal para mostrar archivos de certificado -->
+    <!-- Modal para mostrar certificados de calidad -->
     <div id="modalArchivo" class="modal" style="display:none">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -249,8 +245,8 @@ footer {
 <footer><p id="contadorRegistros">Cantidad de registros: 0</p></footer>
 
 <script>
-// Código JavaScript/jQuery para manejar la lógica de la página
 $(document).ready(function () {
+    // Variables para el ordenamiento de la tabla
     let sort_column = '';
     let sort_direction = 'ASC';
 
@@ -356,7 +352,7 @@ $(document).ready(function () {
     });
 
     // Validación de campos del formulario de alta de proveedor
-    const regexCUIT = /^\d{2}-\d{8}-\d{1}$/;
+    const formatoCUIT = /^\d{2}-\d{8}-\d{1}$/;
     const formAlta = $('#altaProveedorForm');
 
     formAlta.on('input change', 'input, select', function () {
@@ -364,7 +360,7 @@ $(document).ready(function () {
         const cuit = $('#CUIT').val().trim();
         const idIVA = $('#idIVA').val().trim();
         const saldo = $('#SaldoCuentaCorriente').val().trim();
-        const cuitValido = regexCUIT.test(cuit);
+        const cuitValido = formatoCUIT.test(cuit);
         const saldoValido = saldo !== '' && !isNaN(saldo);
         $('#btnAltaProveedor').prop('disabled', !(razon && cuitValido && idIVA && saldoValido));
         $('#CUIT').css('borderColor', cuit && !cuitValido ? 'red' : '');
@@ -387,7 +383,6 @@ $(document).ready(function () {
                     alert('Proveedor dado de alta exitosamente');
                     $('#modalAlta').hide();
                     formAlta[0].reset();
-                    cargarDatos();
                 } else {
                     alert('Error: ' + res.message);
                 }
@@ -406,7 +401,7 @@ $(document).ready(function () {
         const cuit = $('#modificarCUIT').val().trim();
         const idIVA = $('#modificarIdIVA').val().trim();
         const saldo = $('#modificarSaldoCuentaCorriente').val().trim();
-        const cuitValido = regexCUIT.test(cuit);
+        const cuitValido = formatoCUIT.test(cuit);
         const saldoValido = saldo !== '' && !isNaN(saldo);
         $('#btnModificarProveedor').prop('disabled', !(razon && cuitValido && idIVA && saldoValido));
         $('#modificarCUIT').css('borderColor', cuit && !cuitValido ? 'red' : '');
@@ -427,13 +422,74 @@ $(document).ready(function () {
                 if (res.status === 'success') {
                     alert('Proveedor modificado exitosamente');
                     $('#modalModificar').hide();
-                    cargarDatos();
                 } else {
                     alert('Error: ' + res.message);
                 }
             },
             error: function () {
                 alert('Error al modificar el proveedor');
+            }
+        });
+    });
+
+    // Lógica para eliminar proveedor
+    $('#tablaProveedores').on('click', '.eliminar-proveedor', function () {
+        const $btn = $(this);
+        const codProveedor = $btn.data('id');
+        if (confirm('¿Está seguro que desea eliminar este proveedor?')) {
+            $.ajax({
+                url: 'eliminar_proveedor.php',
+                method: 'POST',
+                data: { CodProveedor: codProveedor },
+                success: function (response) {
+                    let res;
+                    try { res = JSON.parse(response); } catch { res = {status: 'error', message: 'Error inesperado'}; }
+                    if (res.status === 'success') {
+                        // Elimina la fila de la tabla solo si la eliminación fue exitosa
+                        $btn.closest('tr').remove();
+                        actualizarContador();
+                        alert('Proveedor eliminado exitosamente.');
+                    } else {
+                        alert('Error: ' + res.message);
+                    }
+                },
+                error: function () {
+                    alert('Error al eliminar el proveedor.');
+                }
+            });
+        }
+    });
+
+    // Lógica para modificar proveedor: cargar datos desde la base de datos
+    $('#tablaProveedores').on('click', '.modificar-proveedor', function () {
+        const codProveedor = $(this).data('id');
+        // Limpia el formulario antes de llenarlo
+        $('#modificarProveedorForm')[0].reset();
+        $('#modificarCodProveedor').val('');
+        $('#modificarRazonSocial').val('');
+        $('#modificarCUIT').val('');
+        $('#modificarIdIVA').val('');
+        $('#modificarSaldoCuentaCorriente').val('');
+
+        $.ajax({
+            url: 'obtener_proveedor.php',
+            method: 'POST',
+            data: { CodProveedor: codProveedor },
+            dataType: 'json',
+            success: function (data) {
+                if (data && !data.error) {
+                    $('#modificarCodProveedor').val(data.CodProveedor);
+                    $('#modificarRazonSocial').val(data.RazonSocial);
+                    $('#modificarCUIT').val(data.CUIT);
+                    $('#modificarIdIVA').val(data.idIVA);
+                    $('#modificarSaldoCuentaCorriente').val(data.SaldoCuentaCorriente);
+                    $('#modalModificar').show();
+                } else {
+                    alert(data.error || 'No se pudo obtener el proveedor.');
+                }
+            },
+            error: function () {
+                alert('Error al obtener los datos del proveedor.');
             }
         });
     });

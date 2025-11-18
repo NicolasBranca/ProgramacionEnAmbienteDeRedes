@@ -1,23 +1,21 @@
 <?php
+header('Content-Type: application/json');
 
-// Configuración de conexión a la base de datos
 $host = 'localhost';
 $db = 'u162024603_miBaseDeDatos';
 $user = 'u162024603_NicolasBranca';
 $pass = 'Alcachofa189';
 
 try {
-    // Crea una nueva conexión PDO a la base de datos
     $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
     $options = [
-        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, // Lanza excepciones en errores
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,       // Devuelve resultados como arrays asociativos
-        PDO::ATTR_EMULATE_PREPARES   => false,                  // Usa sentencias preparadas nativas
+        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, 
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,       
+        PDO::ATTR_EMULATE_PREPARES   => false,                  
     ];
     $pdo = new PDO($dsn, $user, $pass, $options);
 
 } catch (PDOException $e) {
-    // Si falla la conexión, muestra el error y termina el script
     die("Error de conexión: " . $e->getMessage());
 }
 
@@ -78,10 +76,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['CertificadosCalidad']
 
         // Ejecuta la consulta y registra el resultado en el log
         if ($stmt->execute()) {
-            $logMessage = "Proveedor agregado exitosamente: CUIT $CUIT";
-            registrarLog($logMessage);
+            // Verifica si realmente se insertó un registro
+            if ($stmt->rowCount() > 0) {
+                $logMessage = "Proveedor agregado exitosamente: CUIT $CUIT";
+                registrarLog($logMessage);
 
-            echo json_encode(["status" => "success", "message" => "Proveedor dado de alta exitosamente."]);
+                echo json_encode(["status" => "success", "message" => "Proveedor dado de alta exitosamente."]);
+            } else {
+                $logMessage = "No se insertó el proveedor. Verifique los datos enviados.";
+                registrarLog($logMessage);
+
+                echo json_encode(["status" => "error", "message" => "No se pudo dar de alta el proveedor. Verifique los datos ingresados."]);
+            }
         } else {
             $logMessage = "Error al agregar el proveedor: " . json_encode($stmt->errorInfo());
             registrarLog($logMessage);
@@ -90,22 +96,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['CertificadosCalidad']
         }
 
     } catch (PDOException $e) {
-        // Si ocurre un error con PDO, lo registra en el log y responde con error
         registrarLog("Error de PDO: " . $e->getMessage());
         echo json_encode(["status" => "error", "message" => "Error en la base de datos."]);
     }
 }
 
-// Función para registrar mensajes en el archivo debug.log
 function registrarLog($mensaje) {
-    $logFile = __DIR__ . '/debug.log'; // Ruta del archivo de log
-    $fecha = date('Y-m-d H:i:s'); // Fecha y hora actual
-    $logMessage = "[$fecha] - $mensaje" . PHP_EOL; // Mensaje formateado
-    // Intenta escribir el mensaje en el archivo de log
+    $logFile = __DIR__ . '/debug.log'; 
+    $fecha = date('Y-m-d H:i:s');
+    $logMessage = "[$fecha] - $mensaje" . PHP_EOL;
     try {
         file_put_contents($logFile, $logMessage, FILE_APPEND | LOCK_EX);
     } catch (Exception $e) {
-        // Si ocurre un error al escribir el log, lo ignora
     }
 }
 ?>

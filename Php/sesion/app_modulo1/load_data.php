@@ -1,6 +1,5 @@
 <?php
 
-// Configuración de la conexión a la base de datos
 $dsn = 'mysql:host=localhost;dbname=u162024603_miBaseDeDatos;charset=utf8mb4';
 $username = 'u162024603_NicolasBranca';
 $password = 'Alcachofa189';
@@ -10,40 +9,34 @@ $options = [
 ];
 
 try {
-    // Crea una nueva conexión PDO a la base de datos
     $pdo = new PDO($dsn, $username, $password, $options);
 
-    // Consulta base para obtener proveedores
     $query = "SELECT CodProveedor, RazonSocial, CUIT, idIVA, SaldoCuentaCorriente FROM Proveedores WHERE 1=1";
 
-    $conditions = []; // Almacena condiciones de filtrado
-    $params = [];     // Almacena parámetros para la consulta
+    $conditions = [];
+    $params = [];
 
-    // Agrega condición si se filtra por código de proveedor
+    // Agrega condición si se filtra por alguna columna
     if (!empty($_POST['CodProveedor'])) {
         $conditions[] = "CodProveedor LIKE :CodProveedor";
         $params[':CodProveedor'] = '%' . $_POST['CodProveedor'] . '%';
     }
 
-    // Agrega condición si se filtra por razón social
     if (!empty($_POST['RazonSocial'])) {
         $conditions[] = "RazonSocial LIKE :RazonSocial";
         $params[':RazonSocial'] = '%' . $_POST['RazonSocial'] . '%';
     }
 
-    // Agrega condición si se filtra por CUIT
     if (!empty($_POST['CUIT'])) {
         $conditions[] = "CUIT LIKE :CUIT";
         $params[':CUIT'] = '%' . $_POST['CUIT'] . '%';
     }
 
-    // Agrega condición si se filtra por idIVA
     if (!empty($_POST['idIVA'])) {
         $conditions[] = "idIVA = :idIVA";
         $params[':idIVA'] = $_POST['idIVA'];
     }
 
-    // Agrega condición si se filtra por saldo de cuenta corriente
     if (!empty($_POST['SaldoCuentaCorriente'])) {
         $conditions[] = "SaldoCuentaCorriente = :SaldoCuentaCorriente";
         $params[':SaldoCuentaCorriente'] = $_POST['SaldoCuentaCorriente'];
@@ -68,22 +61,18 @@ try {
         }
     }
 
-    // Prepara y ejecuta la consulta con los parámetros
     $stmt = $pdo->prepare($query);
     $stmt->execute($params);
 
-    // Obtiene todos los resultados y los devuelve en formato JSON
     $result = $stmt->fetchAll();
 
     echo json_encode($result);
 
 } catch (PDOException $e) {
-    // Si ocurre un error, lo registra en el log y devuelve un error en JSON
     registrarLog("Error en la base de datos: " . $e->getMessage());
     echo json_encode(['error' => 'Error en la base de datos']);
 }
 
-// Función para registrar mensajes en el archivo debug.log
 function registrarLog($mensaje) {
     $logFile = __DIR__ . '/debug.log';
     $fecha = date('Y-m-d H:i:s');
