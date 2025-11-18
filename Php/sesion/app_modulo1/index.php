@@ -1,4 +1,5 @@
 <?php
+// Incluye el archivo para manejo de sesión
 include('../manejoSesion.inc');
 ?>
 <!DOCTYPE html>
@@ -7,6 +8,7 @@ include('../manejoSesion.inc');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maestro de proveedores</title>
+    <!-- Incluye jQuery para manejo de AJAX y DOM -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
 body {
@@ -135,10 +137,13 @@ footer {
     </style>
 </head>
 <body>
+<!-- Encabezado fijo con el título principal -->
 <header><h1>Maestro de Proveedores</h1></header>
 <main>
+    <!-- Contenedor de filtros y botones de acción -->
     <div class="filtros-container">
         <div class="filtros-campos">
+            <!-- Campos de filtro para buscar proveedores -->
             <label for="CodProveedorFiltro">Código Proveedor:</label>
             <input type="text" id="CodProveedorFiltro">
             <label for="RazonSocialFiltro">Razón Social:</label>
@@ -149,6 +154,7 @@ footer {
             <select id="idIVAFiltro"><option value="">Todos</option></select>
             <label for="SaldoCuentaCorrienteFiltro">Saldo Cuenta Corriente:</label>
             <input type="number" id="SaldoCuentaCorrienteFiltro">
+            <!-- Opciones para ordenar la tabla -->
             <div class="filtros-orden">
                 <label for="ordenColumna">Ordenar por:</label>
                 <input type="text" id="ordenColumna" readonly placeholder="Columna">
@@ -158,6 +164,7 @@ footer {
                 </select>
             </div>
         </div>
+        <!-- Botones principales de acción -->
         <div class="filtros-botones">
             <button id="cargarDatos">Cargar datos</button>
             <button id="altaDato">Alta proveedor</button>
@@ -167,10 +174,12 @@ footer {
         </div>
     </div>
 
+    <!-- Contenedor de la tabla de proveedores -->
     <div class="table-wrapper">
         <table id="tablaProveedores" border="1">
             <thead>
                 <tr>
+                    <!-- Encabezados de la tabla con botones para ordenar -->
                     <th><button class="sort" data-column="CodProveedor">Código</button></th>
                     <th><button class="sort" data-column="RazonSocial">Razón Social</button></th>
                     <th><button class="sort" data-column="CUIT">CUIT</button></th>
@@ -183,6 +192,7 @@ footer {
         </table>
     </div>
 
+    <!-- Modal para alta de proveedor -->
     <div id="modalAlta" class="modal" style="display:none">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -204,6 +214,7 @@ footer {
         </div>
     </div>
 
+    <!-- Modal para modificar proveedor -->
     <div id="modalModificar" class="modal" style="display:none">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -226,6 +237,7 @@ footer {
         </div>
     </div>
 
+    <!-- Modal para mostrar archivos de certificado -->
     <div id="modalArchivo" class="modal" style="display:none">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -233,13 +245,16 @@ footer {
         </div>
     </div>
 </main>
+<!-- Pie de página con contador de registros -->
 <footer><p id="contadorRegistros">Cantidad de registros: 0</p></footer>
 
 <script>
+// Código JavaScript/jQuery para manejar la lógica de la página
 $(document).ready(function () {
     let sort_column = '';
     let sort_direction = 'ASC';
 
+    // Carga las opciones de IVA en los selects usando AJAX
     function cargarIVASelects() {
         $.ajax({
             url: 'load_iva.php',
@@ -256,7 +271,7 @@ $(document).ready(function () {
     }
     cargarIVASelects();
 
-    // Ordenamiento
+    // Maneja el ordenamiento de columnas al hacer click en los encabezados
     $('.sort').on('click', function () {
         const col = $(this).data('column');
         const colLabel = $(this).text().trim();
@@ -267,7 +282,7 @@ $(document).ready(function () {
         sort_direction = $(this).val();
     });
 
-    // Botones principales
+    // Botones principales: cargar datos, cerrar sesión, limpiar filtros, borrar tabla
     $('#cargarDatos').on('click', function () {
         const col = $('#ordenColumna').data('column');
         sort_column = col || '';
@@ -289,11 +304,13 @@ $(document).ready(function () {
         actualizarContador();
     });
 
+    // Actualiza el contador de registros en la tabla
     function actualizarContador() {
         const cantidad = $('#tablaProveedores tbody tr').length;
         $('#contadorRegistros').text('Cantidad de registros: ' + cantidad);
     }
 
+    // Carga los datos de proveedores usando AJAX y los muestra en la tabla
     function cargarDatos() {
         $.ajax({
             url: 'load_data.php',
@@ -333,11 +350,12 @@ $(document).ready(function () {
         });
     }
 
-    // VALIDACIÓN Y ENVÍO DE ALTA DE PROVEEDOR
+    // Muestra el modal para alta de proveedor
     $('#altaDato').on('click', function () {
         $('#modalAlta').show();
     });
 
+    // Validación de campos del formulario de alta de proveedor
     const regexCUIT = /^\d{2}-\d{8}-\d{1}$/;
     const formAlta = $('#altaProveedorForm');
 
@@ -352,6 +370,7 @@ $(document).ready(function () {
         $('#CUIT').css('borderColor', cuit && !cuitValido ? 'red' : '');
     });
 
+    // Envía el formulario de alta de proveedor por AJAX
     formAlta.on('submit', function (e) {
         e.preventDefault();
         const formData = new FormData(this);
@@ -379,7 +398,7 @@ $(document).ready(function () {
         });
     });
 
-    // VALIDACIÓN Y ENVÍO DE MODIFICACIÓN DE PROVEEDOR
+    // Validación y envío del formulario de modificación de proveedor
     const formModificar = $('#modificarProveedorForm');
 
     formModificar.on('input change', 'input, select', function () {
@@ -419,7 +438,7 @@ $(document).ready(function () {
         });
     });
 
-    // Cerrar modales
+    // Cierra los modales al hacer click en la X
     $('.close').on('click', function () {
         $(this).closest('.modal').hide();
     });

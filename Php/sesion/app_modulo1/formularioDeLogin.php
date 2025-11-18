@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <!-- Encabezado con metadatos y título de la página -->
 </head>
 <style>
+/* Estilos generales para centrar el formulario y dar formato */
 body {
     display: flex;
     align-items: center;
@@ -16,6 +18,7 @@ body {
     background-color: #f2f2f2;
 }
 
+/* Contenedor principal del formulario de login */
 .form-container {
     background-color: #fff;
     padding: 20px 40px;
@@ -25,13 +28,14 @@ body {
     text-align: center;
 }
 
-
+/* Estilo para el título del formulario */
 .form-container h1 {
     margin-bottom: 20px;
     font-size: 24px;
     color: #007B7F; 
 }
 
+/* Estilo para las etiquetas de los campos */
 .form-container label {
     display: block;
     margin-bottom: 5px;
@@ -40,6 +44,7 @@ body {
     color: #333;
 }
 
+/* Estilo para los campos de entrada de texto y contraseña */
 .form-container input[type="text"],
 .form-container input[type="password"] {
     width: 100%;
@@ -50,6 +55,7 @@ body {
     box-sizing: border-box;
 }
 
+/* Estilo para el botón de enviar */
 .form-container button {
     background-color: #007B7F;
     color: white;
@@ -62,16 +68,19 @@ body {
     margin-top: 10px;
 }
 
+/* Efecto hover en el botón */
 .form-container button:hover {
     background-color: #005f60; 
 }
 
+/* Estilo para mensajes de error */
 .message {
     margin-top: 10px;
     font-size: 14px;
     color: red;
 }
 
+/* Estilos responsivos para pantallas pequeñas */
 @media (max-width: 600px) {
     .form-container {
         width: 90%;
@@ -81,15 +90,20 @@ body {
 
 </style>
 <body>
+<!-- Contenedor del formulario de inicio de sesión -->
 <div class="form-container">
         <h1>Iniciar Sesión</h1>
+        <!-- Formulario que envía los datos a login.php por POST -->
         <form action="login.php" method="POST">
+            <!-- Campo para el usuario -->
             <label for="login">Usuario: usuario1</label>
             <input type="text" id="login" name="login" required>
             
+            <!-- Campo para la contraseña -->
             <label for="password">Contraseña: root</label>
             <input type="password" id="password" name="password" required>
             
+            <!-- Botón para enviar el formulario -->
             <button type="submit">Iniciar Sesión</button>
         </form>
     </div>
